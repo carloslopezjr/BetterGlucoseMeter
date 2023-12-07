@@ -85,6 +85,10 @@ void Logger()
         */
 
 
+
+        // a possible options 3, how do you feel?
+        // you choose 1 - 10 how well you're cognitive abilities are
+
         // enter level(s)
         printf("Enter your level: ");
         scanf("%d", &level);
@@ -226,3 +230,5 @@ int main()
 
     return 0;
 }
+
+
