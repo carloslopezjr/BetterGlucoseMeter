@@ -20,13 +20,15 @@ int decision(int counter)
     char answer;
 
     printf("Log more levels? (Y/N): ");
-    scanf("%s", &answer);
-    printf("\n");
+    
 
-    int flag = 1;
+    int flag2 = 1;
 
-    while (flag != 0)
-    {
+    while (flag2 != 0){
+
+        scanf("%s", &answer);
+        printf("\n");
+
         if (answer == 'Y')
         {
             counter++;
@@ -34,7 +36,8 @@ int decision(int counter)
         }
         else if (answer == 'N')
         {
-            flag = 0;
+            flag2 = 0;
+            
         }
         else
         {
@@ -54,9 +57,10 @@ void Logger()
     int level;
     int counter = 0;
 
-    int flag = 1;
+    char answer;
 
-    while (flag != 0)
+    int stopper = 1; // condition 
+    while (stopper != 0)
     {
 
         printf("|1| Breakfast\n|2| Lunch\n|3| Dinner\n|4| Early Snack\n|5| Late Snack\n");
@@ -65,21 +69,47 @@ void Logger()
         scanf("%d", &time);
         printf("\n");
 
+        
+        printf("|1| Morning\n|2| Afternoon\n|3| Evening\n|4| Night\n");
+        printf("\n");
         printf("Select a tag: ");
         scanf("%d", &tag);
-        printf("\n");
-        printf("|1| Morning\n|2| Afternoon\n|3| Evening\n|4| Night\n");
         printf("\n");
 
         printf("Enter your level: ");
         scanf("%d", &level);
         printf("\n");
 
-        decision(counter);
+
+        int stopper2; // condition2
+        while (stopper2 == 0) {
+
+            // promps user if they want to add more levels
+            printf("Log more levels? (Y/N): ");
+            scanf("%s", &answer);
+            printf("\n");
+
+
+            // checks answer from user input
+            if (answer == 'Y')
+            {
+                counter++; // increments the counter for prompt purposes
+                break; // returns break into the while loop
+            }
+            else if (answer == 'N')
+            {
+                stopper = 0; // stops the outer while loop
+                stopper2 = 1; // stops the inner while loop
+            }
+            else
+            {   // repeats until valid input
+                printf("Invalid Option: Try again\n");
+                printf("\n");
+            }
+        }   
     }
 
-    // if yes run the function again
-
+    // correct grammar depending on scenario
     if (counter > 0)
     {
         printf("-----Levels were successfully logged-----");
