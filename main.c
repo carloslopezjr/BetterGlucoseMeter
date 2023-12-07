@@ -65,19 +65,26 @@ void Logger()
     while (stopper != 0)
     {
 
+
+        // first options
         printf("|1| Breakfast\n|2| Lunch\n|3| Dinner\n|4| Early Snack\n|5| Late Snack\n");
         printf("\n");
         printf("Specify a time: ");
         scanf("%d", &time);
         printf("\n");
 
+        // second options (under construction)
         
+        /*
         printf("|1| Morning\n|2| Afternoon\n|3| Evening\n|4| Night\n");
         printf("\n");
-        printf("Select a tag: ");
+        printf("What did you eat: ");
         scanf("%d", &tag);
         printf("\n");
+        */
 
+
+        // enter level(s)
         printf("Enter your level: ");
         scanf("%d", &level);
         printf("\n");
