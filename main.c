@@ -14,13 +14,14 @@ void Header()
     printf("\n");
 }
 
+/*
 int decision(int counter)
 {
 
     char answer;
 
     printf("Log more levels? (Y/N): ");
-    
+
 
     int flag2 = 1;
 
@@ -37,7 +38,7 @@ int decision(int counter)
         else if (answer == 'N')
         {
             flag2 = 0;
-            
+
         }
         else
         {
@@ -48,6 +49,7 @@ int decision(int counter)
 
     return counter;
 }
+*/
 
 void Logger()
 {
