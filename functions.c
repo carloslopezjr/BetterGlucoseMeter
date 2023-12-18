@@ -9,6 +9,12 @@ void RemoveNewLine(char *stringInput)
     stringInput[strcspn(stringInput, "\n")] = 0;
 }
 
+void clearInputBuffer()
+{
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
+
 void Header()
 {
 
@@ -153,6 +159,8 @@ void Logger()
 
         // insert new data into a node
         insertEnd(&head, newNode);
+
+        clearInputBuffer();
 
         int stopper2 = 0; // condition2
         while (stopper2 == 0)
