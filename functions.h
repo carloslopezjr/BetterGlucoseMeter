@@ -50,7 +50,7 @@ struct Node
 
 struct Node* createNode(struct LoggerData newData);
 
-void insertEnd(struct Node **head, struct LoggerData newData);
+void insertEnd(struct Node **head, struct Node* newNode);
 
 // we need a data structure to store all the level logs
 

@@ -35,8 +35,8 @@ struct Node *createNode(struct LoggerData newData)
     newNode->next = NULL;
 }
 
-void insertEnd(struct Node** head, struct LoggerData newData) {
-    struct Node* newNode = createNode(newData);
+void insertEnd(struct Node** head, struct Node* newNode) {
+    // struct Node* newNode = createNode(newData);
 
     if (*head == NULL) {
         *head = newNode;
@@ -144,9 +144,13 @@ void Logger()
         scanf("%d", &inputData.levels);
         printf("\n");
 
+
+        // create a new node after collecting all data
         struct Node* newNode = createNode(inputData);
 
-        insertEnd(&head, inputData);
+
+        // insert new data into a node
+        insertEnd(&head, newNode);
 
         int stopper2 = 0; // condition2
         while (stopper2 == 0)
