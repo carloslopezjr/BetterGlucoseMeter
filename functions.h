@@ -13,27 +13,28 @@ void MenuOptions();
 
 void LogIn();
 
-typedef struct LoggerData
+struct LoggerData
 {
 
     int levels;
     // type of day
     // feeling
 
-} LoggerData;
+};
 
-typedef struct Node
+struct Node
 {
     struct LoggerData data;
 
     struct node *next;
     struct node *prev;
 
-} Node;
+};
 
 
 
 struct Node* createNode(struct LoggerData newData);
+void insertEnd(struct Node **head, struct LoggerData newData);
 
 // we need a data structure to store all the level logs
 

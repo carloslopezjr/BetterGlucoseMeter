@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "functions.h"
 
 void RemoveNewLine(char *stringInput)
@@ -61,7 +62,7 @@ struct Node *createNode(struct LoggerData newData)
     if (newNode == NULL)
     {
         // prints the message in the error output
-        fprinf(stderr, "Memory allocation failed.\n");
+        fprintf(stderr, "Memory allocation failed.\n");
 
         // I don't know what this does
         exit(EXIT_FAILURE);
@@ -72,8 +73,37 @@ struct Node *createNode(struct LoggerData newData)
     newNode->next = NULL;
 }
 
+void insertEnd(struct Node** head, struct LoggerData newData) {
+    struct Node* newNode = createNode(newData);
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        
+        struct Node* current = *head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        
+        current->next = newNode;
+        newNode->prev = current;
+    }
+}
+
+void printList(struct Node* head) {
+    
+    struct Node* current = head;
+    
+    while (current != NULL) {
+        printf("Data: %d \n", current->data.levels);
+        current = current->next;
+    }
+}
+
 void Logger()
 {
+
+    struct Node *head = NULL;
 
     int time;
     int tag;
@@ -85,6 +115,8 @@ void Logger()
     int stopper = 1; // condition
     while (stopper != 0)
     {
+
+        struct LoggerData inputData;
 
         // first options
         printf("|1| Breakfast\n|2| Lunch\n|3| Dinner\n|4| Early Snack\n|5| Late Snack\n");
@@ -105,12 +137,18 @@ void Logger()
 
         // enter level(s)
         printf("Enter your level: ");
-        scanf("%d", &level);
+        scanf("%d", &inputData.levels);
         printf("\n");
 
-                int stopper2 = 0; // condition2
+        struct Node* newNode = createNode(inputData);
+
+        insertEnd(&head, inputData);
+
+        int stopper2 = 0; // condition2
         while (stopper2 == 0)
         {
+
+            
 
             // promps user if they want to add more levels
             printf("Log more levels? (Y/N): ");
@@ -147,6 +185,8 @@ void Logger()
     }
 
     printf("\n");
+
+    printList(head);
 }
 
 void MenuOptions()
