@@ -44,7 +44,6 @@ struct Node *createNode(struct LoggerData newData)
 }
 
 void insertEnd(struct Node** head, struct Node* newNode) {
-    // struct Node* newNode = createNode(newData);
 
     if (*head == NULL) {
         *head = newNode;
