@@ -16,44 +16,6 @@ void Header()
     printf("\n");
 }
 
-/*
-int decision(int counter)
-{
-
-    char answer;
-
-    printf("Log more levels? (Y/N): ");
-
-
-    int flag2 = 1;
-
-    while (flag2 != 0){
-
-        scanf("%s", &answer);
-        printf("\n");
-
-        if (answer == 'Y')
-        {
-            counter++;
-            continue;
-        }
-        else if (answer == 'N')
-        {
-            flag2 = 0;
-
-        }
-        else
-        {
-            printf("Invalid Option: Try again\n");
-            printf("\n");
-        }
-    }
-
-    return counter;
-}
-
-*/
-
 struct Node *createNode(struct LoggerData newData)
 {
     // allocate memory for the node
