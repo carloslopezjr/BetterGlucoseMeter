@@ -6,11 +6,8 @@
 int main()
 {
 
-    
-
     Header();
     MenuOptions();
-
 
     return 0;
 }

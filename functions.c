@@ -24,7 +24,7 @@ struct Node *createNode(struct LoggerData newData)
     if (newNode == NULL)
     {
         // prints the message in the error output
-        fprintf(stderr, "Memory allocation failed.\n");
+        printf("Memory allocation failed.\n");
 
         // I don't know what this does
         exit(EXIT_FAILURE);
@@ -53,11 +53,54 @@ void insertEnd(struct Node** head, struct LoggerData newData) {
 }
 
 void printList(struct Node* head) {
-    
+
+    printf("------GLUCLOSE LOGS------\n");
+    printf("\n");
+
     struct Node* current = head;
     
     while (current != NULL) {
-        printf("Data: %d \n", current->data.levels);
+
+        enum FoodType foodType = current->data.foodType;
+        enum FoodTime foodTime = current->data.foodTime;
+
+        printf("Gluclose Level: %d \n", current->data.levels);
+
+        switch (foodType) {
+            case 1:
+                printf("Food Type: Breakfast\n");
+                break;
+            case 2:
+                printf("Food Type: Lunch\n");
+                break;
+            case 3:
+                printf("Food Type: Dinner\n");
+                break;
+            case 4:
+                printf("Food Type: Snack\n");
+                break;
+        }
+
+        switch (foodTime)
+        {
+        case 1:
+            printf("Time: Morning\n");
+            break;
+        case 2:
+            printf("Time: Afternoon\n");
+            break;
+        case 3:
+            printf("Time: Evening\n");
+            break;
+        case 4:
+            printf("Time: Midnight\n");
+            break;
+        }
+
+        printf("Focused Rating: %d \n", current->data.focusedLevel);
+        printf("\n");
+
+        // Go To The Next Node
         current = current->next;
     }
 }
@@ -67,11 +110,8 @@ void Logger()
 
     struct Node *head = NULL;
 
-    int time;
-    int tag;
-    int level;
-    int counter = 0;
 
+    int counter = 0;
     char answer;
 
     int stopper = 1; // condition
@@ -80,22 +120,25 @@ void Logger()
 
         struct LoggerData inputData;
 
-        // first options
-        printf("|1| Breakfast\n|2| Lunch\n|3| Dinner\n|4| Early Snack\n|5| Late Snack\n");
+        // The Type Of Food
+        printf("|1| Breakfast\n|2| Lunch\n|3| Dinner\n|4| Snack\n");
         printf("\n");
-        printf("Specify a time: ");
-        scanf("%d", &time);
+        printf("What Type Of Food Did You Eat?: ");
+        scanf("%d", &inputData.foodType);
         printf("\n");
 
-        // second options (under construction)
+        // When You Ate The Food
+        printf("|1| Morning\n|2| Afternoon\n|3| Evening\n|4| Midnight\n");
+        printf("\n");
+        printf("When Did You Eat It?: ");
+        scanf("%d", &inputData.foodTime);
+        printf("\n");
 
-        /*
-        printf("|1| Morning\n|2| Afternoon\n|3| Evening\n|4| Night\n");
+        // Rate 1-10 How You Focused You Feel
+        printf("Rate 1-10 How Focused You Feel: ");
+        scanf("%d", &inputData.focusedLevel);
         printf("\n");
-        printf("What did you eat: ");
-        scanf("%d", &tag);
-        printf("\n");
-        */
+        
 
         // enter level(s)
         printf("Enter your level: ");
@@ -109,8 +152,6 @@ void Logger()
         int stopper2 = 0; // condition2
         while (stopper2 == 0)
         {
-
-            
 
             // promps user if they want to add more levels
             printf("Log more levels? (Y/N): ");
