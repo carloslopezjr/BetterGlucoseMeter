@@ -33,6 +33,8 @@ struct Node *createNode(struct LoggerData newData)
     newNode->data = newData;
     newNode->prev = NULL;
     newNode->next = NULL;
+
+    return newNode;
 }
 
 void insertEnd(struct Node** head, struct Node* newNode) {
@@ -158,14 +160,14 @@ void Logger()
 
             // promps user if they want to add more levels
             printf("Want To Log More Levels? (Y/N): ");
-            scanf("%s", &answer);
+            scanf("%c", &answer); // fixed from using %s to using %c because of errors with whitespace
             printf("\n");
 
             // checks answer from user input
             if (answer == 'Y' || answer == 'y')
             {
                 counter++; // increments the counter for prompt purposes
-                break;     // returns break into the while loop
+                break; // returns break into the while loop
             }
             else if (answer == 'N' || answer == 'n')
             {
