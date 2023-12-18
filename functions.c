@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "functions.h"
 
 void RemoveNewLine(char *stringInput)
@@ -52,6 +53,25 @@ int decision(int counter)
 
 */
 
+struct Node *createNode(struct LoggerData newData)
+{
+    // allocate memory for the node
+    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+
+    if (newNode == NULL)
+    {
+        // prints the message in the error output
+        fprinf(stderr, "Memory allocation failed.\n");
+
+        // I don't know what this does
+        exit(EXIT_FAILURE);
+    }
+
+    newNode->data = newData;
+    newNode->prev = NULL;
+    newNode->next = NULL;
+}
+
 void Logger()
 {
 
@@ -88,7 +108,7 @@ void Logger()
         scanf("%d", &level);
         printf("\n");
 
-        int stopper2; // condition2
+                int stopper2 = 0; // condition2
         while (stopper2 == 0)
         {
 
