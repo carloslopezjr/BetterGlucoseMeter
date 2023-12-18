@@ -185,11 +185,11 @@ void Logger()
     // correct grammar depending on scenario
     if (counter > 0)
     {
-        printf("-----Levels were successfully logged-----");
+        printf("-----Levels were successfully logged-----\n");
     }
     else
     {
-        printf("-----Level was successfully logged-----");
+        printf("-----Level was successfully logged-----\n");
     }
 
     printf("\n");
