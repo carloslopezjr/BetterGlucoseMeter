@@ -43,8 +43,8 @@ struct Node
 {
     struct LoggerData data;
 
-    struct node *next;
-    struct node *prev;
+    struct Node *next;
+    struct Node *prev;
 
 };
 

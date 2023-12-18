@@ -110,7 +110,6 @@ void Logger()
 
     struct Node *head = NULL;
 
-
     int counter = 0;
     char answer;
 
@@ -154,17 +153,17 @@ void Logger()
         {
 
             // promps user if they want to add more levels
-            printf("Log more levels? (Y/N): ");
+            printf("Want To Log More Levels? (Y/N): ");
             scanf("%s", &answer);
             printf("\n");
 
             // checks answer from user input
-            if (answer == 'Y')
+            if (answer == 'Y' || answer == 'y')
             {
                 counter++; // increments the counter for prompt purposes
                 break;     // returns break into the while loop
             }
-            else if (answer == 'N')
+            else if (answer == 'N' || answer == 'n')
             {
                 stopper = 0;  // stops the outer while loop
                 stopper2 = 1; // stops the inner while loop
