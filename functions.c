@@ -110,6 +110,9 @@ void printList(struct Node* head) {
         // Go To The Next Node
         current = current->next;
     }
+
+    printf("-------------------------\n");
+    printf("\n");
 }
 
 void Logger()
@@ -127,14 +130,14 @@ void Logger()
         struct LoggerData inputData;
 
         // The Type Of Food
-        printf("|1| Breakfast\n|2| Lunch\n|3| Dinner\n|4| Snack\n");
+        printf("|1| Breakfast |2| Lunch |3| Dinner |4| Snack\n");
         printf("\n");
         printf("What Type Of Food Did You Eat?: ");
         scanf("%d", &inputData.foodType);
         printf("\n");
 
         // When You Ate The Food
-        printf("|1| Morning\n|2| Afternoon\n|3| Evening\n|4| Midnight\n");
+        printf("|1| Morning |2| Afternoon |3| Evening |4| Midnight\n");
         printf("\n");
         printf("When Did You Eat It?: ");
         scanf("%d", &inputData.foodTime);
@@ -209,13 +212,14 @@ void MenuOptions()
 
     int selection;
 
-    printf("|1| Logger\n|2| Carb Planner\n|3| Calculate Insulin Dose\n|4| Food-To-Carbs\n|5| A1C Goal Planner\n");
-
-    printf("\n");
 
     int num = 1;
     while (num != 0)
     {
+
+        printf("|1| Logger |2| Carb Planner |3| Calculate Insulin Dose |4| Food-To-Carbs |5| A1C Goal Planner |6| Exit\n");
+
+        printf("\n");
 
         if (num == 1)
         {
@@ -233,30 +237,34 @@ void MenuOptions()
         if (selection == 1)
         {
             Logger();
-            num = 0;
+            
         }
         else if (selection == 2)
         {
             printf("Option 2");
             // option 2
-            num = 0;
+           
         }
         else if (selection == 3)
         {
             printf("Option 3");
             // option 3
-            num = 0;
+            
         }
         else if (selection == 4)
         {
             printf("Option 4");
             // option 4
-            num = 0;
+            
         }
         else if (selection == 5)
         {
-            printf("Option 4");
+            printf("Option 5");
             // option 5
+            
+        }
+        else if (selection == 6) {
+            // exit
             num = 0;
         }
         else
