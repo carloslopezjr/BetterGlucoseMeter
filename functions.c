@@ -10,7 +10,7 @@ void RemoveNewLine(char *stringInput)
     stringInput[strcspn(stringInput, "\n")] = 0;
 }
 
-void backupData() {
+void backupData(struct Node* head) {
     
     // look for file text file in the current directory
     DIR *dir;
@@ -74,8 +74,9 @@ void backupData() {
         fprintf(fptr, "\n");
 
         // take the linked list data and paste it into the file
+        printList(head, fptr);
 
-        fprintf(fptr, "This is new data after the file wasn't found\n");
+        // fprintf(fptr, "This is new data after the file wasn't found\n");
 
         // close the file when done
         fclose(fptr);
@@ -183,21 +184,44 @@ void insertEnd(struct Node** head, struct Node* newNode) {
     }
 }
 
-void printList(struct Node* head) {
+void printList(struct Node* head, FILE* fptr) {
 
-    printf("------GLUCLOSE LOGS------\n");
-    printf("\n");
+    // printf("------GLUCLOSE LOGS------\n");
+    // printf("\n");
+
+    fprintf(fptr, "Hello world\n");
 
     struct Node* current = head;
+
+    fprintf(fptr, "%-10d", current->data.levels);
     
     while (current != NULL) {
 
-        enum FoodType foodType = current->data.foodType;
-        enum FoodTime foodTime = current->data.foodTime;
+        // enum FoodType foodType = current->data.foodType;
+        // enum FoodTime foodTime = current->data.foodTime;
 
-        printf("Gluclose Level: %d \n", current->data.levels);
+        // printf("Gluclose Level: %d \n", current->data.levels);
 
-        switch (foodType) {
+        // print day
+        char day[10] = "Monday";
+        fprintf(fptr, "%-10s|", day);
+
+        // print date
+        char date[10] = "10/12/23";
+        fprintf(fptr, "%-10s|", date);
+
+        // print time
+        char time[10] = "10:10am";
+        fprintf(fptr, "%-10s|", time);
+
+        // print levels
+        fprintf(fptr, "%-10d|", current->data.levels);
+
+        // print tags
+        char tags[10] = "Happy";
+        fprintf(fptr, "%-10s", tags);
+
+        /* switch (foodType) {
             case 1:
                 printf("Food Type: Breakfast\n");
                 break;
@@ -226,23 +250,23 @@ void printList(struct Node* head) {
         case 4:
             printf("Time: Midnight\n");
             break;
-        }
+        } */
 
-        printf("Focused Rating: %d \n", current->data.focusedLevel);
-        printf("\n");
+        // printf("Focused Rating: %d \n", current->data.focusedLevel);
+        // printf("\n");
+        fprintf(fptr, "\n");
 
         // Go To The Next Node
         current = current->next;
     }
 
-    printf("-------------------------\n");
-    printf("\n");
+    // printf("-------------------------\n");
+    fprintf(fptr, "\n");
 }
 
-void Logger()
+// this gets called by menuOptions() function
+struct Node* Logger(struct Node* head)
 {
-
-    struct Node *head = NULL;
 
     int counter = 0;
     char answer;
@@ -314,6 +338,7 @@ void Logger()
                 printf("\n");
             }
         }
+
     }
 
     // correct grammar depending on scenario
@@ -328,10 +353,13 @@ void Logger()
 
     printf("\n");
 
-    printList(head);
+    return head;
+
+    // printList(head);
 }
 
-void MenuOptions()
+// gets called in the main.c file
+struct Node* MenuOptions(struct Node* head)
 {
 
     int selection;
@@ -360,7 +388,7 @@ void MenuOptions()
 
         if (selection == 1)
         {
-            Logger();
+            Logger(head);
             
         }
         else if (selection == 2)
@@ -397,9 +425,12 @@ void MenuOptions()
             printf("Option %d out of range.\n\n", selection);
         }
     }
+
+    return head;
 }
 
-void LogIn()
+// this function is not in use
+/*void LogIn()
 {
 
     char username[100];
@@ -418,5 +449,5 @@ void LogIn()
 
     printf("Welcome %s! Please select an option: \n\n", username);
 
-    MenuOptions();
-}
+    MenuOptions(head);
+} */

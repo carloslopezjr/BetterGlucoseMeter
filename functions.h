@@ -1,23 +1,8 @@
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
 
-void RemoveNewLine(char *stringInput);
-
-void backupData();
-
-void loadData();
-
-void readData();
-
-void Header();
-
-void Logger();
-
-void MenuOptions();
-
-void LogIn();
-
-enum FoodType {
+enum FoodType
+{
 
     BREAKFAST = 1,
     LUNCH = 2,
@@ -51,12 +36,31 @@ struct Node
 
     struct Node *next;
     struct Node *prev;
-
 };
+
+void RemoveNewLine(char *stringInput);
+
+void backupData(struct Node* head);
+
+void loadData();
+
+void readData();
+
+void clearInputBuffer();
+
+void Header();
 
 struct Node* createNode(struct LoggerData newData);
 
 void insertEnd(struct Node **head, struct Node* newNode);
+
+void printList(struct Node* head, FILE* fptr);
+
+struct Node* Logger(struct Node* head);
+
+struct Node* MenuOptions(struct Node* head);
+
+// void LogIn();
 
 // we need a data structure to store all the level logs
 
