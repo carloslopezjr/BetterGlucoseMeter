@@ -21,4 +21,14 @@ int main()
     return 0;
 }
 
+/* NEXT UPDATES */
+
+// 1:
+// change printList function to take current date, day, and time
+    // change meal tags to be more specific
+
+
+// 2:
+// add insert function to insert a previous log from a different day
+
 

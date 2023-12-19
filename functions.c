@@ -136,7 +136,7 @@ void clearInputBuffer()
 void Header()
 {
 
-    printf("-----WELCOME TO GLUCLOSE LOGGER V.1-----\n");
+    printf("-----WELCOME TO GLUCLOSE LOGGER V.2-----\n");
     printf("\n");
 }
 
@@ -184,15 +184,15 @@ void printList(struct Node* head, FILE* fptr) {
 
     while (current != NULL) {
 
-        // print date
+        // print current date
         char date[10] = "10/12/23";
         fprintf(fptr, "%-10s|", date);
 
-        // print day
+        // print current day
         char day[10] = "Monday";
         fprintf(fptr, "%-10s|", day);
 
-        // print time
+        // print current time
         char time[10] = "10:10am";
         fprintf(fptr, "%-10s|", time);
 

@@ -1,6 +1,4 @@
-Date      |Day       |Time      |Levels    |Focus R8  |Food Time |Food Type |
+Date      |Day       |Time      |Levels    |Focus R8  |Meal Time |Meal Type |
 -----------------------------------------------------------------------------
-10/12/23  |Monday    |10:10am   |140       |9         |Midnight  |Dinner    |
-10/12/23  |Monday    |10:10am   |200       |5         |Evening   |Snack     |
-10/12/23  |Monday    |10:10am   |120       |8         |Morning   |Breakfast |
+10/12/23  |Monday    |10:10am   |100       |1         |Morning   |Breakfast |
 
