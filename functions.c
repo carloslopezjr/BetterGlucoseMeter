@@ -65,8 +65,8 @@ void backupData(struct Node* head) {
         char time[10] = "Time";
         char levels[10] = "Levels";
         char focus[10] = "Focus R8";
-        char foodTime[10] = "Food Time";
-        char foodType[10] = "Food Type";
+        char foodTime[10] = "Meal Time";
+        char foodType[10] = "Meal Type";
 
         fprintf(fptr, "%-10s|%-10s|%-10s|%-10s|%-10s|%-10s|%-10s|\n", date, day, time, levels, focus, foodTime, foodType);
 
@@ -286,7 +286,7 @@ struct Node* Logger(struct Node* head)
         printf("\n");
 
         // Rate 1-10 How You Focused You Feel
-        printf("Rate 1-10 How Focused You Feel: ");
+        printf("Rate 1-10 How Focused You Feel?: ");
         scanf("%d", &inputData.focusedLevel);
         printf("\n");
         
@@ -380,7 +380,7 @@ struct Node* MenuOptions(struct Node* head)
             printf("\n");
         }
 
-        if (selection == 1)
+        if (selection == 1) // if user selects 1, then run logger
         {
             head = Logger(head);
             
@@ -448,3 +448,7 @@ struct Node* MenuOptions(struct Node* head)
 
     MenuOptions(head);
 } */
+
+
+
+
