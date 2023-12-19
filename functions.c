@@ -33,7 +33,7 @@ void backupData(struct Node* head) {
         if (strcmp(entry->d_name, "glucloselogs.txt") == 0)
         {
             // append new data to the file
-            printf("File was found\n");
+            // printf("File was found\n");
             fileNotFound++;
 
             FILE* fptr;
@@ -43,8 +43,9 @@ void backupData(struct Node* head) {
 
             // take the linked list data and paste it into the file
                 // if file already has data, go to the next avaliable space
+            printList(head, fptr);
 
-            fprintf(fptr, "This is new data after the file was found\n");
+            // fprintf(fptr, "This is new data after the file was found\n");
 
             // close the file when done
             fclose(fptr);
@@ -252,7 +253,7 @@ void printList(struct Node* head, FILE* fptr) {
         current = current->next;
     }
 
-    fprintf(fptr, "\n");
+    // fprintf(fptr, "\n");
 }
 
 // this gets called by menuOptions() function
