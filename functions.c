@@ -176,7 +176,6 @@ void insertEnd(struct Node** head, struct Node* newNode) {
     }
 }
 
-
 // gets the head from 
 void printList(struct Node* head, FILE* fptr) {
 
