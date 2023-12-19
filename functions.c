@@ -59,6 +59,8 @@ void backupData() {
 
         fptr = fopen("glucloselogs.txt", "w");
 
+        // create column header for the text file
+
         // take the linked list data and paste it into the file
 
         fprintf(fptr, "This is new data after the file wasn't found\n");
