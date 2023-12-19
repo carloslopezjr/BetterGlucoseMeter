@@ -1,6 +1,5 @@
-Date      |Day       |Time      |Levels    |Tags      |
--------------------------------------------------------
-Monday    |10/12/23  |10:10am   |100       |Happy     
-Monday    |10/12/23  |10:10am   |240       |Happy     
-Monday    |10/12/23  |10:10am   |180       |Happy     
+Date      |Day       |Time      |Levels    |Focus R8  |Food Time |Food Type |
+-----------------------------------------------------------------------------
+10/12/23  |Monday    |10:10am   |110       |5         |Evening   |Breakfast |
+10/12/23  |Monday    |10:10am   |200       |8         |Morning   |Snack     |
 

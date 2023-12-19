@@ -10,7 +10,6 @@ void RemoveNewLine(char *stringInput)
     stringInput[strcspn(stringInput, "\n")] = 0;
 }
 
-
 // gets the head from the main function
 void backupData(struct Node* head) {
     
@@ -51,7 +50,6 @@ void backupData(struct Node* head) {
             fclose(fptr);
 
         }
-
     }
 
     // prompt that the file wasn't found, then make a file
@@ -66,11 +64,13 @@ void backupData(struct Node* head) {
         char day[10] = "Day";
         char time[10] = "Time";
         char levels[10] = "Levels";
-        char tags[10] = "Tags";
+        char focus[10] = "Focus R8";
+        char foodTime[10] = "Food Time";
+        char foodType[10] = "Food Type";
 
-        fprintf(fptr, "%-10s|%-10s|%-10s|%-10s|%-10s|\n", date, day, time, levels, tags);
-        
-        for (int i = 0; i < 55; i++) {
+        fprintf(fptr, "%-10s|%-10s|%-10s|%-10s|%-10s|%-10s|%-10s|\n", date, day, time, levels, focus, foodTime, foodType);
+
+        for (int i = 0; i < 77; i++) {
             fprintf(fptr, "-");
         }
         fprintf(fptr, "\n");
@@ -78,17 +78,14 @@ void backupData(struct Node* head) {
         // take the linked list data and paste it into the file
         printList(head, fptr);
 
-        // fprintf(fptr, "This is new data after the file wasn't found\n");
-
         // close the file when done
         fclose(fptr);
-
     }
 
     closedir(dir);
 
-    // read data from the text file
-    readData();
+    // read data from the text file and output it
+    readData(); // comment out if you don't want the program to print in the terminal the contents in the text file
 
 }
 
@@ -153,8 +150,7 @@ struct Node *createNode(struct LoggerData newData)
         // prints the message in the error output
         fprintf(stderr, "Memory allocation failed.\n");
 
-        // I don't know what this does
-        exit(EXIT_FAILURE);
+        exit(EXIT_FAILURE); // I don't know what this does
     }
 
     newNode->data = newData;
@@ -184,83 +180,79 @@ void insertEnd(struct Node** head, struct Node* newNode) {
 // gets the head from 
 void printList(struct Node* head, FILE* fptr) {
 
-    // printf("------GLUCLOSE LOGS------\n");
-    // printf("\n");
+    struct Node* current = head; 
 
-    // this prints out
-    // fprintf(fptr, "Hello world\n");
-
-    struct Node* current = head; // issue with accessing the data
-
-    // fprintf(fptr, "%-10d", current->data.levels);
-
-    // this is where the issue is at
     while (current != NULL) {
-
-        // enum FoodType foodType = current->data.foodType;
-        // enum FoodTime foodTime = current->data.foodTime;
-
-        // printf("Gluclose Level: %d \n", current->data.levels);
-
-        // print day
-        char day[10] = "Monday";
-        fprintf(fptr, "%-10s|", day);
 
         // print date
         char date[10] = "10/12/23";
         fprintf(fptr, "%-10s|", date);
 
+        // print day
+        char day[10] = "Monday";
+        fprintf(fptr, "%-10s|", day);
+
         // print time
         char time[10] = "10:10am";
         fprintf(fptr, "%-10s|", time);
 
-        // print levels
-        fprintf(fptr, "%-10d|", current->data.levels); // issue with accessing the data structure
+        // print gluclose levels
+        fprintf(fptr, "%-10d|", current->data.levels);
 
-        // print tags
-        char tags[10] = "Happy";
-        fprintf(fptr, "%-10s", tags);
+        // print cognative rating
+        fprintf(fptr, "%-10d|", current->data.focusedLevel);
 
-        /* switch (foodType) {
-            case 1:
-                printf("Food Type: Breakfast\n");
-                break;
-            case 2:
-                printf("Food Type: Lunch\n");
-                break;
-            case 3:
-                printf("Food Type: Dinner\n");
-                break;
-            case 4:
-                printf("Food Type: Snack\n");
-                break;
-        }
-
+        // print foodTime tag
+        enum FoodTime foodTime = current->data.foodTime;
+        
         switch (foodTime)
         {
         case 1:
-            printf("Time: Morning\n");
+            // char word[15] = "Morning";
+            fprintf(fptr, "%-10s|", "Morning");
             break;
         case 2:
-            printf("Time: Afternoon\n");
+            // char word[15] = "Afternoon";
+            fprintf(fptr, "%-10s|", "Afternoon");
             break;
         case 3:
-            printf("Time: Evening\n");
+            // char word[15] = "Evening";
+            fprintf(fptr, "%-10s|", "Evening");
             break;
         case 4:
-            printf("Time: Midnight\n");
+            // char word[15] = "Midnight";
+            fprintf(fptr, "%-10s|", "Midnight");
             break;
-        } */
+        }
 
-        // printf("Focused Rating: %d \n", current->data.focusedLevel);
-        // printf("\n");
+            // print foodType tag
+            enum FoodType foodType = current->data.foodType;
+            switch (foodType)
+            {
+            case 1:
+                // char word[15] = "Breakfast";
+                fprintf(fptr, "%-10s|", "Breakfast");
+                break;
+            case 2:
+                // char word[15] = "Lunch";
+                fprintf(fptr, "%-10s|", "Lunch");
+                break;
+            case 3:
+                // char word[15] = "Dinner";
+                fprintf(fptr, "%-10s|", "Dinner");
+                break;
+            case 4:
+                // char word[15] = "Snack";
+                fprintf(fptr, "%-10s|", "Snack");
+                break;
+            }
+
         fprintf(fptr, "\n");
 
         // Go To The Next Node
-        current = current->next; // issue with accessing the data
+        current = current->next;
     }
 
-    // printf("-------------------------\n");
     fprintf(fptr, "\n");
 }
 
