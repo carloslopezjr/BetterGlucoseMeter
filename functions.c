@@ -28,7 +28,7 @@ void backupData() {
 
     while ((entry = readdir(dir)) != NULL) {
 
-        // check to see if it meets the name criteria
+        // check to see if it meets the name criteria, then open if it does
         if (strcmp(entry->d_name, "glucloselogs.txt") == 0)
         {
             // append new data to the file
@@ -39,43 +39,45 @@ void backupData() {
 
             fptr = fopen("glucloselogs.txt", "a");
 
+
+            // take the linked list data and paste it into the file
+                // if file already has data, go to the next avaliable space
+
             fprintf(fptr, "This is new data after the file was found\n");
 
+            // close the file when done
             fclose(fptr);
 
         }
 
     }
 
-    // prompt that the file wasn't found
+    // prompt that the file wasn't found, then make a file
     if (fileNotFound != 1) {
-       // printf("File was not found\n");
-        
-        // if no file exists, make one
+
         FILE* fptr;
 
         fptr = fopen("glucloselogs.txt", "w");
 
+        // take the linked list data and paste it into the file
+
         fprintf(fptr, "This is new data after the file wasn't found\n");
 
+        // close the file when done
         fclose(fptr);
 
     }
 
     closedir(dir);
 
+    // read data from the text file
+    readData();
 
-        
+
 
     
 
-        // if it meets the name criteria, open the file
-
-            // take the linked list data and paste it into the file
-
-                // if file already has data, go to the next avaliable space
-
-            // close the file when done
+    
 
 }
 
@@ -88,6 +90,32 @@ void loadData() {
         // if it meets the name criteria, load the data into a linked list
 
             // load the data into the linked list from top -> bottom
+
+}
+
+void readData() {
+
+    FILE *fptr;
+
+    fptr = fopen("glucloselogs.txt", "r");
+
+    if (fptr == NULL)
+    {
+        perror("Error Opening File");
+        exit(EXIT_FAILURE);
+    }
+
+
+    // this is the buffer for each line
+    char buffer[100];
+    while (fgets(buffer, sizeof(buffer), fptr) != NULL)
+    {
+
+        printf("%s", buffer);
+
+    }
+
+    fclose(fptr);
 
 }
 

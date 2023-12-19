@@ -7,6 +7,8 @@ void backupData();
 
 void loadData();
 
+void readData();
+
 void Header();
 
 void Logger();
