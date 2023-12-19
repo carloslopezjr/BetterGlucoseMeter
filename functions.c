@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <dirent.h>
 #include "functions.h"
 
 void RemoveNewLine(char *stringInput)
@@ -12,8 +13,41 @@ void RemoveNewLine(char *stringInput)
 void backupData() {
     
     // look for file text file in the current directory
+    DIR *dir;
 
-    // check to see if it meets the name criteria
+    struct dirent *entry;
+
+    dir = opendir(".");
+
+    if (dir == NULL) {
+        perror("Error opening up directory");
+        // return 1;
+    }
+
+    // if file == 0, file was not found
+    int fileNotFound = 0;
+
+    while ((entry = readdir(dir)) != NULL) {
+
+        // check to see if it meets the name criteria
+        if (strcmp(entry->d_name, "glucloselogs.txt") == 0)
+        {
+            printf("main.c is FOUND\n");
+            fileNotFound++;
+        }
+
+    }
+
+    if (fileNotFound != 1) {
+        printf("File was not found\n");
+    }
+
+    closedir(dir);
+
+
+        // if no file exists, make one
+
+    
 
         // if it meets the name criteria, open the file
 
@@ -34,7 +68,7 @@ void loadData() {
         // if it meets the name criteria, load the data into a linked list
 
             // load the data into the linked list from top -> bottom
-            
+
 }
 
 void clearInputBuffer()

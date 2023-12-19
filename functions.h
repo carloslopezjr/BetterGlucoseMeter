@@ -3,7 +3,9 @@
 
 void RemoveNewLine(char *stringInput);
 
-void transferData();
+void backupData();
+
+void loadData();
 
 void Header();
 

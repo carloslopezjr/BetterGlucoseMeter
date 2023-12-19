@@ -10,10 +10,7 @@ int main()
 
     MenuOptions();
 
-
-    
-
-    
+    backupData();
 
     return 0;
 }
