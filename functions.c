@@ -30,7 +30,7 @@ struct Node *createNode(struct LoggerData newData)
     if (newNode == NULL)
     {
         // prints the message in the error output
-        printf("Memory allocation failed.\n");
+        fprintf(stderr, "Memory allocation failed.\n");
 
         // I don't know what this does
         exit(EXIT_FAILURE);
