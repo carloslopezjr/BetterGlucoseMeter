@@ -9,6 +9,34 @@ void RemoveNewLine(char *stringInput)
     stringInput[strcspn(stringInput, "\n")] = 0;
 }
 
+void backupData() {
+    
+    // look for file text file in the current directory
+
+    // check to see if it meets the name criteria
+
+        // if it meets the name criteria, open the file
+
+            // take the linked list data and paste it into the file
+
+                // if file already has data, go to the next avaliable space
+
+            // close the file when done
+
+}
+
+void loadData() {
+    
+    // look for text file in current directory
+
+    // check to see if it meets the name criteria
+
+        // if it meets the name criteria, load the data into a linked list
+
+            // load the data into the linked list from top -> bottom
+            
+}
+
 void clearInputBuffer()
 {
     int c;

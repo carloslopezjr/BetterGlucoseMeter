@@ -3,6 +3,8 @@
 
 void RemoveNewLine(char *stringInput);
 
+void transferData();
+
 void Header();
 
 void Logger();
