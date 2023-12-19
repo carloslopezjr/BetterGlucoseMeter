@@ -24,28 +24,48 @@ void backupData() {
         // return 1;
     }
 
-    // if file == 0, file was not found
-    int fileNotFound = 0;
+    int fileNotFound = 0; // 0 == file wasn't found, 1 == file was found
 
     while ((entry = readdir(dir)) != NULL) {
 
         // check to see if it meets the name criteria
         if (strcmp(entry->d_name, "glucloselogs.txt") == 0)
         {
-            printf("main.c is FOUND\n");
+            // append new data to the file
+            printf("File was found\n");
             fileNotFound++;
+
+            FILE* fptr;
+
+            fptr = fopen("glucloselogs.txt", "a");
+
+            fprintf(fptr, "This is new data after the file was found\n");
+
+            fclose(fptr);
+
         }
 
     }
 
+    // prompt that the file wasn't found
     if (fileNotFound != 1) {
-        printf("File was not found\n");
+       // printf("File was not found\n");
+        
+        // if no file exists, make one
+        FILE* fptr;
+
+        fptr = fopen("glucloselogs.txt", "w");
+
+        fprintf(fptr, "This is new data after the file wasn't found\n");
+
+        fclose(fptr);
+
     }
 
     closedir(dir);
 
 
-        // if no file exists, make one
+        
 
     
 
