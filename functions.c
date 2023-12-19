@@ -60,6 +60,18 @@ void backupData() {
         fptr = fopen("glucloselogs.txt", "w");
 
         // create column header for the text file
+        char day[10] = "Day";
+        char date[10] = "Date";
+        char time[10] = "Time";
+        char levels[10] = "Levels";
+        char tags[10] = "Tags";
+
+        fprintf(fptr, "%-10s|%-10s|%-10s|%-10s|%-10s|\n", day, date, time, levels, tags);
+        
+        for (int i = 0; i < 10 * 5; i++) {
+            putchar('-');
+        }
+        putchar("\n");
 
         // take the linked list data and paste it into the file
 
