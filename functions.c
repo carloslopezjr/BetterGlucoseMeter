@@ -10,6 +10,8 @@ void RemoveNewLine(char *stringInput)
     stringInput[strcspn(stringInput, "\n")] = 0;
 }
 
+
+// gets the head from the main function
 void backupData(struct Node* head) {
     
     // look for file text file in the current directory
@@ -87,12 +89,6 @@ void backupData(struct Node* head) {
 
     // read data from the text file
     readData();
-
-
-
-    
-
-    
 
 }
 
@@ -184,17 +180,21 @@ void insertEnd(struct Node** head, struct Node* newNode) {
     }
 }
 
+
+// gets the head from 
 void printList(struct Node* head, FILE* fptr) {
 
     // printf("------GLUCLOSE LOGS------\n");
     // printf("\n");
 
-    fprintf(fptr, "Hello world\n");
+    // this prints out
+    // fprintf(fptr, "Hello world\n");
 
-    struct Node* current = head;
+    struct Node* current = head; // issue with accessing the data
 
-    fprintf(fptr, "%-10d", current->data.levels);
-    
+    // fprintf(fptr, "%-10d", current->data.levels);
+
+    // this is where the issue is at
     while (current != NULL) {
 
         // enum FoodType foodType = current->data.foodType;
@@ -215,7 +215,7 @@ void printList(struct Node* head, FILE* fptr) {
         fprintf(fptr, "%-10s|", time);
 
         // print levels
-        fprintf(fptr, "%-10d|", current->data.levels);
+        fprintf(fptr, "%-10d|", current->data.levels); // issue with accessing the data structure
 
         // print tags
         char tags[10] = "Happy";
@@ -257,7 +257,7 @@ void printList(struct Node* head, FILE* fptr) {
         fprintf(fptr, "\n");
 
         // Go To The Next Node
-        current = current->next;
+        current = current->next; // issue with accessing the data
     }
 
     // printf("-------------------------\n");
@@ -267,6 +267,8 @@ void printList(struct Node* head, FILE* fptr) {
 // this gets called by menuOptions() function
 struct Node* Logger(struct Node* head)
 {
+
+
 
     int counter = 0;
     char answer;
@@ -388,7 +390,7 @@ struct Node* MenuOptions(struct Node* head)
 
         if (selection == 1)
         {
-            Logger(head);
+            head = Logger(head);
             
         }
         else if (selection == 2)
@@ -424,9 +426,12 @@ struct Node* MenuOptions(struct Node* head)
             ++num;
             printf("Option %d out of range.\n\n", selection);
         }
+
+
     }
 
     return head;
+
 }
 
 // this function is not in use

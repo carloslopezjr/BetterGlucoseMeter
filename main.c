@@ -12,7 +12,9 @@ int main()
     Header();
 
     // this will keep running until the user exits
-    MenuOptions(head);
+    head = MenuOptions(head);
+
+    //printf("%d", head->data.levels);
 
     // take in the linked list data and back it up into a text file
     backupData(head);
