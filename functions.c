@@ -42,7 +42,7 @@ void backupData(struct Node* head) {
 
 
             // take the linked list data and paste it into the file
-                // if file already has data, go to the next avaliable space
+            // if file already has data, go to the next avaliable space
             printList(head, fptr);
 
             // fprintf(fptr, "This is new data after the file was found\n");
