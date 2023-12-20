@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <dirent.h>
+#include <time.h>
 #include "functions.h"
 
 void RemoveNewLine(char *stringInput)
@@ -180,20 +181,27 @@ void insertEnd(struct Node** head, struct Node* newNode) {
 // gets the head from 
 void printList(struct Node* head, FILE* fptr) {
 
+    time_t now = time(NULL);
+
+    struct tm* cur_time = localtime(&now);
+
     struct Node* current = head; 
 
     while (current != NULL) {
 
         // print current date
-        char date[10] = "10/12/23";
+        char date[20];
+        strftime(date, 20, "%m/%d/%y", cur_time);
         fprintf(fptr, "%-10s|", date);
 
         // print current day
-        char day[10] = "Monday";
+        char day[20];
+        strftime(day, 20, "%A", cur_time);
         fprintf(fptr, "%-10s|", day);
 
         // print current time
-        char time[10] = "10:10am";
+        char time[20];
+        strftime(time, 20, "%I:%M%p", cur_time);
         fprintf(fptr, "%-10s|", time);
 
         // print gluclose levels

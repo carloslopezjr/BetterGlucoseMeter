@@ -1,0 +1,4 @@
+Date      |Day       |Time      |Levels    |Focus R8  |Meal Time |Meal Type |
+-----------------------------------------------------------------------------
+12/19/23  |Tuesday   |07:47PM   |100       |5         |Morning   |Dinner    |
+12/19/23  |Tuesday   |07:47PM   |140       |8         |Evening   |Breakfast |
