@@ -12,8 +12,9 @@ void RemoveNewLine(char *stringInput)
 }
 
 // gets the head from the main function
-void backupData(struct Node* head) {
-    
+void backupData(struct Node *head)
+{
+
     // look for file text file in the current directory
     DIR *dir;
 
@@ -21,14 +22,16 @@ void backupData(struct Node* head) {
 
     dir = opendir(".");
 
-    if (dir == NULL) {
+    if (dir == NULL)
+    {
         perror("Error opening up directory");
         // return 1;
     }
 
     int fileNotFound = 0; // 0 == file wasn't found, 1 == file was found
 
-    while ((entry = readdir(dir)) != NULL) {
+    while ((entry = readdir(dir)) != NULL)
+    {
 
         // check to see if it meets the name criteria, then open if it does
         if (strcmp(entry->d_name, "glucloselogs.txt") == 0)
@@ -37,10 +40,9 @@ void backupData(struct Node* head) {
             // printf("File was found\n");
             fileNotFound++;
 
-            FILE* fptr;
+            FILE *fptr;
 
             fptr = fopen("glucloselogs.txt", "a");
-
 
             // take the linked list data and paste it into the file
             // if file already has data, go to the next avaliable space
@@ -50,14 +52,14 @@ void backupData(struct Node* head) {
 
             // close the file when done
             fclose(fptr);
-
         }
     }
 
     // prompt that the file wasn't found, then make a file
-    if (fileNotFound != 1) {
+    if (fileNotFound != 1)
+    {
 
-        FILE* fptr;
+        FILE *fptr;
 
         fptr = fopen("glucloselogs.txt", "w");
 
@@ -72,7 +74,8 @@ void backupData(struct Node* head) {
 
         fprintf(fptr, "%-10s|%-10s|%-10s|%-10s|%-10s|%-10s|%-10s|\n", date, day, time, levels, focus, foodTime, foodType);
 
-        for (int i = 0; i < 77; i++) {
+        for (int i = 0; i < 77; i++)
+        {
             fprintf(fptr, "-");
         }
         fprintf(fptr, "\n");
@@ -88,22 +91,22 @@ void backupData(struct Node* head) {
 
     // read data from the text file and output it
     readData(); // comment out if you don't want the program to print in the terminal the contents in the text file
-
 }
 
-void loadData() {
-    
+void loadData()
+{
+
     // look for text file in current directory
 
     // check to see if it meets the name criteria
 
-        // if it meets the name criteria, load the data into a linked list
+    // if it meets the name criteria, load the data into a linked list
 
-            // load the data into the linked list from top -> bottom
-
+    // load the data into the linked list from top -> bottom
 }
 
-void readData() {
+void readData()
+{
 
     FILE *fptr;
 
@@ -115,24 +118,22 @@ void readData() {
         exit(EXIT_FAILURE);
     }
 
-
     // this is the buffer for each line
     char buffer[100];
     while (fgets(buffer, sizeof(buffer), fptr) != NULL)
     {
 
         printf("%s", buffer);
-
     }
 
     fclose(fptr);
-
 }
 
 void clearInputBuffer()
 {
     int c;
-    while ((c = getchar()) != '\n' && c != EOF);
+    while ((c = getchar()) != '\n' && c != EOF)
+        ;
 }
 
 void Header()
@@ -162,32 +163,39 @@ struct Node *createNode(struct LoggerData newData)
     return newNode;
 }
 
-void insertEnd(struct Node** head, struct Node* newNode) {
+void insertEnd(struct Node **head, struct Node *newNode)
+{
 
-    if (*head == NULL) {
+    if (*head == NULL)
+    {
         *head = newNode;
-    } else {
-        
-        struct Node* current = *head;
-        while (current->next != NULL) {
+    }
+    else
+    {
+
+        struct Node *current = *head;
+        while (current->next != NULL)
+        {
             current = current->next;
         }
-        
+
         current->next = newNode;
         newNode->prev = current;
     }
 }
 
-// gets the head from 
-void printList(struct Node* head, FILE* fptr) {
+// gets the head from
+void printList(struct Node *head, FILE *fptr)
+{
 
     time_t now = time(NULL);
 
-    struct tm* cur_time = localtime(&now);
+    struct tm *cur_time = localtime(&now);
 
-    struct Node* current = head; 
+    struct Node *current = head;
 
-    while (current != NULL) {
+    while (current != NULL)
+    {
 
         // print current date
         char date[20];
@@ -212,7 +220,7 @@ void printList(struct Node* head, FILE* fptr) {
 
         // print foodTime tag
         enum FoodTime foodTime = current->data.foodTime;
-        
+
         switch (foodTime)
         {
         case 1:
@@ -233,27 +241,27 @@ void printList(struct Node* head, FILE* fptr) {
             break;
         }
 
-            // print foodType tag
-            enum FoodType foodType = current->data.foodType;
-            switch (foodType)
-            {
-            case 1:
-                // char word[15] = "Breakfast";
-                fprintf(fptr, "%-10s|", "Breakfast");
-                break;
-            case 2:
-                // char word[15] = "Lunch";
-                fprintf(fptr, "%-10s|", "Lunch");
-                break;
-            case 3:
-                // char word[15] = "Dinner";
-                fprintf(fptr, "%-10s|", "Dinner");
-                break;
-            case 4:
-                // char word[15] = "Snack";
-                fprintf(fptr, "%-10s|", "Snack");
-                break;
-            }
+        // print foodType tag
+        enum FoodType foodType = current->data.foodType;
+        switch (foodType)
+        {
+        case 1:
+            // char word[15] = "Breakfast";
+            fprintf(fptr, "%-10s|", "Breakfast");
+            break;
+        case 2:
+            // char word[15] = "Lunch";
+            fprintf(fptr, "%-10s|", "Lunch");
+            break;
+        case 3:
+            // char word[15] = "Dinner";
+            fprintf(fptr, "%-10s|", "Dinner");
+            break;
+        case 4:
+            // char word[15] = "Snack";
+            fprintf(fptr, "%-10s|", "Snack");
+            break;
+        }
 
         fprintf(fptr, "\n");
 
@@ -265,10 +273,8 @@ void printList(struct Node* head, FILE* fptr) {
 }
 
 // this gets called by menuOptions() function
-struct Node* Logger(struct Node* head)
+struct Node *Logger(struct Node *head)
 {
-
-
 
     int counter = 0;
     char answer;
@@ -278,6 +284,16 @@ struct Node* Logger(struct Node* head)
     {
 
         struct LoggerData inputData;
+
+        // Ask the user if they will be logging current data,old data, or current data and old data
+
+        // If user selects to log old data
+
+        // the only extra step they need to do is type in the month, day and year and the time.
+
+        // we don't ask for specific time, just the hour (ex: 11 am)
+
+        // in the data table, the program will auto fill in the time (ex: 11 am == 11:00AM)
 
         // The Type Of Food
         printf("|1| Breakfast |2| Lunch |3| Dinner |4| Snack\n");
@@ -297,17 +313,14 @@ struct Node* Logger(struct Node* head)
         printf("Rate 1-10 How Focused You Feel?: ");
         scanf("%d", &inputData.focusedLevel);
         printf("\n");
-        
 
         // enter level(s)
         printf("Enter your level: ");
         scanf("%d", &inputData.levels);
         printf("\n");
 
-
         // create a new node after collecting all data
-        struct Node* newNode = createNode(inputData);
-
+        struct Node *newNode = createNode(inputData);
 
         // insert new data into a node
         insertEnd(&head, newNode);
@@ -327,7 +340,7 @@ struct Node* Logger(struct Node* head)
             if (answer == 'Y' || answer == 'y')
             {
                 counter++; // increments the counter for prompt purposes
-                break; // returns break into the while loop
+                break;     // returns break into the while loop
             }
             else if (answer == 'N' || answer == 'n')
             {
@@ -340,7 +353,6 @@ struct Node* Logger(struct Node* head)
                 printf("\n");
             }
         }
-
     }
 
     // correct grammar depending on scenario
@@ -361,11 +373,10 @@ struct Node* Logger(struct Node* head)
 }
 
 // gets called in the main.c file
-struct Node* MenuOptions(struct Node* head)
+struct Node *MenuOptions(struct Node *head)
 {
 
     int selection;
-
 
     int num = 1;
     while (num != 0)
@@ -391,33 +402,29 @@ struct Node* MenuOptions(struct Node* head)
         if (selection == 1) // if user selects 1, then run logger
         {
             head = Logger(head);
-            
         }
         else if (selection == 2)
         {
             printf("Option 2");
             // option 2
-           
         }
         else if (selection == 3)
         {
             printf("Option 3");
             // option 3
-            
         }
         else if (selection == 4)
         {
             printf("Option 4");
             // option 4
-            
         }
         else if (selection == 5)
         {
             printf("Option 5");
             // option 5
-            
         }
-        else if (selection == 6) {
+        else if (selection == 6)
+        {
             // exit
             num = 0;
         }
@@ -426,12 +433,9 @@ struct Node* MenuOptions(struct Node* head)
             ++num;
             printf("Option %d out of range.\n\n", selection);
         }
-
-
     }
 
     return head;
-
 }
 
 // this function is not in use
@@ -456,7 +460,3 @@ struct Node* MenuOptions(struct Node* head)
 
     MenuOptions(head);
 } */
-
-
-
-

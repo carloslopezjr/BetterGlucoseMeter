@@ -19,6 +19,13 @@ int main()
     // take in the linked list data and back it up into a text file
     backupData(head);
 
+
+    while (head != NULL) {
+
+        printf("%d\n", head->data.levels);
+        
+    }
+
     return 0;
 }
 
