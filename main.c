@@ -17,8 +17,10 @@ int main()
 
     // take in the linked list data and back it up into a text file
     visualizeData(head);
-    
 
+    backupData(head);
+    
+    /*
     while (head != NULL)
     {
         // test to see if time is being stored in node
@@ -29,6 +31,7 @@ int main()
 
         head = head->next;
     } 
+    */
     
     return 0; 
 }
@@ -40,7 +43,7 @@ int main()
 
 // 2:
 // create another text file to backup all the node data
-
+// complete operations in backupData()
 
 // 3:
 // add insert function to insert a previous log from a different day
