@@ -68,6 +68,8 @@ void visualizeData(struct Node *head);
 
 void backupData(struct Node *head);
 
+void printData(struct Node *head, FILE *fptr);
+
 void loadData();
 
 void readData();
