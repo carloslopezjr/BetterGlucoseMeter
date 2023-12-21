@@ -276,10 +276,8 @@ struct Node *Logger(struct Node *head)
 {
     // TASKS:
     // needs to use the time library in this function
-        // will take the time data and place it in the LoggerData struct
+    // will take the time data and place it in the LoggerData struct
 
-
-    
     time_t now = time(NULL);
 
     int counter = 0;
@@ -288,7 +286,7 @@ struct Node *Logger(struct Node *head)
     int stopper = 1; // condition
 
     // this starts the iteration that the user will input their data, so we want the current time from this specific iteration of the program
-    while (stopper != 0) 
+    while (stopper != 0)
     {
 
         struct LoggerData inputData;
@@ -303,14 +301,8 @@ struct Node *Logger(struct Node *head)
 
         // in the data table, the program will auto fill in the time (ex: 11 am == 11:00AM)
 
-
         // STORING TIME DATA HERE
-        struct tm *cur_time = localtime(&now); // calculates the local time and holds calculations of a bunch of different times
-
-        // store month integer here
-        inputData.month = cur_time->tm_mon;
-
-
+       inputData = currentTime(inputData);
 
 
         // The Type Of Food
@@ -454,6 +446,39 @@ struct Node *MenuOptions(struct Node *head)
     }
 
     return head;
+}
+
+struct LoggerData currentTime(struct LoggerData inputData) {
+    
+    time_t now = time(NULL);
+
+    // STORING TIME DATA HERE
+    struct tm *cur_time = localtime(&now); // calculates the local time and holds calculations of a bunch of different times
+
+    // store month integer here
+    inputData.month = cur_time->tm_mon;
+
+    // store day integer here
+    inputData.day = cur_time->tm_wday;
+
+    // store year integer here
+    inputData.year = cur_time->tm_year + 1900;
+    // inputData.year += 1900;
+
+    // store day name as number
+    inputData.dayName = cur_time->tm_wday;
+
+    // store hour in 24hr format
+    inputData.hour = cur_time->tm_hour;
+
+    // store minutes
+    inputData.minutes = cur_time->tm_min;
+
+
+    // store seconds
+    inputData.seconds = cur_time->tm_sec;
+
+    return inputData;
 }
 
 // this function is not in use
