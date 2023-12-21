@@ -41,7 +41,7 @@ int main()
 // 1: (COMPLETE)
 // change printList function to take current date, day, and time
 
-// 2:
+// 2: (95% COMPLETE)
 // create another text file to backup all the node data
 // complete operations in backupData()
 
