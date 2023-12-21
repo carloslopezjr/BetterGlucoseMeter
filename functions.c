@@ -10,7 +10,7 @@ void RemoveNewLine(char *stringInput)
     stringInput[strcspn(stringInput, "\n")] = 0;
 }
 
-// gets the head from the main function
+// creates text file that will provide a visual of all the logs the user has made
 void visualizeData(struct Node *head)
 {
 
@@ -94,13 +94,173 @@ void visualizeData(struct Node *head)
 
 void backupData(struct Node *head)
 {
+
+    // look for file text file in the current directory
+    DIR *dir;
+
+    struct dirent *entry;
+
+    dir = opendir(".");
+
+    if (dir == NULL)
+    {
+        perror("Error opening up directory");
+    }
+
+    int fileNotFound = 0; // 0 == file wasn't found, 1 == file was found
+    
     // search directory for file name (backupData.txt)
+    while ((entry = readdir(dir)) != NULL)
+    {
+        // check to see if it meets the name criteria, then open if it does
+        if (strcmp(entry->d_name, "backupData.txt") == 0)
+        {
+            // append new data to the file
+            fileNotFound++;
+
+            // required set up for file appending
+            FILE *fptr;
+            fptr = fopen("backupData.txt", "a");
+
+            // loop through each nodes data members and print it into file
+            // if file already has data, go to the next avaliable space
+            printData(head, fptr);
+
+            // close the file when done
+            fclose(fptr);
+        }
+    }
+
     // if file isn't present, create the file
+    if (fileNotFound != 1)
+    {
 
-    // create a column header to specify each data section
+        FILE *fptr;
 
-    // loop through each nodes data members and print it into file
+        fptr = fopen("backupData.txt", "w");
+
+        // create a column header to specify each data section
+        char month[10] = "Month";
+        char day[10] = "Day";
+        char year[10] = "Year";
+        char dayName[10] = "DayName";
+        char hour[10] = "Hour";
+        char minutes[10] = "Minutes";
+        char seconds[10] = "Seconds";
+        char levels[10] = "Levels";
+        char focus[10] = "Focus R8";
+        char foodTime[10] = "Meal Time";
+        char foodType[10] = "Meal Type";
+
+        fprintf(fptr, "%-10s|%-10s|%-10s|%-10s|%-10s|%-10s|%-10s|%-10s|%-10s|%-10s|%-10s|\n", month, day, year, dayName, hour, minutes, seconds, levels, focus, foodTime, foodType);
+
+        for (int i = 0; i < 121; i++)
+        {
+            fprintf(fptr, "-");
+        }
+        fprintf(fptr, "\n");
+
+        // take the linked list data and paste it into the file
+        printData(head, fptr);
+
+        // close the file when done
+        fclose(fptr);
+    }
+
+    closedir(dir); 
+
 }
+
+
+void printData(struct Node *head, FILE *fptr) {
+
+    struct Node *current = head;
+
+
+    while (current != NULL)
+    {
+
+        // print node data for month
+        fprintf(fptr, "%-10d|", current->data.month);
+
+        // print node data for day
+        fprintf(fptr, "%-10d|", current->data.day);
+
+        // print node data for year
+        fprintf(fptr, "%-10d|", current->data.year);
+
+        // print node data for weekday
+        fprintf(fptr, "%-10d|", current->data.dayName);
+
+        // print node hour
+        fprintf(fptr, "%-10d|", current->data.hour);
+
+        // print node minutes
+        fprintf(fptr, "%-10d|", current->data.minutes);
+
+        // print node seconds
+        fprintf(fptr, "%-10d|", current->data.seconds);
+
+        // print node gluclose data
+        fprintf(fptr, "%-10d|", current->data.levels);
+
+        // print node focus R8
+        fprintf(fptr, "%-10d|", current->data.focusedLevel);
+
+        // print foodTime tag
+        enum FoodTime foodTime = current->data.foodTime;
+
+        switch (foodTime)
+        {
+        case 1:
+            // char word[15] = "Morning";
+            fprintf(fptr, "%-10s|", "Morning");
+            break;
+        case 2:
+            // char word[15] = "Afternoon";
+            fprintf(fptr, "%-10s|", "Afternoon");
+            break;
+        case 3:
+            // char word[15] = "Evening";
+            fprintf(fptr, "%-10s|", "Evening");
+            break;
+        case 4:
+            // char word[15] = "Midnight";
+            fprintf(fptr, "%-10s|", "Midnight");
+            break;
+        }
+
+        // print foodType tag
+        enum FoodType foodType = current->data.foodType;
+        switch (foodType)
+        {
+        case 1:
+            // char word[15] = "Breakfast";
+            fprintf(fptr, "%-10s|", "Breakfast");
+            break;
+        case 2:
+            // char word[15] = "Lunch";
+            fprintf(fptr, "%-10s|", "Lunch");
+            break;
+        case 3:
+            // char word[15] = "Dinner";
+            fprintf(fptr, "%-10s|", "Dinner");
+            break;
+        case 4:
+            // char word[15] = "Snack";
+            fprintf(fptr, "%-10s|", "Snack");
+            break;
+        }
+
+        fprintf(fptr, "\n");
+
+        // Go To The Next Node
+        current = current->next;
+    }
+
+    // fprintf(fptr, "\n");
+}
+
 
 void loadData()
 {
@@ -114,6 +274,8 @@ void loadData()
     // load the data into the linked list from top -> bottom
 }
 
+
+// prints each line of the gluclose logs 
 void readData()
 {
 
@@ -131,7 +293,6 @@ void readData()
     char buffer[100];
     while (fgets(buffer, sizeof(buffer), fptr) != NULL)
     {
-
         printf("%s", buffer);
     }
 
@@ -193,7 +354,7 @@ void insertEnd(struct Node **head, struct Node *newNode)
     }
 }
 
-// gets the head from
+// prints the data into desired file
 void printList(struct Node *head, FILE *fptr)
 {
 
@@ -466,7 +627,7 @@ struct LoggerData currentTime(struct LoggerData inputData)
     inputData.month = cur_time->tm_mon;
 
     // store day integer here
-    inputData.day = cur_time->tm_wday;
+    inputData.day = cur_time->tm_mday; // day of the month
 
     // store year integer here
     inputData.year = cur_time->tm_year + 1900;
