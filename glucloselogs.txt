@@ -1,27 +1,4 @@
 Date      |Day       |Time      |Levels    |Focus R8  |Meal Time |Meal Type |
 -----------------------------------------------------------------------------
-12/20/23  |Wednesday |06:43PM   |100       |5         |Evening   |Breakfast |
-12/20/23  |Wednesday |06:43PM   |230       |4         |Morning   |Dinner    |
-12/20/23  |Wednesday |06:45PM   |100       |5         |Morning   |Dinner    |
-12/20/23  |Wednesday |06:46PM   |100       |0         |Afternoon |Dinner    |
-12/20/23  |Wednesday |06:47PM   |100       |5         |Evening   |Lunch     |
-12/20/23  |Wednesday |06:50PM   |100       |4         |Evening   |Breakfast |
-12/20/23  |Wednesday |06:50PM   |140       |6         |Evening   |Dinner    |
-12/20/23  |Wednesday |06:51PM   |100       |5         |Evening   |Lunch     |
-12/20/23  |Wednesday |06:51PM   |150       |3         |Morning   |Dinner    |
-12/20/23  |Wednesday |06:52PM   |100       |5         |Evening   |Breakfast |
-12/20/23  |Wednesday |06:52PM   |150       |7         |Evening   |Breakfast |
-12/20/23  |Wednesday |06:52PM   |170       |3         |Afternoon |Breakfast |
-12/20/23  |Wednesday |07:05PM   |100       |3         |Morning   |Dinner    |
-12/20/23  |Wednesday |07:05PM   |150       |7         |Afternoon |Breakfast |
-12/20/23  |Wednesday |07:05PM   |150       |8         |Evening   |Breakfast |
-12/20/23  |Wednesday |07:08PM   |100       |6         |Morning   |Dinner    |
-12/20/23  |Wednesday |07:08PM   |160       |3         |Morning   |Dinner    |
-12/20/23  |Wednesday |07:08PM   |160       |4         |Morning   |Dinner    |
-12/20/23  |Wednesday |07:11PM   |100       |6         |Evening   |Lunch     |
-12/20/23  |Wednesday |07:11PM   |56        |7         |Evening   |Breakfast |
-12/20/23  |Wednesday |07:13PM   |100       |7         |Afternoon |Dinner    |
-12/20/23  |Wednesday |07:13PM   |200       |1         |Evening   |Breakfast |
-12/20/23  |Wednesday |07:13PM   |150       |8         |Morning   |Dinner    |
-12/20/23  |Wednesday |07:16PM   |100       |7         |Morning   |Dinner    |
-12/20/23  |Wednesday |07:16PM   |160       |4         |Evening   |Lunch     |
+12/20/23  |Wednesday |11:09PM   |130       |9         |Afternoon |Dinner    |
+12/20/23  |Wednesday |11:09PM   |120       |9         |Evening   |Breakfast |
