@@ -15,18 +15,21 @@ int main()
     // this will keep running until the user exits
     head = MenuOptions(head); // assignes the head variable with the return of menuOptions(head) function
 
-
     // take in the linked list data and back it up into a text file
     backupData(head);
+    
 
-
-    while (head != NULL) {
-
-        printf("%d\n", head->data.levels);
+    while (head != NULL)
+    {
+        printf("Hour: %d\n", head->data.hour);
+        printf("Minutes: %d\n", head->data.minutes);
+        printf("Seconds: %d\n", head->data.seconds);
+        printf("Year: %d\n", head->data.year);
         
-    }
-
-    return 0;
+        head = head->next;
+    } 
+    
+    return 0; 
 }
 
 /* NEXT UPDATES */
@@ -37,8 +40,5 @@ int main()
 // 2:
 // change meal tags to be more specific
 
-
 // 3:
 // add insert function to insert a previous log from a different day
-
-
