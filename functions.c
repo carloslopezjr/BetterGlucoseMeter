@@ -7,7 +7,6 @@
 
 void RemoveNewLine(char *stringInput)
 {
-
     stringInput[strcspn(stringInput, "\n")] = 0;
 }
 
@@ -275,12 +274,21 @@ void printList(struct Node *head, FILE *fptr)
 // this gets called by menuOptions() function
 struct Node *Logger(struct Node *head)
 {
+    // TASKS:
+    // needs to use the time library in this function
+        // will take the time data and place it in the LoggerData struct
+
+
+    
+    time_t now = time(NULL);
 
     int counter = 0;
     char answer;
 
     int stopper = 1; // condition
-    while (stopper != 0)
+
+    // this starts the iteration that the user will input their data, so we want the current time from this specific iteration of the program
+    while (stopper != 0) 
     {
 
         struct LoggerData inputData;
@@ -294,6 +302,16 @@ struct Node *Logger(struct Node *head)
         // we don't ask for specific time, just the hour (ex: 11 am)
 
         // in the data table, the program will auto fill in the time (ex: 11 am == 11:00AM)
+
+
+        // STORING TIME DATA HERE
+        struct tm *cur_time = localtime(&now); // calculates the local time and holds calculations of a bunch of different times
+
+        // store month integer here
+        inputData.month = cur_time->tm_mon;
+
+
+
 
         // The Type Of Food
         printf("|1| Breakfast |2| Lunch |3| Dinner |4| Snack\n");
