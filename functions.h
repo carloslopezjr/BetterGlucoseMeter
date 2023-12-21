@@ -21,6 +21,7 @@ enum FoodTime
 
 };
 
+
 struct LoggerData
 {
 
@@ -45,6 +46,7 @@ struct LoggerData
 
     int hour;
     int minutes;
+    int seconds;
 
     int levels;
     int focusedLevel;
@@ -81,6 +83,8 @@ void printList(struct Node *head, FILE *fptr);
 struct Node *Logger(struct Node *head);
 
 struct Node *MenuOptions(struct Node *head);
+
+struct LoggerData currentTime(struct LoggerData inputData);
 
 // void LogIn();
 
