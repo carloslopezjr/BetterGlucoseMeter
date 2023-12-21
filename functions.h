@@ -24,10 +24,32 @@ enum FoodTime
 struct LoggerData
 {
 
+    // we want this data to be stored in the node for easier sorting in the future
+
+    // date formatted
+    // month number
+    // day number
+    // year number
+
+    int month;
+    int day;
+    int year;
+
+    // day
+    // name
+    int dayName;
+
+    // hour formatted
+    // hour number
+    // minutes number
+
+    int hour;
+    int minutes;
+
+    int levels;
+    int focusedLevel;
     int foodType;
     int foodTime;
-    int focusedLevel;
-    int levels;
 };
 
 struct Node
@@ -40,7 +62,7 @@ struct Node
 
 void RemoveNewLine(char *stringInput);
 
-void backupData(struct Node* head);
+void backupData(struct Node *head);
 
 void loadData();
 
@@ -50,15 +72,15 @@ void clearInputBuffer();
 
 void Header();
 
-struct Node* createNode(struct LoggerData newData);
+struct Node *createNode(struct LoggerData newData);
 
-void insertEnd(struct Node **head, struct Node* newNode);
+void insertEnd(struct Node **head, struct Node *newNode);
 
-void printList(struct Node* head, FILE* fptr);
+void printList(struct Node *head, FILE *fptr);
 
-struct Node* Logger(struct Node* head);
+struct Node *Logger(struct Node *head);
 
-struct Node* MenuOptions(struct Node* head);
+struct Node *MenuOptions(struct Node *head);
 
 // void LogIn();
 
