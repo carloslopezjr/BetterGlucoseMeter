@@ -92,6 +92,16 @@ void visualizeData(struct Node *head)
     readData(); // comment out if you don't want the program to print in the terminal the contents in the text file
 }
 
+void backupData(struct Node *head)
+{
+    // search directory for file name (backupData.txt)
+    // if file isn't present, create the file
+
+    // create a column header to specify each data section
+
+    // loop through each nodes data members and print it into file
+}
+
 void loadData()
 {
 
@@ -274,7 +284,7 @@ void printList(struct Node *head, FILE *fptr)
 // this gets called by menuOptions() function
 struct Node *Logger(struct Node *head)
 {
-    
+
     time_t now = time(NULL);
 
     int counter = 0;
@@ -299,8 +309,7 @@ struct Node *Logger(struct Node *head)
         // in the data table, the program will auto fill in the time (ex: 11 am == 11:00AM)
 
         // STORING TIME DATA HERE
-       inputData = currentTime(inputData);
-
+        inputData = currentTime(inputData);
 
         // The Type Of Food
         printf("|1| Breakfast |2| Lunch |3| Dinner |4| Snack\n");
@@ -445,8 +454,9 @@ struct Node *MenuOptions(struct Node *head)
     return head;
 }
 
-struct LoggerData currentTime(struct LoggerData inputData) {
-    
+struct LoggerData currentTime(struct LoggerData inputData)
+{
+
     time_t now = time(NULL);
 
     // STORING TIME DATA HERE
@@ -470,7 +480,6 @@ struct LoggerData currentTime(struct LoggerData inputData) {
 
     // store minutes
     inputData.minutes = cur_time->tm_min;
-
 
     // store seconds
     inputData.seconds = cur_time->tm_sec;
