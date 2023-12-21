@@ -66,6 +66,8 @@ void RemoveNewLine(char *stringInput);
 
 void visualizeData(struct Node *head);
 
+void backupData(struct Node *head);
+
 void loadData();
 
 void readData();
@@ -86,7 +88,7 @@ struct Node *MenuOptions(struct Node *head);
 
 struct LoggerData currentTime(struct LoggerData inputData);
 
-void backupData(struct Node *head);
+
 
 // void LogIn();
 
