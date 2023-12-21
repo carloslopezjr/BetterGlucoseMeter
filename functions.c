@@ -11,7 +11,7 @@ void RemoveNewLine(char *stringInput)
 }
 
 // gets the head from the main function
-void backupData(struct Node *head)
+void visualizeData(struct Node *head)
 {
 
     // look for file text file in the current directory
