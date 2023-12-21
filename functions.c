@@ -274,10 +274,7 @@ void printList(struct Node *head, FILE *fptr)
 // this gets called by menuOptions() function
 struct Node *Logger(struct Node *head)
 {
-    // TASKS:
-    // needs to use the time library in this function
-    // will take the time data and place it in the LoggerData struct
-
+    
     time_t now = time(NULL);
 
     int counter = 0;
