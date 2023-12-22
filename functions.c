@@ -171,7 +171,6 @@ void backupData(struct Node *head)
 
 }
 
-
 void printData(struct Node *head, FILE *fptr) {
 
     struct Node *current = head;
@@ -261,7 +260,6 @@ void printData(struct Node *head, FILE *fptr) {
     // fprintf(fptr, "\n");
 }
 
-
 void loadData()
 {
 
@@ -273,7 +271,6 @@ void loadData()
 
     // load the data into the linked list from top -> bottom
 }
-
 
 // prints each line of the gluclose logs 
 void readData()
