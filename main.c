@@ -41,13 +41,17 @@ int main()
 // 1: (COMPLETE)
 // change printList function to take current date, day, and time
 
-// 2: (95% COMPLETE)
-// create another text file to backup all the node data
+// 2: (50% COMPLETE)
 // complete operations in backupData()
+    // change backupData() to export as csv with correct table formats
+
 
 // 3:
 // add insert function to insert a previous log from a different day
-// change the user logic when using the program to make this work
+// fix Logger() logic to improve user experience
 
 // 4:
 // change meal tags to be more specific
+
+// 5: 
+// ideate how to create "Calculate Insulin Dose" option for program
