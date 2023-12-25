@@ -154,15 +154,6 @@ void backupData(struct Node *head)
 
         fprintf(fptr, "%15s %15s %15s %15s %15s %15s %15s %15s %15s %15s %15s\n", month, day, year, dayName, hour, minutes, seconds, levels, focus, foodTime, foodType);
 
-        /*
-        for (int i = 0; i < 121; i++)
-        {
-            fprintf(fptr, "-");
-        }
-        fprintf(fptr, "\n");
-
-        */
-
         // take the linked list data and paste it into the file
         printData(head, fptr);
 
