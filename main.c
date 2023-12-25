@@ -62,3 +62,7 @@ int main()
 
 // 5: 
 // ideate how to create "Calculate Insulin Dose" option for program
+
+
+// (IDEA)
+// My levels right now are 140, and I'm going to eat 15 carbs right now. What are the chances I will feel less focused because of it? 
