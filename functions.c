@@ -108,7 +108,7 @@ void backupData(struct Node *head)
     }
 
     int fileNotFound = 0; // 0 == file wasn't found, 1 == file was found
-    
+
     // search directory for file name (backupData.txt)
     while ((entry = readdir(dir)) != NULL)
     {
@@ -170,11 +170,11 @@ void backupData(struct Node *head)
         fclose(fptr);
     }
 
-    closedir(dir); 
-
+    closedir(dir);
 }
 
-void printData(struct Node *head, FILE *fptr) {
+void printData(struct Node *head, FILE *fptr)
+{
 
     struct Node *current = head;
 
@@ -186,69 +186,55 @@ void printData(struct Node *head, FILE *fptr) {
         // print foodTime tag
         enum FoodTime foodTime = current->data.foodTime;
 
-        // char foodTimeTag[15];
-
         switch (foodTime)
         {
         case 1:
-            // char word[15] = "Morning";
+
             fprintf(fptr, "%15s ", "Morning");
-            // strcpy(foodTimeTag, "Morning");
+
             break;
         case 2:
-            // char word[15] = "Afternoon";
+
             fprintf(fptr, "%15s ", "Afternoon");
-            // strcpy(foodTimeTag, "Afternoon");
+
             break;
         case 3:
-            // char word[15] = "Evening";
+
             fprintf(fptr, "%15s ", "Evening");
-            // strcpy(foodTimeTag, "Evening");
+
             break;
         case 4:
-            // char word[15] = "Midnight";
+
             fprintf(fptr, "%15s ", "Midnight");
-            // strcpy(foodTimeTag, "Midnight");
+
             break;
         }
 
         // print foodType tag
         enum FoodType foodType = current->data.foodType;
 
-        char foodTypeTag[15];
-
         switch (foodType)
         {
         case 1:
-            // char word[15] = "Breakfast";
             fprintf(fptr, "%15s", "Breakfast");
-            // strcpy(foodTypeTag, "Breakfast");
             break;
         case 2:
-            // char word[15] = "Lunch";
             fprintf(fptr, "%15s", "Lunch");
-            // strcpy(foodTimeTag, "Lunch");
             break;
         case 3:
-            // char word[15] = "Dinner";
             fprintf(fptr, "%15s", "Dinner");
-            // strcpy(foodTimeTag, "Dinner");
             break;
         case 4:
-            // char word[15] = "Snack";
+
             fprintf(fptr, "%15s", "Snack");
-            // strcpy(foodTimeTag, "Snack");
             break;
         }
-
 
         fprintf(fptr, "\n");
 
         // Go To The Next Node
         current = current->next;
     }
-
-    // fprintf(fptr, "\n");
 }
 
 void loadData()
@@ -263,7 +249,7 @@ void loadData()
     // load the data into the linked list from top -> bottom
 }
 
-// prints each line of the gluclose logs 
+// prints each line of the gluclose logs
 void readData()
 {
 
