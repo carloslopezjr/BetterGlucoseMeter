@@ -113,14 +113,14 @@ void backupData(struct Node *head)
     while ((entry = readdir(dir)) != NULL)
     {
         // check to see if it meets the name criteria, then open if it does
-        if (strcmp(entry->d_name, "backupData.txt") == 0)
+        if (strcmp(entry->d_name, "backupData.csv") == 0)
         {
             // append new data to the file
             fileNotFound++;
 
             // required set up for file appending
             FILE *fptr;
-            fptr = fopen("backupData.txt", "a");
+            fptr = fopen("backupData.csv", "a");
 
             // loop through each nodes data members and print it into file
             // if file already has data, go to the next avaliable space
@@ -137,28 +137,31 @@ void backupData(struct Node *head)
 
         FILE *fptr;
 
-        fptr = fopen("backupData.txt", "w");
+        fptr = fopen("backupData.csv", "w");
 
         // create a column header to specify each data section
-        char month[10] = "Month";
-        char day[10] = "Day";
-        char year[10] = "Year";
-        char dayName[10] = "DayName";
-        char hour[10] = "Hour";
-        char minutes[10] = "Minutes";
-        char seconds[10] = "Seconds";
-        char levels[10] = "Levels";
-        char focus[10] = "Focus R8";
-        char foodTime[10] = "Meal Time";
-        char foodType[10] = "Meal Type";
+        char month[15] = "Month";
+        char day[15] = "Day";
+        char year[15] = "Year";
+        char dayName[15] = "Day-Name";
+        char hour[15] = "Hour";
+        char minutes[15] = "Minutes";
+        char seconds[15] = "Seconds";
+        char levels[15] = "Levels";
+        char focus[15] = "Focus-R8";
+        char foodTime[15] = "Meal-Time";
+        char foodType[15] = "Meal-Type";
 
-        fprintf(fptr, "%-10s|%-10s|%-10s|%-10s|%-10s|%-10s|%-10s|%-10s|%-10s|%-10s|%-10s|\n", month, day, year, dayName, hour, minutes, seconds, levels, focus, foodTime, foodType);
+        fprintf(fptr, "%15s %15s %15s %15s %15s %15s %15s %15s %15s %15s %15s\n", month, day, year, dayName, hour, minutes, seconds, levels, focus, foodTime, foodType);
 
+        /*
         for (int i = 0; i < 121; i++)
         {
             fprintf(fptr, "-");
         }
         fprintf(fptr, "\n");
+
+        */
 
         // take the linked list data and paste it into the file
         printData(head, fptr);
@@ -175,81 +178,96 @@ void printData(struct Node *head, FILE *fptr) {
 
     struct Node *current = head;
 
-
     while (current != NULL)
     {
 
-        // print node data for month
-        fprintf(fptr, "%-10d|", current->data.month);
+        // print node data for month, day, year, weekday, hour, minutes, seconds, gluclose data, focus r8, tag
+        // fprintf(fptr, "%-10d|", current->data.month);
 
         // print node data for day
-        fprintf(fptr, "%-10d|", current->data.day);
+        // fprintf(fptr, "%-10d|", current->data.day);
 
         // print node data for year
-        fprintf(fptr, "%-10d|", current->data.year);
+        // fprintf(fptr, "%-10d|", current->data.year);
 
         // print node data for weekday
-        fprintf(fptr, "%-10d|", current->data.dayName);
+        // fprintf(fptr, "%-10d|", current->data.dayName);
 
         // print node hour
-        fprintf(fptr, "%-10d|", current->data.hour);
+        // fprintf(fptr, "%-10d|", current->data.hour);
 
         // print node minutes
-        fprintf(fptr, "%-10d|", current->data.minutes);
+        // fprintf(fptr, "%-10d|", current->data.minutes);
 
         // print node seconds
-        fprintf(fptr, "%-10d|", current->data.seconds);
+        // fprintf(fptr, "%-10d|", current->data.seconds);
 
         // print node gluclose data
-        fprintf(fptr, "%-10d|", current->data.levels);
+        // fprintf(fptr, "%-10d|", current->data.levels);
 
         // print node focus R8
-        fprintf(fptr, "%-10d|", current->data.focusedLevel);
+        // fprintf(fptr, "%-10d|", current->data.focusedLevel);
+
+        fprintf(fptr, "%15d %15d %15d %15d %15d %15d %15d %15d %15d ", current->data.month, current->data.day, current->data.year, current->data.dayName, current->data.hour, current->data.minutes, current->data.seconds, current->data.levels, current->data.focusedLevel);
 
         // print foodTime tag
         enum FoodTime foodTime = current->data.foodTime;
+
+        // char foodTimeTag[15];
 
         switch (foodTime)
         {
         case 1:
             // char word[15] = "Morning";
-            fprintf(fptr, "%-10s|", "Morning");
+            fprintf(fptr, "%15s ", "Morning");
+            // strcpy(foodTimeTag, "Morning");
             break;
         case 2:
             // char word[15] = "Afternoon";
-            fprintf(fptr, "%-10s|", "Afternoon");
+            fprintf(fptr, "%15s ", "Afternoon");
+            // strcpy(foodTimeTag, "Afternoon");
             break;
         case 3:
             // char word[15] = "Evening";
-            fprintf(fptr, "%-10s|", "Evening");
+            fprintf(fptr, "%15s ", "Evening");
+            // strcpy(foodTimeTag, "Evening");
             break;
         case 4:
             // char word[15] = "Midnight";
-            fprintf(fptr, "%-10s|", "Midnight");
+            fprintf(fptr, "%15s ", "Midnight");
+            // strcpy(foodTimeTag, "Midnight");
             break;
         }
 
         // print foodType tag
         enum FoodType foodType = current->data.foodType;
+
+        char foodTypeTag[15];
+
         switch (foodType)
         {
         case 1:
             // char word[15] = "Breakfast";
-            fprintf(fptr, "%-10s|", "Breakfast");
+            fprintf(fptr, "%15s", "Breakfast");
+            // strcpy(foodTypeTag, "Breakfast");
             break;
         case 2:
             // char word[15] = "Lunch";
-            fprintf(fptr, "%-10s|", "Lunch");
+            fprintf(fptr, "%15s", "Lunch");
+            // strcpy(foodTimeTag, "Lunch");
             break;
         case 3:
             // char word[15] = "Dinner";
-            fprintf(fptr, "%-10s|", "Dinner");
+            fprintf(fptr, "%15s", "Dinner");
+            // strcpy(foodTimeTag, "Dinner");
             break;
         case 4:
             // char word[15] = "Snack";
-            fprintf(fptr, "%-10s|", "Snack");
+            fprintf(fptr, "%15s", "Snack");
+            // strcpy(foodTimeTag, "Snack");
             break;
         }
+
 
         fprintf(fptr, "\n");
 
