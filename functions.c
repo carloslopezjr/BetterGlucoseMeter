@@ -181,33 +181,6 @@ void printData(struct Node *head, FILE *fptr) {
     while (current != NULL)
     {
 
-        // print node data for month, day, year, weekday, hour, minutes, seconds, gluclose data, focus r8, tag
-        // fprintf(fptr, "%-10d|", current->data.month);
-
-        // print node data for day
-        // fprintf(fptr, "%-10d|", current->data.day);
-
-        // print node data for year
-        // fprintf(fptr, "%-10d|", current->data.year);
-
-        // print node data for weekday
-        // fprintf(fptr, "%-10d|", current->data.dayName);
-
-        // print node hour
-        // fprintf(fptr, "%-10d|", current->data.hour);
-
-        // print node minutes
-        // fprintf(fptr, "%-10d|", current->data.minutes);
-
-        // print node seconds
-        // fprintf(fptr, "%-10d|", current->data.seconds);
-
-        // print node gluclose data
-        // fprintf(fptr, "%-10d|", current->data.levels);
-
-        // print node focus R8
-        // fprintf(fptr, "%-10d|", current->data.focusedLevel);
-
         fprintf(fptr, "%15d %15d %15d %15d %15d %15d %15d %15d %15d ", current->data.month, current->data.day, current->data.year, current->data.dayName, current->data.hour, current->data.minutes, current->data.seconds, current->data.levels, current->data.focusedLevel);
 
         // print foodTime tag
