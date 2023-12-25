@@ -51,7 +51,7 @@ int main()
 
         // (REASON)
         // Ideally this will help with identifying the data in the future and can specifically call out a certain line the specific data is at
-
+        // Also it looks prettier when you open the file outside the program
 
 // 3:
 // add insert function to insert a previous log from a different day
