@@ -36,7 +36,7 @@ int main()
     return 0; 
 }
 
-/* NEXT UPDATES */
+/* NEXT UPDATES */ 
 
 // 1: (COMPLETE)
 // change printList function to take current date, day, and time
