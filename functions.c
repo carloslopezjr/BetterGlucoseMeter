@@ -189,24 +189,16 @@ void printData(struct Node *head, FILE *fptr)
         switch (foodTime)
         {
         case 1:
-
             fprintf(fptr, "%15s ", "Morning");
-
             break;
         case 2:
-
             fprintf(fptr, "%15s ", "Afternoon");
-
             break;
         case 3:
-
             fprintf(fptr, "%15s ", "Evening");
-
             break;
         case 4:
-
             fprintf(fptr, "%15s ", "Midnight");
-
             break;
         }
 
@@ -240,7 +232,7 @@ void printData(struct Node *head, FILE *fptr)
 void loadData()
 {
 
-    // look for text file in current directory
+    // look for csv file in current directory
 
     // check to see if it meets the name criteria
 
