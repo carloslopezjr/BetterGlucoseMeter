@@ -1,4 +1,0 @@
-Month     |Day       |Year      |DayName   |Hour      |Minutes   |Seconds   |Levels    |Focus R8  |Meal Time |Meal Type |
--------------------------------------------------------------------------------------------------------------------------
-11        |20        |2023      |3         |23        |9         |21        |130       |9         |Afternoon |Dinner    |
-11        |20        |2023      |3         |23        |9         |31        |120       |9         |Evening   |Breakfast |
