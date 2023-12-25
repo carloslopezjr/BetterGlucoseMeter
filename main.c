@@ -41,9 +41,16 @@ int main()
 // 1: (COMPLETE)
 // change printList function to take current date, day, and time
 
-// 2: (50% COMPLETE)
+// 2: (COMPLETE)
 // complete operations in backupData()
     // change backupData() to export as csv with correct table formats
+
+    // (POSSIBLE FUTURE UPDATES FOR THIS TASK)
+    // Add an extra column to the far left that will be called "#"
+        // Each row below it will be ordered starting from 1
+
+        // (REASON)
+        // Ideally this will help with identifying the data in the future and can specifically call out a certain line the specific data is at
 
 
 // 3:
