@@ -5,6 +5,8 @@
 #include <time.h>
 #include "functions.h"
 
+
+// function not is use
 void RemoveNewLine(char *stringInput)
 {
     stringInput[strcspn(stringInput, "\n")] = 0;
