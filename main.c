@@ -55,6 +55,27 @@ int main()
 
 // 3:
 // add insert function to insert a previous log from a different day
+
+// (IMPLEMENTATION)
+//  Traverse through the linked list
+        // Condition test the insert node's year data member with the current node's year data member:
+
+            // if the condition is true, test the insert node's month data member with the current node's data member
+                // else traverse to next node
+
+            // if the condition is true, test the insert node's day data member with the current node's data member
+                // else traverse to next node
+
+            // if true, test the insert node's hour data member with the current node's data member
+                // else traverse to next node
+
+            // if true, test the insert node's minute data member with the current data member
+                // else traverse to next node
+
+            // if true, test thet insert node's seconds data member with the current data member
+                // else traverse to next node
+    
+
 // fix Logger() logic to improve user experience
 
 // 4:
