@@ -21,7 +21,6 @@ enum FoodTime
 
 };
 
-
 struct LoggerData
 {
 
@@ -90,14 +89,8 @@ struct Node *MenuOptions(struct Node *head);
 
 struct LoggerData currentTime(struct LoggerData inputData);
 
-
-
 // void LogIn();
 
-// we need a data structure to store all the level logs
 
-// create a struct that holds a couple of data members
-
-// store that specific struct into a node for a linked list
 
 #endif
