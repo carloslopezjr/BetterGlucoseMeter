@@ -607,6 +607,30 @@ struct LoggerData currentTime(struct LoggerData inputData)
     return inputData;
 }
 
+
+void insertData(struct Node *newNode, struct Node *head) {
+    // we don't need to have a test case to see if the head is null because the function outside of this will already test to see if the list is empty that will prevent the user from inserting old data into a list that isn't created
+    struct Node *current = head;
+    
+    if (current->data.year == newNode->data.year) {
+        if (current->data.month == newNode->data.month) {
+            if (current->data.day == newNode->data.day){
+                if (current)
+            }
+        }
+
+    } else {
+        current = current->next;
+        insertData(newNode, current);
+    }
+
+
+
+
+
+}
+
+
 // this function is not in use
 /*void LogIn()
 {
