@@ -91,7 +91,7 @@ void visualizeData(struct Node *head)
     closedir(dir);
 
     // read data from the text file and output it
-    readData(); // comment out if you don't want the program to print in the terminal the contents in the text file
+    // readData(); // comment out if you don't want the program to print in the terminal the contents in the text file
 }
 
 void backupData(struct Node *head)
@@ -518,7 +518,7 @@ struct Node *MenuOptions(struct Node *head)
     while (num != 0)
     {
 
-        printf("|1| Logger |2| Carb Planner |3| Calculate Insulin Dose |4| Food-To-Carbs |5| A1C Goal Planner |6| Exit\n");
+        printf("|1| Logs |2| Carb Planner |3| Calculate Insulin Dose |4| Food-To-Carbs |5| A1C Goal Planner |6| Exit\n");
 
         printf("\n");
 
@@ -537,7 +537,42 @@ struct Node *MenuOptions(struct Node *head)
 
         if (selection == 1) // if user selects 1, then run logger
         {
-            head = Logger(head);
+            int selection;
+            int num = 1;
+
+            while (num == 1)
+            {
+                printf("|1| View Logs |2| Log Current Levels |3| Log Past Levels \n");
+                printf("\n");
+
+                printf("Selection: ");
+                scanf("%d", &selection);
+                printf("\n");
+
+                if (selection == 1)
+                {
+                    readData();
+                    printf("\n");
+                    num = 0;
+                }
+                else if (selection == 2)
+                {
+                    printf("Log Current Levels\n");
+                    // head = Logger(head);
+                    num = 0;
+                }
+                else if (selection == 3)
+                {
+                    printf("Log Past Levels\n");
+                    num = 0;
+                }
+                else
+                {
+                    printf("Please select valid option.\n");
+                }
+            }
+
+            
         }
         else if (selection == 2)
         {
@@ -562,7 +597,13 @@ struct Node *MenuOptions(struct Node *head)
         else if (selection == 6)
         {
             // exit
+            printf("-------------------\n");
+            printf("See you later! :D\n");
+            printf("-------------------\n");
+            printf("\n");
+
             num = 0;
+
         }
         else
         {
@@ -608,48 +649,45 @@ struct LoggerData currentTime(struct LoggerData inputData)
 }
 
 
-void insertData(struct Node *newNode, struct Node *head) {
-    // we don't need to have a test case to see if the head is null because the function outside of this will already test to see if the list is empty that will prevent the user from inserting old data into a list that isn't created
-    struct Node *current = head;
-    
-    if (current->data.year == newNode->data.year) {
-        if (current->data.month == newNode->data.month) {
-            if (current->data.day == newNode->data.day){
-                if (current)
-            }
-        }
+    /*
+    void insertData(struct Node *newNode, struct Node *head) {
+        // we don't need to have a test case to see if the head is null because the function outside of this will already test to see if the list is empty that will prevent the user from inserting old data into a list that isn't created
+        struct Node *current = head;
 
-    } else {
-        current = current->next;
-        insertData(newNode, current);
+        if (current->data.year == newNode->data.year) {
+            if (current->data.month == newNode->data.month) {
+                if (current->data.day == newNode->data.day){
+                    if (current)
+                }
+            }
+
+        } else {
+            current = current->next;
+            insertData(newNode, current);
+        }
     }
 
+    */
 
+    // this function is not in use
+    /*void LogIn()
+    {
 
+        char username[100];
+        char password[100];
 
+        printf("Enter Username: ");
+        fgets(username, 100, stdin);
 
-}
+        printf("Enter Password: ");
+        fgets(password, 100, stdin);
+        printf("\n");
 
+        printf("---Successful Login---\n\n");
 
-// this function is not in use
-/*void LogIn()
-{
+        RemoveNewLine(username);
 
-    char username[100];
-    char password[100];
+        printf("Welcome %s! Please select an option: \n\n", username);
 
-    printf("Enter Username: ");
-    fgets(username, 100, stdin);
-
-    printf("Enter Password: ");
-    fgets(password, 100, stdin);
-    printf("\n");
-
-    printf("---Successful Login---\n\n");
-
-    RemoveNewLine(username);
-
-    printf("Welcome %s! Please select an option: \n\n", username);
-
-    MenuOptions(head);
-} */
+        MenuOptions(head);
+    } */
