@@ -5,3 +5,5 @@ Date      |Day       |Time      |Levels    |Focus R8  |Meal Time |Meal Type |
 12/25/23  |Monday    |12:26AM   |170       |2         |Evening   |Lunch     |
 12/25/23  |Monday    |12:26AM   |100       |4         |Midnight  |Dinner    |
 01/03/24  |Wednesday |04:43PM   |150       |6         |Evening   |Lunch     |
+01/09/24  |Tuesday   |12:05AM   |140       |7         |Evening   |Lunch     |
+01/09/24  |Tuesday   |12:22AM   |5         |5         |
