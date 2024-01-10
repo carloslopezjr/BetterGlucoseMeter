@@ -575,25 +575,35 @@ struct Node *MenuOptions(struct Node *head)
         }
         else if (selection == 2)
         {
-            printf("Option 2");
             // option 2: Carb Planner
+            printf("-------------------\n");
+            printf("Option 2: (UNDER CONSTRUCTION) \n");
+            printf("-------------------\n\n");
+            
         }
         else if (selection == 3)
         {
-            printf("Describe ");
             // option 3: Calculate Insulin Dose
-            // Take the total carbs of the food and tell the user the total insulin needed to meidate it
+                // Take the total carbs of the food and tell the user the total insulin needed to meidate it
+            printf("-------------------\n");
+            printf("Option 3: (UNDER CONSTRUCTION) \n");
+            printf("-------------------\n\n");
         }
         else if (selection == 4)
         {
-            printf("Option 4");
             // option 4: Food-To-Carbs
+            printf("-------------------\n");
+            printf("Option 4: (UNDER CONSTRUCTION) \n");
+            printf("-------------------\n\n");
+    
         }
         else if (selection == 5)
         {
-            printf("Option 5");
             // option 5: A1C Goal Planner
-        }
+            printf("-------------------\n");
+            printf("Option 5: (UNDER CONSTRUCTION) \n");
+            printf("-------------------\n\n");
+                }
         else if (selection == 6)
         {
             // exit
@@ -652,7 +662,7 @@ void deleteLog() {
 
 
     printf("hello");
-    
+
     // have the logs indexed 
 
     // ask the user which date they want to edit/delete
