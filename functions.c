@@ -577,22 +577,23 @@ struct Node *MenuOptions(struct Node *head)
         else if (selection == 2)
         {
             printf("Option 2");
-            // option 2
+            // option 2: Carb Planner
         }
         else if (selection == 3)
         {
-            printf("Option 3");
-            // option 3
+            printf("Describe ");
+            // option 3: Calculate Insulin Dose
+            // Take the total carbs of the food and tell the user the total insulin needed to meidate it
         }
         else if (selection == 4)
         {
             printf("Option 4");
-            // option 4
+            // option 4: Food-To-Carbs
         }
         else if (selection == 5)
         {
             printf("Option 5");
-            // option 5
+            // option 5: A1C Goal Planner
         }
         else if (selection == 6)
         {
@@ -647,7 +648,6 @@ struct LoggerData currentTime(struct LoggerData inputData)
 
     return inputData;
 }
-
 
     /*
     void insertData(struct Node *newNode, struct Node *head) {
