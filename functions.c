@@ -542,8 +542,7 @@ struct Node *MenuOptions(struct Node *head)
 
             while (num == 1)
             {
-                printf("|1| View Logs |2| Log Current Levels |3| Log Past Levels \n");
-                printf("\n");
+                printf("|1| View Logs |2| Log Current Levels |3| Log Past Levels \n\n");
 
                 printf("Selection: ");
                 scanf("%d", &selection);
@@ -600,8 +599,7 @@ struct Node *MenuOptions(struct Node *head)
             // exit
             printf("-------------------\n");
             printf("See you later! :D\n");
-            printf("-------------------\n");
-            printf("\n");
+            printf("-------------------\n\n");
 
             num = 0;
 
