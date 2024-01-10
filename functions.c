@@ -602,12 +602,17 @@ struct Node *MenuOptions(struct Node *head)
 
             
             // option 5: A1C Goal Planner
-            // printf("-------------------\n");
-            // printf("Option 5: (UNDER CONSTRUCTION) \n");
-            // printf("-------------------\n\n");
  
             double neededAverage = a1cCalculator();
+
             printf("This will be the average levels needed to achieve that goal: %2.0lf mg/dL\n\n", neededAverage);
+
+            // I want it to print out the top items I eat that usual leave my levels around this range
+
+            // I want to set a 3 month timer for the program to know and I can check up on my progress when I ask
+                // EXAMPLE: Once I set my goal, the program marks it and then the next time I get on, I can selection the option to see how I'm doing on my goal.
+
+                // the program would start from that date I set the goal and scan all the levels I logged from then, and tell me if I'm underachieving or overachieving 
 
         
         }
