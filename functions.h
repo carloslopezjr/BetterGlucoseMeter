@@ -95,5 +95,7 @@ void insertData(struct Node *newNode, struct Node *head);
 
 void deleteLog();
 
+double a1cCalculator();
+
 
 #endif
