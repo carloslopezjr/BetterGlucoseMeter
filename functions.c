@@ -530,7 +530,7 @@ struct Node *MenuOptions(struct Node *head)
         }
         else
         {
-            printf("Select Option Between 1-4: ");
+            printf("Select Option Between 1-6: ");
             scanf("%d", &selection);
             printf("\n");
         }
@@ -599,11 +599,18 @@ struct Node *MenuOptions(struct Node *head)
         }
         else if (selection == 5)
         {
+
+            
             // option 5: A1C Goal Planner
-            printf("-------------------\n");
-            printf("Option 5: (UNDER CONSTRUCTION) \n");
-            printf("-------------------\n\n");
-                }
+            // printf("-------------------\n");
+            // printf("Option 5: (UNDER CONSTRUCTION) \n");
+            // printf("-------------------\n\n");
+ 
+            double neededAverage = a1cCalculator();
+            printf("This will be the average levels needed to achieve that goal: %2.0lf mg/dL\n\n", neededAverage);
+
+        
+        }
         else if (selection == 6)
         {
             // exit
@@ -676,6 +683,43 @@ void deleteLog() {
 
 
 }
+
+
+double a1cCalculator() {
+
+    double input = 0;
+    double calculation;
+
+    printf("What is your desired A1C? ");
+    scanf("%lf", &input);
+    printf("\n");
+
+
+    if (input < 4.0 || input > 7.0) {
+
+        int count = 0;
+        while (count == 0) {
+            printf("This is a concerning goal. Please select an ideal goal: ");
+            scanf("%lf", &input);
+            printf("\n");
+
+            if (input < 4.0 || input > 7.0) {
+                count = 0;
+            }
+            else {
+                count = 1;
+            }
+        }
+    }
+    
+    // printf("That's a good goal, let's set it up!\n\n");
+    // printf("%0.1lf", input);
+
+    calculation = 28.7 * input - 46.7;
+    
+    return calculation;
+}
+
 
     /*
     void insertData(struct Node *newNode, struct Node *head) {
