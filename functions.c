@@ -647,6 +647,26 @@ struct LoggerData currentTime(struct LoggerData inputData)
     return inputData;
 }
 
+
+void deleteLog() {
+
+
+    printf("hello");
+    
+    // have the logs indexed 
+
+    // ask the user which date they want to edit/delete
+    
+
+    // sort out all the dates that are returned, and have them numbered. The user then selects the correct one
+
+    // then the data is removed
+
+
+
+
+}
+
     /*
     void insertData(struct Node *newNode, struct Node *head) {
         // we don't need to have a test case to see if the head is null because the function outside of this will already test to see if the list is empty that will prevent the user from inserting old data into a list that isn't created

@@ -93,5 +93,7 @@ struct LoggerData currentTime(struct LoggerData inputData);
 
 void insertData(struct Node *newNode, struct Node *head);
 
+void deleteLog();
+
 
 #endif
