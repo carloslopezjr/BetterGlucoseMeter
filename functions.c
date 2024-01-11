@@ -599,13 +599,43 @@ struct Node *MenuOptions(struct Node *head)
         }
         else if (selection == 5)
         {
+            // option 5: A1C Goal Planner
+            // printf("|1| Set Goal |2| Track Progress |3| Edit Goal |4| Go Back\n\n");
+
+            int selection;
+            int num = 1;
+
+            while (num == 1)
+            {
+                printf("|1| Set Goal |2| Track Progress |3| Edit Goal |4| Go Back\n\n");
+
+                printf("Selection: ");
+                scanf("%d", &selection);
+                printf("\n");
+
+                if (selection == 1)
+                {
+                    double neededAverage = a1cCalculator();
+                    printf("This will be the average levels needed to achieve that goal: %2.0lf mg/dL\n\n", neededAverage);
+                    num = 0;
+                }
+                else if (selection == 2)
+                {
+                    printf("Track Progress\n\n");
+                    num = 0;
+                }
+                else if (selection == 3)
+                {
+                    printf("Edit Goal\n\n");
+                    num = 0;
+                }
+                else
+                {
+                    printf("Please select valid option.\n\n");
+                }
+            }
 
             
-            // option 5: A1C Goal Planner
- 
-            double neededAverage = a1cCalculator();
-
-            printf("This will be the average levels needed to achieve that goal: %2.0lf mg/dL\n\n", neededAverage);
 
             // I want it to print out the top items I eat that usual leave my levels around this range
 
