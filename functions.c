@@ -600,7 +600,7 @@ struct Node *MenuOptions(struct Node *head)
         else if (selection == 5)
         {
             // option 5: A1C Goal Planner
-            // printf("|1| Set Goal |2| Track Progress |3| Edit Goal |4| Go Back\n\n");
+            
 
             int selection;
             int num = 1;
@@ -621,11 +621,25 @@ struct Node *MenuOptions(struct Node *head)
                 }
                 else if (selection == 2)
                 {
+                    // FUNCTIONALITY: 
+                        // This process will look back at your data based on the marked date the user started the goal and average out the level numbers.
+
+                        // It will tell you if you're on pace to meet your goal or not
+
+                        // It can also tell you what are the highest levels in relation to the foods that were ate
+
+                        // Overall it will give advice on what to keep doing and what to stop doing
                     printf("Track Progress\n\n");
                     num = 0;
                 }
                 else if (selection == 3)
                 {
+
+                    // FUNCTIONALITY:
+                        // This will allow the user to remove their old goal and add a new goal into their profile
+
+                        // The function will average the old goal just so the user knows their progress before they set the new one.
+
                     printf("Edit Goal\n\n");
                     num = 0;
                 }
