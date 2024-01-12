@@ -16,6 +16,11 @@ int main()
     head = MenuOptions(head); // assignes the head variable with the return of menuOptions(head) function
 
     backupData(head);
+
+    
+
+
+
     
     return 0; 
 }
@@ -37,12 +42,15 @@ int main()
         // Ideally this will help with identifying the data in the future and can specifically call out a certain line the specific data is at
         // Also it looks prettier when you open the file outside the program
 
-// 3:
-// add insert function to insert a previous log from a different day
-    // I might have to switch data to be an array
+// 3: (UNDER CONSTRUCTION) - Working on it 1/12/24 
+// add insert function to insert a previous log from a different day and a deletion function
+
+    // Read the csv data and put it into an array.
+        // We want to do this because if we have multiple iterations, we would need to read it anyways
+
+
     // This would allow me to do binary search when searching for specific data and other searching algorithms
 
-    // Task: Find out how the program is creating the linked list after 1 execution 
 
 // (IMPLEMENTATION) - OLD
 //  Traverse through the linked list
@@ -64,14 +72,13 @@ int main()
                 // else traverse to next node
     
 
-// fix Logger() logic to improve user experience
+// Fix Logger() logic to improve user experience
 
-// 4:
+// 4: (FUTURE IMPLEMENTATION)
 // change meal tags to be more specific
 
-// 5: 
+// 5: (FUTER IMPLEMENTATION)
 // ideate how to create "Calculate Insulin Dose" option for program
-
 
 // (IDEA)
 // My levels right now are 140, and I'm going to eat 15 carbs right now. What are the chances I will feel less focused because of it? 
