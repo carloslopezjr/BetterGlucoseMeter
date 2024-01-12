@@ -5,7 +5,6 @@
 #include <time.h>
 #include "functions.h"
 
-
 // function not is use
 void RemoveNewLine(char *stringInput)
 {
@@ -154,7 +153,7 @@ void backupData(struct Node *head)
         char foodTime[15] = "Meal-Time";
         char foodType[15] = "Meal-Type";
 
-        fprintf(fptr, "%15s %15s %15s %15s %15s %15s %15s %15s %15s %15s %15s\n", month, day, year, dayName, hour, minutes, seconds, levels, focus, foodTime, foodType);
+        fprintf(fptr, "%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s\n", month, day, year, dayName, hour, minutes, seconds, levels, focus, foodTime, foodType);
 
         // take the linked list data and paste it into the file
         printData(head, fptr);
@@ -174,7 +173,7 @@ void printData(struct Node *head, FILE *fptr)
     while (current != NULL)
     {
 
-        fprintf(fptr, "%15d %15d %15d %15d %15d %15d %15d %15d %15d ", current->data.month, current->data.day, current->data.year, current->data.dayName, current->data.hour, current->data.minutes, current->data.seconds, current->data.levels, current->data.focusedLevel);
+        fprintf(fptr, "%d, %d, %d, %d, %d, %d, %d, %d, %d, ", current->data.month, current->data.day, current->data.year, current->data.dayName, current->data.hour, current->data.minutes, current->data.seconds, current->data.levels, current->data.focusedLevel);
 
         // print foodTime tag
         enum FoodTime foodTime = current->data.foodTime;
@@ -182,16 +181,16 @@ void printData(struct Node *head, FILE *fptr)
         switch (foodTime)
         {
         case 1:
-            fprintf(fptr, "%15s ", "Morning");
+            fprintf(fptr, "%s, ", "Morning");
             break;
         case 2:
-            fprintf(fptr, "%15s ", "Afternoon");
+            fprintf(fptr, "%s, ", "Afternoon");
             break;
         case 3:
-            fprintf(fptr, "%15s ", "Evening");
+            fprintf(fptr, "%s, ", "Evening");
             break;
         case 4:
-            fprintf(fptr, "%15s ", "Midnight");
+            fprintf(fptr, "%s, ", "Midnight");
             break;
         }
 
@@ -201,17 +200,17 @@ void printData(struct Node *head, FILE *fptr)
         switch (foodType)
         {
         case 1:
-            fprintf(fptr, "%15s", "Breakfast");
+            fprintf(fptr, "%s", "Breakfast");
             break;
         case 2:
-            fprintf(fptr, "%15s", "Lunch");
+            fprintf(fptr, "%s", "Lunch");
             break;
         case 3:
-            fprintf(fptr, "%15s", "Dinner");
+            fprintf(fptr, "%s", "Dinner");
             break;
         case 4:
 
-            fprintf(fptr, "%15s", "Snack");
+            fprintf(fptr, "%s", "Snack");
             break;
         }
 
@@ -505,7 +504,6 @@ struct Node *Logger(struct Node *head)
 
     return head;
 
-    // printList(head);
 }
 
 // gets called in the main.c file
@@ -556,13 +554,25 @@ struct Node *MenuOptions(struct Node *head)
                 }
                 else if (selection == 2)
                 {
-                    printf("Log Current Levels\n");
-                    // head = Logger(head);
+                    // printf("Log Current Levels\n");
+                    head = Logger(head);
                     num = 0;
                 }
                 else if (selection == 3)
                 {
+
                     printf("Log Past Levels\n");
+
+                    // Enter the date for this log?
+                    scanf("Please enter the date for this log:");
+
+                    // What time for this log?
+                    scanf("What time?");
+
+                    // What is the meal time of the log?
+
+                    // What is the meal type of the log?
+
                     num = 0;
                 }
                 else
@@ -570,8 +580,6 @@ struct Node *MenuOptions(struct Node *head)
                     printf("Please select valid option.\n");
                 }
             }
-
-            
         }
         else if (selection == 2)
         {
@@ -579,12 +587,11 @@ struct Node *MenuOptions(struct Node *head)
             printf("-------------------\n");
             printf("Option 2: (UNDER CONSTRUCTION) \n");
             printf("-------------------\n\n");
-            
         }
         else if (selection == 3)
         {
             // option 3: Calculate Insulin Dose
-                // Take the total carbs of the food and tell the user the total insulin needed to meidate it
+            // Take the total carbs of the food and tell the user the total insulin needed to meidate it
             printf("-------------------\n");
             printf("Option 3: (UNDER CONSTRUCTION) \n");
             printf("-------------------\n\n");
@@ -595,12 +602,10 @@ struct Node *MenuOptions(struct Node *head)
             printf("-------------------\n");
             printf("Option 4: (UNDER CONSTRUCTION) \n");
             printf("-------------------\n\n");
-    
         }
         else if (selection == 5)
         {
             // option 5: A1C Goal Planner
-            
 
             int selection;
             int num = 1;
@@ -621,14 +626,14 @@ struct Node *MenuOptions(struct Node *head)
                 }
                 else if (selection == 2)
                 {
-                    // FUNCTIONALITY: 
-                        // This process will look back at your data based on the marked date the user started the goal and average out the level numbers.
+                    // FUNCTIONALITY:
+                    // This process will look back at your data based on the marked date the user started the goal and average out the level numbers.
 
-                        // It will tell you if you're on pace to meet your goal or not
+                    // It will tell you if you're on pace to meet your goal or not
 
-                        // It can also tell you what are the highest levels in relation to the foods that were ate
+                    // It can also tell you what are the highest levels in relation to the foods that were ate
 
-                        // Overall it will give advice on what to keep doing and what to stop doing
+                    // Overall it will give advice on what to keep doing and what to stop doing
                     printf("Track Progress\n\n");
                     num = 0;
                 }
@@ -636,9 +641,9 @@ struct Node *MenuOptions(struct Node *head)
                 {
 
                     // FUNCTIONALITY:
-                        // This will allow the user to remove their old goal and add a new goal into their profile
+                    // This will allow the user to remove their old goal and add a new goal into their profile
 
-                        // The function will average the old goal just so the user knows their progress before they set the new one.
+                    // The function will average the old goal just so the user knows their progress before they set the new one.
 
                     printf("Edit Goal\n\n");
                     num = 0;
@@ -649,16 +654,12 @@ struct Node *MenuOptions(struct Node *head)
                 }
             }
 
-            
-
             // I want it to print out the top items I eat that usual leave my levels around this range
 
             // I want to set a 3 month timer for the program to know and I can check up on my progress when I ask
-                // EXAMPLE: Once I set my goal, the program marks it and then the next time I get on, I can selection the option to see how I'm doing on my goal.
+            // EXAMPLE: Once I set my goal, the program marks it and then the next time I get on, I can selection the option to see how I'm doing on my goal.
 
-                // the program would start from that date I set the goal and scan all the levels I logged from then, and tell me if I'm underachieving or overachieving 
-
-        
+            // the program would start from that date I set the goal and scan all the levels I logged from then, and tell me if I'm underachieving or overachieving
         }
         else if (selection == 6)
         {
@@ -668,7 +669,6 @@ struct Node *MenuOptions(struct Node *head)
             printf("-------------------\n\n");
 
             num = 0;
-
         }
         else
         {
@@ -713,28 +713,22 @@ struct LoggerData currentTime(struct LoggerData inputData)
     return inputData;
 }
 
-
-void deleteLog() {
-
+void deleteLog()
+{
 
     printf("hello");
 
-    // have the logs indexed 
+    // have the logs indexed
 
     // ask the user which date they want to edit/delete
-    
 
     // sort out all the dates that are returned, and have them numbered. The user then selects the correct one
 
     // then the data is removed
-
-
-
-
 }
 
-
-double a1cCalculator() {
+double a1cCalculator()
+{
 
     double input = 0;
     double calculation;
@@ -743,72 +737,73 @@ double a1cCalculator() {
     scanf("%lf", &input);
     printf("\n");
 
-
-    if (input < 4.0 || input > 7.0) {
+    if (input < 4.0 || input > 7.0)
+    {
 
         int count = 0;
-        while (count == 0) {
+        while (count == 0)
+        {
             printf("This is a concerning goal. Please select an ideal goal: ");
             scanf("%lf", &input);
             printf("\n");
 
-            if (input < 4.0 || input > 7.0) {
+            if (input < 4.0 || input > 7.0)
+            {
                 count = 0;
             }
-            else {
+            else
+            {
                 count = 1;
             }
         }
     }
-    
+
     // printf("That's a good goal, let's set it up!\n\n");
     // printf("%0.1lf", input);
 
     calculation = 28.7 * input - 46.7;
-    
+
     return calculation;
 }
 
+void insert(struct Node *newNode, struct Node *head)
+{
 
-    /*
-    void insertData(struct Node *newNode, struct Node *head) {
-        // we don't need to have a test case to see if the head is null because the function outside of this will already test to see if the list is empty that will prevent the user from inserting old data into a list that isn't created
-        struct Node *current = head;
+    // this function will take in the newNode and have a pointer to the head
 
-        if (current->data.year == newNode->data.year) {
-            if (current->data.month == newNode->data.month) {
-                if (current->data.day == newNode->data.day){
-                    if (current)
-                }
-            }
+    // this function can't do divide and conquor because it's not an array which you can have a length
 
-        } else {
-            current = current->next;
-            insertData(newNode, current);
-        }
-    }
+    // this function will have a pointer starting at the front, and a pointer starting at the end
 
-    */
+    //
 
-    // this function is not in use
-    /*void LogIn()
-    {
+    struct Node *current = head;
+}
 
-        char username[100];
-        char password[100];
+void deleteLast(struct Node *tail)
+{
+    printf("Hello world");
+}
 
-        printf("Enter Username: ");
-        fgets(username, 100, stdin);
+// this function is not in use
+/*void LogIn()
+{
 
-        printf("Enter Password: ");
-        fgets(password, 100, stdin);
-        printf("\n");
+    char username[100];
+    char password[100];
 
-        printf("---Successful Login---\n\n");
+    printf("Enter Username: ");
+    fgets(username, 100, stdin);
 
-        RemoveNewLine(username);
+    printf("Enter Password: ");
+    fgets(password, 100, stdin);
+    printf("\n");
 
-        printf("Welcome %s! Please select an option: \n\n", username);
+    printf("---Successful Login---\n\n");
 
-        MenuOptions(head);
-    } */
+    RemoveNewLine(username);
+
+    printf("Welcome %s! Please select an option: \n\n", username);
+
+    MenuOptions(head);
+} */
