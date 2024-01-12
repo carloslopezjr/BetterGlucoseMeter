@@ -1,0 +1,5 @@
+Date      |Day       |Time      |Levels    |Focus R8  |Meal Time |Meal Type |
+-----------------------------------------------------------------------------
+01/12/24  |Friday    |12:53PM   |100       |1         |Morning   |Breakfast |
+01/12/24  |Friday    |12:53PM   |200       |2         |Afternoon |Lunch     |
+01/12/24  |Friday    |12:53PM   |300       |3         |Evening   |Dinner    |
