@@ -50,6 +50,7 @@ void visualizeData(struct Node *head)
 
             // fprintf(fptr, "This is new data after the file was found\n");
 
+
             // close the file when done
             fclose(fptr);
         }
@@ -168,6 +169,8 @@ void backupData(struct Node *head)
     closedir(dir);
 }
 
+
+// takes in the head ptr and file ptr from backupData() and printsData into csv file
 void printData(struct Node *head, FILE *fptr)
 {
 
@@ -224,17 +227,128 @@ void printData(struct Node *head, FILE *fptr)
     }
 }
 
+
+// this will read data from the csv file and add it into an array data structure
 void loadData()
 {
 
     // look for csv file in current directory
+    DIR *dir;
 
-    // check to see if it meets the name criteria
+    struct dirent *entry;
 
-    // if it meets the name criteria, load the data into a linked list
+    dir = opendir(".");
 
-    // load the data into the linked list from top -> bottom
+    if (dir == NULL)
+    {
+        perror("Error opening up directory");
+        // return 1;
+    }
+
+    int fileNotFound = 0; // 0 == file wasn't found, 1 == file was found
+
+    while ((entry = readdir(dir)) != NULL)
+    {
+
+        // if it meets the name criteria, load the data into an array
+        if (strcmp(entry->d_name, "backupData.csv") == 0)
+        {
+            
+            fileNotFound++;
+
+            FILE *fptr;
+
+            // read data from the file
+            fptr = fopen("backupData.csv", "r");
+
+            // enter code here
+            allocatedArray(fptr);
+
+            // we read the data from the 2nd line and put it into a newNode
+
+
+            // we then store that newNode into an dynamically allocated array
+
+            fclose(fptr);
+        }
+    }
+
+    // prompt that the file wasn't found, then make a file
+    if (fileNotFound != 1)
+    {
+        printf("No File Found\n");    
+    }
+
+    closedir(dir);
 }
+
+
+
+void allocatedArray(FILE *fptr) {
+    
+    // this is a node sturct that holds functions
+    int initialSize = 10;
+    struct ArrayNode *dynamicArray;
+
+    
+    // this is the initial allocation but it will soon have to be reallocated if it reaches a higher point
+
+    // allocate the memory
+    dynamicArray = (struct ArrayNode*)malloc(initialSize * sizeof(struct ArrayNode));
+
+    // If allocation fails condition
+    if (dynamicArray == NULL) {
+        fprintf(stderr, "Memory allocation failed\n");
+        return 1;
+    }
+
+
+    // we iterate through the file and take all the data and plug it into the first index of the dynamicArray variable
+    char buffer[100];
+    if (fgets(buffer, sizeof(buffer), fptr) == NULL) {
+
+        // this means that there isn't a file in place
+        fprintf(stderr, "Couldn't read the first line\n");
+        fclose(fptr);
+        return 1;
+    }
+
+    // set current index for array
+    int currentIndex = 0;
+
+    // read month, day, year, day-name, hour, minutes, seconds, levels, focus r8, meal time, meal type
+    while (fscanf(fptr, "%15[^\n],%d", dynamicArray[currentIndex].month, dynamicArray[currentIndex].day, dynamicArray[currentIndex].year, dynamicArray[currentIndex].dayName, dynamicArray[currentIndex].hour, dynamicArray[currentIndex].minutes, dynamicArray[currentIndex].seconds, dynamicArray[currentIndex].levels, dynamicArray[currentIndex].focusedLevel))
+    {
+
+        currentIndex++;
+
+        // need another while loop to add the meal types into the Node (FUTURE ADD)
+
+
+        // this checks to see if the current count of the index has exceeded the set initial value for the array
+        if (currentIndex >= initialSize) {
+            initialSize *= 10;
+
+
+            // if it does exceed, it will reallocate memory by 10 times, to make sure there is space
+            dynamicArray = (struct ArrayNode*)realloc(dynamicArray, initialSize * sizeof(struct ArrayNode));
+            
+
+            // failure condition
+            if (dynamicArray == NULL) {
+                fprintf(stderr, "Memory reallocation failed\n");
+                return 1;
+
+            }
+        }
+
+    }
+
+    fclose(fptr);
+    free(dynamicArray);
+}
+
+
 
 // prints each line of the gluclose logs to the terminal
 void readData()
@@ -294,6 +408,8 @@ struct Node *createNode(struct LoggerData newData)
     return newNode;
 }
 
+
+// takes a newNode and inserts it to the end of the linked list
 void insertEnd(struct Node **head, struct Node *newNode)
 {
 

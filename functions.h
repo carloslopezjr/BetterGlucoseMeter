@@ -61,6 +61,26 @@ struct Node
     struct Node *prev;
 };
 
+
+struct ArrayNode {
+
+    int month;
+    int day;
+    int year; 
+    int dayName;
+    int hour;
+    int minutes;
+    int seconds;
+    int levels;
+    int focusedLevel;
+    
+
+
+};
+
+
+
+
 void RemoveNewLine(char *stringInput);
 
 void visualizeData(struct Node *head);
@@ -70,6 +90,8 @@ void backupData(struct Node *head);
 void printData(struct Node *head, FILE *fptr);
 
 void loadData();
+
+void allocatedArray(FILE *fptr);
 
 void readData();
 
