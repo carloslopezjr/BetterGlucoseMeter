@@ -2,3 +2,9 @@ Month, Day, Year, Day-Name, Hour, Minutes, Seconds, Levels, Focus-R8, Meal-Time,
 0, 12, 2024, 5, 12, 56, 47, 100, 1, Morning, Breakfast
 0, 12, 2024, 5, 12, 56, 53, 200, 2, Afternoon, Lunch
 0, 12, 2024, 5, 12, 56, 56, 300, 3, Evening, Dinner
+0, 12, 2024, 5, 16, 37, 5, 200, 1, Morning, Breakfast
+0, 12, 2024, 5, 16, 37, 11, 100, 1, Morning, Breakfast
+0, 12, 2024, 5, 16, 38, 19, 100, 6, Morning, Dinner
+0, 12, 2024, 5, 16, 38, 29, 500, 7, Midnight, Breakfast
+0, 12, 2024, 5, 16, 46, 38, 1, 1, Morning, Breakfast
+0, 12, 2024, 5, 16, 46, 42, 300, 3, Afternoon, Breakfast
