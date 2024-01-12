@@ -93,6 +93,9 @@ void visualizeData(struct Node *head)
     // readData(); // comment out if you don't want the program to print in the terminal the contents in the text file
 }
 
+
+
+// 
 void backupData(struct Node *head)
 {
 
@@ -233,7 +236,7 @@ void loadData()
     // load the data into the linked list from top -> bottom
 }
 
-// prints each line of the gluclose logs
+// prints each line of the gluclose logs to the terminal
 void readData()
 {
 
@@ -556,6 +559,7 @@ struct Node *MenuOptions(struct Node *head)
                 {
                     // printf("Log Current Levels\n");
                     head = Logger(head);
+                    visualizeData(head);
                     num = 0;
                 }
                 else if (selection == 3)
