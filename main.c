@@ -17,11 +17,8 @@ int main()
 
     backupData(head);
 
-    
+    loadData();
 
-
-
-    
     return 0; 
 }
 
