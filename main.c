@@ -15,23 +15,9 @@ int main()
     // this will keep running until the user exits
     head = MenuOptions(head); // assignes the head variable with the return of menuOptions(head) function
 
-    // take in the linked list data and back it up into a text file
-    visualizeData(head);
-
-    backupData(head);
     
-    /*
-    while (head != NULL)
-    {
-        // test to see if time is being stored in node
-        printf("Hour: %d\n", head->data.hour);
-        printf("Minutes: %d\n", head->data.minutes);
-        printf("Seconds: %d\n", head->data.seconds);
-        printf("Year: %d\n", head->data.year);
 
-        head = head->next;
-    } 
-    */
+    // backupData(head);
     
     return 0; 
 }
