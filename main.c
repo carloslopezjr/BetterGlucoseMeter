@@ -15,9 +15,7 @@ int main()
     // this will keep running until the user exits
     head = MenuOptions(head); // assignes the head variable with the return of menuOptions(head) function
 
-    
-
-    // backupData(head);
+    backupData(head);
     
     return 0; 
 }
