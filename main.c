@@ -55,8 +55,12 @@ int main()
 
 // 3:
 // add insert function to insert a previous log from a different day
+    // I might have to switch data to be an array
+    // This would allow me to do binary search when searching for specific data and other searching algorithms
 
-// (IMPLEMENTATION)
+    // Task: Find out how the program is creating the linked list after 1 execution 
+
+// (IMPLEMENTATION) - OLD
 //  Traverse through the linked list
         // Condition test the insert node's year data member with the current node's year data member:
 
