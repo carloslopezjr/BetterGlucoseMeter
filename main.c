@@ -17,7 +17,34 @@ int main()
 
     backupData(head);
 
-    loadData();
+
+    int arrayLength = 0;
+    // int* arrPtr = &arrayLength;
+
+    int initialSize = 10;
+    struct ArrayNode *dynamicArray;
+    
+
+    loadData(dynamicArray, &arrayLength, initialSize);
+
+    // printf("Hello world\n");
+    // printf("This is the current index: %d\n", arrayLength);
+
+    // there is an issue with this not printing. It could be memory issues but I feel like it has to do with the memory not dynamically changing in the main function. So this code works within the allocate memory function, but not out here
+    printf("%d, ", dynamicArray[1].month);
+    printf("%d, ", dynamicArray[1].day);
+    printf("%d, ", dynamicArray[1].year);
+    printf("%d, ", dynamicArray[1].dayName);
+    printf("%d, ", dynamicArray[1].hour);
+    printf("%d, ", dynamicArray[1].minutes);
+    printf("%d, ", dynamicArray[1].seconds);
+    printf("%d, ", dynamicArray[1].levels);
+    printf("%d, ", dynamicArray[1].focusedLevel);
+    printf("%s, ", dynamicArray[1].foodTime);
+    printf("%s\n", dynamicArray[1].foodType);
+
+
+    free(dynamicArray);
 
     return 0; 
 }
@@ -47,26 +74,6 @@ int main()
 
 
     // This would allow me to do binary search when searching for specific data and other searching algorithms
-
-
-// (IMPLEMENTATION) - OLD
-//  Traverse through the linked list
-        // Condition test the insert node's year data member with the current node's year data member:
-
-            // if the condition is true, test the insert node's month data member with the current node's data member
-                // else traverse to next node
-
-            // if the condition is true, test the insert node's day data member with the current node's data member
-                // else traverse to next node
-
-            // if true, test the insert node's hour data member with the current node's data member
-                // else traverse to next node
-
-            // if true, test the insert node's minute data member with the current data member
-                // else traverse to next node
-
-            // if true, test thet insert node's seconds data member with the current data member
-                // else traverse to next node
     
 
 // Fix Logger() logic to improve user experience
