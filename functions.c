@@ -308,10 +308,10 @@ void allocatedArray(FILE *fptr)
     // set current index for array
     int currentIndex = 0;
 
-    printf("Hello world");
+    // printf("Hello world");
 
     // read month, day, year, day-name, hour, minutes, seconds, levels, focus r8, meal time, meal type
-    while (fscanf(fptr, "%15[^\n],%d", dynamicArray[currentIndex].month, dynamicArray[currentIndex].day, dynamicArray[currentIndex].year, dynamicArray[currentIndex].dayName, dynamicArray[currentIndex].hour, dynamicArray[currentIndex].minutes, dynamicArray[currentIndex].seconds, dynamicArray[currentIndex].levels, dynamicArray[currentIndex].focusedLevel))
+    while (fscanf(fptr, "%d, %d, %d, %d, %d, %d, %d, %d, %d, %15[^,], %15[^,\n]", &dynamicArray[currentIndex].month, &dynamicArray[currentIndex].day, &dynamicArray[currentIndex].year, &dynamicArray[currentIndex].dayName, &dynamicArray[currentIndex].hour, &dynamicArray[currentIndex].minutes, &dynamicArray[currentIndex].seconds, &dynamicArray[currentIndex].levels, &dynamicArray[currentIndex].focusedLevel, dynamicArray[currentIndex].foodTime, dynamicArray[currentIndex].foodType) == 11)
     {
 
         currentIndex++;
@@ -335,12 +335,25 @@ void allocatedArray(FILE *fptr)
         }
     }
 
-    for (int i = 0; i <= currentIndex; i++)
-    {
-        printf("%d", dynamicArray[i].month);
+
+    for (int i = 0; i < currentIndex; i++) {
+        printf("%d, ", dynamicArray[i].month);
+        printf("%d, ", dynamicArray[i].day);
+        printf("%d, ", dynamicArray[i].year);
+        printf("%d, ", dynamicArray[i].dayName);
+        printf("%d, ", dynamicArray[i].hour);
+        printf("%d, ", dynamicArray[i].minutes);
+        printf("%d, ", dynamicArray[i].seconds);
+        printf("%d, ", dynamicArray[i].levels);
+        printf("%d, ", dynamicArray[i].focusedLevel);
+        printf("%s, ", dynamicArray[i].foodTime);
+        printf("%s\n", dynamicArray[i].foodType);
     }
 
     free(dynamicArray);
+
+    // printf("This is the current index: %d\n", currentIndex);
+    
 }
 
 // prints each line of the gluclose logs to the terminal
