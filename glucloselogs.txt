@@ -9,3 +9,9 @@ Date      |Day       |Time      |Levels    |Focus R8  |Meal Time |Meal Type |
 01/12/24  |Friday    |04:38PM   |500       |7         |Midnight  |Breakfast |
 01/12/24  |Friday    |04:46PM   |1         |1         |Morning   |Breakfast |
 01/12/24  |Friday    |04:46PM   |300       |3         |Afternoon |Breakfast |
+01/13/24  |Saturday  |10:33PM   |100       |6         |Evening   |Lunch     |
+01/13/24  |Saturday  |10:36PM   |150       |5         |Morning   |Breakfast |
+01/13/24  |Saturday  |11:25PM   |100       |5         |Morning   |Breakfast |
+01/13/24  |Saturday  |11:25PM   |150       |6         |Afternoon |Breakfast |
+01/14/24  |Sunday    |12:33AM   |123       |7         |Morning   |Dinner    |
+01/14/24  |Sunday    |12:33AM   |198       |9         |Afternoon |Snack     |
