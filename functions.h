@@ -73,6 +73,10 @@ struct ArrayNode {
     int seconds;
     int levels;
     int focusedLevel;
+
+    char foodTime[20];
+    char foodType[20];
+
     
 
 
