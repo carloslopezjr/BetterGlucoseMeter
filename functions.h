@@ -93,9 +93,9 @@ void backupData(struct Node *head);
 
 void printData(struct Node *head, FILE *fptr);
 
-void loadData();
+struct ArrayNode loadData(struct ArrayNode *dynamicArray, int* arrayLength, int size);
 
-void allocatedArray(FILE *fptr);
+struct ArrayNode allocatedArray(FILE *fptr, struct ArrayNode *dynamicArray, int *arrayLength, int size);
 
 void readData();
 
