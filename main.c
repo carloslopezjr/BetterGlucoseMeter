@@ -27,22 +27,10 @@ int main()
 
     loadData(dynamicArray, &arrayLength, initialSize);
 
-    // printf("Hello world\n");
-    // printf("This is the current index: %d\n", arrayLength);
 
     // there is an issue with this not printing. It could be memory issues but I feel like it has to do with the memory not dynamically changing in the main function. So this code works within the allocate memory function, but not out here
-    printf("%d, ", dynamicArray[1].month);
-    printf("%d, ", dynamicArray[1].day);
-    printf("%d, ", dynamicArray[1].year);
-    printf("%d, ", dynamicArray[1].dayName);
-    printf("%d, ", dynamicArray[1].hour);
-    printf("%d, ", dynamicArray[1].minutes);
-    printf("%d, ", dynamicArray[1].seconds);
-    printf("%d, ", dynamicArray[1].levels);
-    printf("%d, ", dynamicArray[1].focusedLevel);
-    printf("%s, ", dynamicArray[1].foodTime);
-    printf("%s\n", dynamicArray[1].foodType);
-
+    printf("%d\n", arrayLength);
+    
 
     free(dynamicArray);
 
