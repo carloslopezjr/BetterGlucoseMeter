@@ -18,22 +18,14 @@ int main()
 
     backupData(head);
 
-
     int arrayLength = 0;
     int initialSize = 100;
 
     struct ArrayNode *dynamicArray;
 
-    // allocate memory for the array data structure
-    dynamicArray = (struct ArrayNode *)malloc(initialSize * sizeof(struct ArrayNode));
+    initializeDynamicArray(&dynamicArray, &arrayLength, &initialSize);
 
-    // If allocation fails condition
-    if (dynamicArray == NULL)
-    {
-        fprintf(stderr, "Memory allocation failed\n");
-    }
-
-    loadData(&dynamicArray, &arrayLength, &initialSize);
+    // ------------------------------------------------------------------------------ //
 
     for (int i = 0; i < arrayLength; i++)
     {
