@@ -10,8 +10,7 @@ int main()
 
     struct Node *head = NULL;
 
-    // this will always display the header in the beginning of the program
-    Header();
+    Header(); // this will always display the header in the beginning of the program
 
     // this will keep running until the user exits
     head = MenuOptions(head); // assignes the head variable with the return of menuOptions(head) function
@@ -21,11 +20,9 @@ int main()
     int arrayLength = 0;
     int initialSize = 100;
 
-    struct ArrayNode *dynamicArray;
+    struct ArrayNode *dynamicArray; // initalized here to use in other functions
 
     initializeDynamicArray(&dynamicArray, &arrayLength, &initialSize);
-
-    // ------------------------------------------------------------------------------ //
 
     for (int i = 0; i < arrayLength; i++)
     {
