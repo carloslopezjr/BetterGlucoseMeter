@@ -5,596 +5,8 @@
 #include <time.h>
 #include "functions.h"
 
-// function not is use
-void RemoveNewLine(char *stringInput)
-{
-    stringInput[strcspn(stringInput, "\n")] = 0;
-}
-
-// creates text file that will provide a visual of all the logs the user has made
-void visualizeData(struct Node *head)
-{
-
-    // look for file text file in the current directory
-    DIR *dir;
-
-    struct dirent *entry;
-
-    dir = opendir(".");
-
-    if (dir == NULL)
-    {
-        perror("Error opening up directory");
-        // return 1;
-    }
-
-    int fileNotFound = 0; // 0 == file wasn't found, 1 == file was found
-
-    while ((entry = readdir(dir)) != NULL)
-    {
-
-        // check to see if it meets the name criteria, then open if it does
-        if (strcmp(entry->d_name, "glucloselogs.txt") == 0)
-        {
-            // append new data to the file
-            // printf("File was found\n");
-            fileNotFound++;
-
-            FILE *fptr;
-
-            fptr = fopen("glucloselogs.txt", "a");
-
-            // take the linked list data and paste it into the file
-            // if file already has data, go to the next avaliable space
-            printList(head, fptr);
-
-            // fprintf(fptr, "This is new data after the file was found\n");
-
-            // close the file when done
-            fclose(fptr);
-        }
-    }
-
-    // prompt that the file wasn't found, then make a file
-    if (fileNotFound != 1)
-    {
-
-        FILE *fptr;
-
-        fptr = fopen("glucloselogs.txt", "w");
-
-        // create column header for the text file
-        char date[10] = "Date";
-        char day[10] = "Day";
-        char time[10] = "Time";
-        char levels[10] = "Levels";
-        char focus[10] = "Focus R8";
-        char foodTime[10] = "Meal Time";
-        char foodType[10] = "Meal Type";
-
-        fprintf(fptr, "%-10s|%-10s|%-10s|%-10s|%-10s|%-10s|%-10s|\n", date, day, time, levels, focus, foodTime, foodType);
-
-        for (int i = 0; i < 77; i++)
-        {
-            fprintf(fptr, "-");
-        }
-        fprintf(fptr, "\n");
-
-        // take the linked list data and paste it into the file
-        printList(head, fptr);
-
-        // close the file when done
-        fclose(fptr);
-    }
-
-    closedir(dir);
-
-    // read data from the text file and output it
-    // readData(); // comment out if you don't want the program to print in the terminal the contents in the text file
-}
-
-// backs up data into a csv file
-void backupData(struct Node *head)
-{
-    // look for file text file in the current directory
-    DIR *dir;
-
-    struct dirent *entry;
-
-    dir = opendir(".");
-
-    if (dir == NULL)
-    {
-        perror("Error opening up directory");
-    }
-
-    int fileNotFound = 0; // 0 == file wasn't found, 1 == file was found
-
-    // search directory for file name (backupData.txt)
-    while ((entry = readdir(dir)) != NULL)
-    {
-        // check to see if it meets the name criteria, then open if it does
-        if (strcmp(entry->d_name, "backupData.csv") == 0)
-        {
-            // append new data to the file
-            fileNotFound++;
-
-            // required set up for file appending
-            FILE *fptr;
-            fptr = fopen("backupData.csv", "a");
-
-            // loop through each nodes data members and print it into file
-            // if file already has data, go to the next avaliable space
-            printData(head, fptr);
-
-            // close the file when done
-            fclose(fptr);
-        }
-    }
-
-    // if file isn't present, create the file
-    if (fileNotFound != 1)
-    {
-
-        FILE *fptr;
-
-        fptr = fopen("backupData.csv", "w");
-
-        // create a column header to specify each data section
-        char month[15] = "Month";
-        char day[15] = "Day";
-        char year[15] = "Year";
-        char dayName[15] = "Day-Name";
-        char hour[15] = "Hour";
-        char minutes[15] = "Minutes";
-        char seconds[15] = "Seconds";
-        char levels[15] = "Levels";
-        char focus[15] = "Focus-R8";
-        char foodTime[15] = "Meal-Time";
-        char foodType[15] = "Meal-Type";
-
-        fprintf(fptr, "%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s\n", month, day, year, dayName, hour, minutes, seconds, levels, focus, foodTime, foodType);
-
-        // take the linked list data and paste it into the file
-        printData(head, fptr);
-
-        // close the file when done
-        fclose(fptr);
-    }
-
-    closedir(dir);
-}
-
-// takes in the head ptr and file ptr from backupData() and printsData into csv file
-void printData(struct Node *head, FILE *fptr)
-{
-
-    struct Node *current = head;
-
-    while (current != NULL)
-    {
-
-        fprintf(fptr, "%d, %d, %d, %d, %d, %d, %d, %d, %d, ", current->data.month, current->data.day, current->data.year, current->data.dayName, current->data.hour, current->data.minutes, current->data.seconds, current->data.levels, current->data.focusedLevel);
-
-        // print foodTime tag
-        enum FoodTime foodTime = current->data.foodTime;
-
-        switch (foodTime)
-        {
-        case 1:
-            fprintf(fptr, "%s, ", "Morning");
-            break;
-        case 2:
-            fprintf(fptr, "%s, ", "Afternoon");
-            break;
-        case 3:
-            fprintf(fptr, "%s, ", "Evening");
-            break;
-        case 4:
-            fprintf(fptr, "%s, ", "Midnight");
-            break;
-        }
-
-        // print foodType tag
-        enum FoodType foodType = current->data.foodType;
-
-        switch (foodType)
-        {
-        case 1:
-            fprintf(fptr, "%s", "Breakfast");
-            break;
-        case 2:
-            fprintf(fptr, "%s", "Lunch");
-            break;
-        case 3:
-            fprintf(fptr, "%s", "Dinner");
-            break;
-        case 4:
-
-            fprintf(fptr, "%s", "Snack");
-            break;
-        }
-
-        fprintf(fptr, "\n");
-
-        // Go To The Next Node
-        current = current->next;
-    }
-}
-
-// this will read data from the csv file and add it into an array data structure
-void loadData(struct ArrayNode **dynamicArray, int *arrayLength, int *size)
-{
-    // look for csv file in the current directory
-    DIR *dir;
-    struct dirent *entry;
-    dir = opendir(".");
-
-    if (dir == NULL)
-    {
-        perror("Error opening up directory");
-    }
-
-    int fileCheck = 0; // 0 == file wasn't found, 1 == file was found
-
-    // iterate through the dir while it's not NULL
-    while ((entry = readdir(dir)) != NULL)
-    {
-        // if it meets the name criteria, load the data into an array
-        if (strcmp(entry->d_name, "backupData.csv") == 0)
-        {
-            fileCheck++;
-
-            FILE *fptr;
-
-            // open and read data from the file
-            fptr = fopen("backupData.csv", "r");
-
-            // we then store that newNode into a dynamically allocated array
-            char buffer[100];
-            if (fgets(buffer, sizeof(buffer), fptr) == NULL)
-            {
-                // this means that there isn't a file in place
-                fprintf(stderr, "Couldn't read the first line\n");
-                fclose(fptr);
-            }
-
-            // set current index for array
-            int currentIndex = 0;
-
-            // we iterate through the file and take all the data and plug it into the first index of the dynamicArray variable
-            while (fscanf(fptr, "%d, %d, %d, %d, %d, %d, %d, %d, %d, %15[^,], %15[^,\n]", &(*dynamicArray)[currentIndex].month, &(*dynamicArray)[currentIndex].day, &(*dynamicArray)[currentIndex].year, &(*dynamicArray)[currentIndex].dayName, &(*dynamicArray)[currentIndex].hour, &(*dynamicArray)[currentIndex].minutes, &(*dynamicArray)[currentIndex].seconds, &(*dynamicArray)[currentIndex].levels, &(*dynamicArray)[currentIndex].focusedLevel, (*dynamicArray)[currentIndex].foodTime, (*dynamicArray)[currentIndex].foodType) == 11)
-            {
-                // ^^^ need to change food type and food time into integers and use enum to convert data
-                currentIndex++;
-
-                // this checks to see if the current count of the index has exceeded the set initial value for the array
-                if (currentIndex >= *size)
-                {
-                    *size *= 2;
-
-                    // count how many times we've stored into the structure, and reallocate memory if it exceeds initial size
-                    *dynamicArray = (struct ArrayNode *)realloc(*dynamicArray, *size * sizeof(struct ArrayNode));
-
-                    // failure condition
-                    if (*dynamicArray == NULL)
-                    {
-                        fprintf(stderr, "Memory reallocation failed\n");
-                    }
-                }
-            }
-
-            // assigns arrayLength with the value of the current index to use outside scope
-            *arrayLength = currentIndex;
-
-            fclose(fptr);
-        }
-    }
-
-    // prompt that the file wasn't found
-    if (fileCheck != 1)
-    {
-        printf("No File Found\n");
-    }
-    closedir(dir);
-}
-
-// not in use right now
-void allocatedArray(struct ArrayNode *dynamicArray, int size)
-{
-
-    // this is a node sturct that holds functions
-    // int initialSize = 10;
-    // struct ArrayNode *dynamicArray;
-
-    // this is the initial allocation but it will soon have to be reallocated if it reaches a higher point
-
-    // allocate the memory
-    dynamicArray = (struct ArrayNode *)malloc(size * sizeof(struct ArrayNode));
-
-    // If allocation fails condition
-    if (dynamicArray == NULL)
-    {
-        fprintf(stderr, "Memory allocation failed\n");
-    }
-
-}
-
-// prints each line of the gluclose logs to the terminal
-void readData()
-{
-
-    FILE *fptr;
-
-    fptr = fopen("glucloselogs.txt", "r");
-
-    if (fptr == NULL)
-    {
-        perror("Error Opening File");
-        exit(EXIT_FAILURE);
-    }
-
-    // this is the buffer for each line
-    char buffer[100];
-    while (fgets(buffer, sizeof(buffer), fptr) != NULL)
-    {
-        printf("%s", buffer);
-    }
-
-    fclose(fptr);
-}
-
-void clearInputBuffer()
-{
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF)
-        ;
-}
-
-void Header()
-{
-
-    printf("-----WELCOME TO GLUCLOSE LOGGER V.2-----\n");
-    printf("\n");
-}
-
-struct Node *createNode(struct LoggerData newData)
-{
-    // allocate memory for the node
-    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
-
-    if (newNode == NULL)
-    {
-        // prints the message in the error output
-        fprintf(stderr, "Memory allocation failed.\n");
-
-        exit(EXIT_FAILURE); // I don't know what this does
-    }
-
-    newNode->data = newData;
-    newNode->prev = NULL;
-    newNode->next = NULL;
-
-    return newNode;
-}
-
-// takes a newNode and inserts it to the end of the linked list
-void insertEnd(struct Node **head, struct Node *newNode)
-{
-
-    if (*head == NULL)
-    {
-        *head = newNode;
-    }
-    else
-    {
-
-        struct Node *current = *head;
-        while (current->next != NULL)
-        {
-            current = current->next;
-        }
-
-        current->next = newNode;
-        newNode->prev = current;
-    }
-}
-
-// prints the data into desired file
-void printList(struct Node *head, FILE *fptr)
-{
-
-    time_t now = time(NULL);
-
-    struct tm *cur_time = localtime(&now);
-
-    struct Node *current = head;
-
-    while (current != NULL)
-    {
-
-        // print current date
-        char date[20];
-        strftime(date, 20, "%m/%d/%y", cur_time);
-        fprintf(fptr, "%-10s|", date);
-
-        // print current day
-        char day[20];
-        strftime(day, 20, "%A", cur_time);
-        fprintf(fptr, "%-10s|", day);
-
-        // print current time
-        char time[20];
-        strftime(time, 20, "%I:%M%p", cur_time);
-        fprintf(fptr, "%-10s|", time);
-
-        // print gluclose levels
-        fprintf(fptr, "%-10d|", current->data.levels);
-
-        // print cognative rating
-        fprintf(fptr, "%-10d|", current->data.focusedLevel);
-
-        // print foodTime tag
-        enum FoodTime foodTime = current->data.foodTime;
-
-        switch (foodTime)
-        {
-        case 1:
-            // char word[15] = "Morning";
-            fprintf(fptr, "%-10s|", "Morning");
-            break;
-        case 2:
-            // char word[15] = "Afternoon";
-            fprintf(fptr, "%-10s|", "Afternoon");
-            break;
-        case 3:
-            // char word[15] = "Evening";
-            fprintf(fptr, "%-10s|", "Evening");
-            break;
-        case 4:
-            // char word[15] = "Midnight";
-            fprintf(fptr, "%-10s|", "Midnight");
-            break;
-        }
-
-        // print foodType tag
-        enum FoodType foodType = current->data.foodType;
-        switch (foodType)
-        {
-        case 1:
-            // char word[15] = "Breakfast";
-            fprintf(fptr, "%-10s|", "Breakfast");
-            break;
-        case 2:
-            // char word[15] = "Lunch";
-            fprintf(fptr, "%-10s|", "Lunch");
-            break;
-        case 3:
-            // char word[15] = "Dinner";
-            fprintf(fptr, "%-10s|", "Dinner");
-            break;
-        case 4:
-            // char word[15] = "Snack";
-            fprintf(fptr, "%-10s|", "Snack");
-            break;
-        }
-
-        fprintf(fptr, "\n");
-
-        // Go To The Next Node
-        current = current->next;
-    }
-
-    // fprintf(fptr, "\n");
-}
-
-// this gets called by menuOptions() function
-struct Node *Logger(struct Node *head)
-{
-
-    time_t now = time(NULL);
-
-    int counter = 0;
-    char answer;
-
-    int stopper = 1; // condition
-
-    // this starts the iteration that the user will input their data, so we want the current time from this specific iteration of the program
-    while (stopper != 0)
-    {
-
-        struct LoggerData inputData;
-
-        // Ask the user if they will be logging current data,old data, or current data and old data
-
-        // If user selects to log old data
-
-        // the only extra step they need to do is type in the month, day and year and the time.
-
-        // we don't ask for specific time, just the hour (ex: 11 am)
-
-        // in the data table, the program will auto fill in the time (ex: 11 am == 11:00AM)
-
-        // STORING TIME DATA HERE
-        inputData = currentTime(inputData);
-
-        // The Type Of Food
-        printf("|1| Breakfast |2| Lunch |3| Dinner |4| Snack\n");
-        printf("\n");
-        printf("What Type Of Food Did You Eat?: ");
-        scanf("%d", &inputData.foodType);
-        printf("\n");
-
-        // When You Ate The Food
-        printf("|1| Morning |2| Afternoon |3| Evening |4| Midnight\n");
-        printf("\n");
-        printf("When Did You Eat It?: ");
-        scanf("%d", &inputData.foodTime);
-        printf("\n");
-
-        // Rate 1-10 How You Focused You Feel
-        printf("Rate 1-10 How Focused You Feel?: ");
-        scanf("%d", &inputData.focusedLevel);
-        printf("\n");
-
-        // enter level(s)
-        printf("Enter your level: ");
-        scanf("%d", &inputData.levels);
-        printf("\n");
-
-        // create a new node after collecting all data
-        struct Node *newNode = createNode(inputData);
-
-        // insert new data into a node
-        insertEnd(&head, newNode);
-
-        clearInputBuffer();
-
-        int stopper2 = 0; // condition2
-        while (stopper2 == 0)
-        {
-
-            // promps user if they want to add more levels
-            printf("Want To Log More Levels? (Y/N): ");
-            scanf("%c", &answer); // fixed from using %s to using %c because of errors with whitespace
-            printf("\n");
-
-            // checks answer from user input
-            if (answer == 'Y' || answer == 'y')
-            {
-                counter++; // increments the counter for prompt purposes
-                break;     // returns break into the while loop
-            }
-            else if (answer == 'N' || answer == 'n')
-            {
-                stopper = 0;  // stops the outer while loop
-                stopper2 = 1; // stops the inner while loop
-            }
-            else
-            { // repeats until valid input
-                printf("Invalid Option: Try again\n");
-                printf("\n");
-            }
-        }
-    }
-
-    // correct grammar depending on scenario
-    if (counter > 0)
-    {
-        printf("-----Levels were successfully logged-----\n");
-    }
-    else
-    {
-        printf("-----Level was successfully logged-----\n");
-    }
-
-    printf("\n");
-
-    return head;
-}
-
-// gets called in the main.c file
-struct Node *MenuOptions(struct Node *head)
+// -------Menu Option Function------- //
+struct Node *MenuOptions(struct Node *head) // gets called in the main.c file
 {
     int selection;
 
@@ -644,7 +56,7 @@ struct Node *MenuOptions(struct Node *head)
                 }
                 else if (selection == 3)
                 {
-                    
+
                     int month, day, year, hour, minutes;
 
                     // Enter the date for this log?
@@ -654,10 +66,8 @@ struct Node *MenuOptions(struct Node *head)
                     // What time for this log?
                     printf("Please enter the time for this log (HH/MM): ");
                     scanf("%d:%d", &hour, &minutes);
-                    
 
                     // get the other data from this input:
-
 
                     // add a insert function here to search through the array of structs to find the right point to place it
                     // binarySearch(month, day, year);
@@ -769,6 +179,156 @@ struct Node *MenuOptions(struct Node *head)
     return head;
 }
 
+// --|1.1| Logger Option View Logs Functions--- //
+void readData() // prints each line of the gluclose logs to the terminal
+{
+
+    FILE *fptr;
+
+    fptr = fopen("glucloselogs.txt", "r");
+
+    if (fptr == NULL)
+    {
+        perror("Error Opening File");
+        exit(EXIT_FAILURE);
+    }
+
+    // this is the buffer for each line
+    char buffer[100];
+    while (fgets(buffer, sizeof(buffer), fptr) != NULL)
+    {
+        printf("%s", buffer);
+    }
+
+    fclose(fptr);
+}
+
+
+// ---|1.1 & 1.2|Logger Option Functions--- //
+struct Node *Logger(struct Node *head) // this gets called by menuOptions() function
+{
+
+    time_t now = time(NULL);
+
+    int counter = 0;
+    char answer;
+
+    int stopper = 1; // condition
+
+    // this starts the iteration that the user will input their data, so we want the current time from this specific iteration of the program
+    while (stopper != 0)
+    {
+
+        struct LoggerData inputData;
+
+        // Ask the user if they will be logging current data,old data, or current data and old data
+
+        // If user selects to log old data
+
+        // the only extra step they need to do is type in the month, day and year and the time.
+
+        // we don't ask for specific time, just the hour (ex: 11 am)
+
+        // in the data table, the program will auto fill in the time (ex: 11 am == 11:00AM)
+
+        // STORING TIME DATA HERE
+        inputData = currentTime(inputData);
+
+        // The Type Of Food
+        printf("|1| Breakfast |2| Lunch |3| Dinner |4| Snack\n");
+        printf("\n");
+        printf("What Type Of Food Did You Eat?: ");
+        scanf("%d", &inputData.foodType);
+        printf("\n");
+
+        // When You Ate The Food
+        printf("|1| Morning |2| Afternoon |3| Evening |4| Midnight\n");
+        printf("\n");
+        printf("When Did You Eat It?: ");
+        scanf("%d", &inputData.foodTime);
+        printf("\n");
+
+        // Rate 1-10 How You Focused You Feel
+        printf("Rate 1-10 How Focused You Feel?: ");
+        scanf("%d", &inputData.focusedLevel);
+        printf("\n");
+
+        // enter level(s)
+        printf("Enter your level: ");
+        scanf("%d", &inputData.levels);
+        printf("\n");
+
+        // create a new node after collecting all data
+        struct Node *newNode = createNode(inputData);
+
+        // insert new data into a node
+        insertEnd(&head, newNode);
+
+        clearInputBuffer();
+
+        int stopper2 = 0; // condition2
+        while (stopper2 == 0)
+        {
+
+            // promps user if they want to add more levels
+            printf("Want To Log More Levels? (Y/N): ");
+            scanf("%c", &answer); // fixed from using %s to using %c because of errors with whitespace
+            printf("\n");
+
+            // checks answer from user input
+            if (answer == 'Y' || answer == 'y')
+            {
+                counter++; // increments the counter for prompt purposes
+                break;     // returns break into the while loop
+            }
+            else if (answer == 'N' || answer == 'n')
+            {
+                stopper = 0;  // stops the outer while loop
+                stopper2 = 1; // stops the inner while loop
+            }
+            else
+            { // repeats until valid input
+                printf("Invalid Option: Try again\n");
+                printf("\n");
+            }
+        }
+    }
+
+    // correct grammar depending on scenario
+    if (counter > 0)
+    {
+        printf("-----Levels were successfully logged-----\n");
+    }
+    else
+    {
+        printf("-----Level was successfully logged-----\n");
+    }
+
+    printf("\n");
+
+    return head;
+}
+
+struct Node *createNode(struct LoggerData newData)
+{
+    // allocate memory for the node
+    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+
+    if (newNode == NULL)
+    {
+        // prints the message in the error output
+        fprintf(stderr, "Memory allocation failed.\n");
+
+        exit(EXIT_FAILURE); // I don't know what this does
+    }
+
+    newNode->data = newData;
+    newNode->prev = NULL;
+    newNode->next = NULL;
+
+    return newNode;
+}
+
 struct LoggerData currentTime(struct LoggerData inputData)
 {
 
@@ -802,20 +362,298 @@ struct LoggerData currentTime(struct LoggerData inputData)
     return inputData;
 }
 
-void deleteLog()
+void insertEnd(struct Node **head, struct Node *newNode) // takes a newNode and inserts it to the end of the linked list
 {
 
-    printf("hello");
+    if (*head == NULL)
+    {
+        *head = newNode;
+    }
+    else
+    {
 
-    // have the logs indexed
+        struct Node *current = *head;
+        while (current->next != NULL)
+        {
+            current = current->next;
+        }
 
-    // ask the user which date they want to edit/delete
-
-    // sort out all the dates that are returned, and have them numbered. The user then selects the correct one
-
-    // then the data is removed
+        current->next = newNode;
+        newNode->prev = current;
+    }
 }
 
+void visualizeData(struct Node *head) // creates text file that will later provide visual of all the logs the user has made
+{
+    DIR *dir; // look for file text file in the current directory
+
+    struct dirent *entry;
+
+    dir = opendir(".");
+
+    if (dir == NULL)
+    {
+        perror("Error opening up directory");
+    }
+
+    int fileNotFound = 0; // 0 == file wasn't found, 1 == file was found
+
+    while ((entry = readdir(dir)) != NULL)
+    {
+
+        if (strcmp(entry->d_name, "glucloselogs.txt") == 0) // check to see if it meets the name criteria, then open if it does
+        {
+            // append new data to the file
+            fileNotFound++;
+
+            FILE *fptr;
+
+            fptr = fopen("glucloselogs.txt", "a");
+
+            // if file already has data, go to the next avaliable space
+            printList(head, fptr); // take the linked list data and paste it into the file
+
+            fclose(fptr); // close the file when done
+        }
+    }
+
+    if (fileNotFound != 1) // prompt that the file wasn't found, then make a file
+    {
+
+        FILE *fptr;
+
+        fptr = fopen("glucloselogs.txt", "w");
+
+        // create column header for the text file
+        char date[10] = "Date";
+        char day[10] = "Day";
+        char time[10] = "Time";
+        char levels[10] = "Levels";
+        char focus[10] = "Focus R8";
+        char foodTime[10] = "Meal Time";
+        char foodType[10] = "Meal Type";
+
+        fprintf(fptr, "%-10s|%-10s|%-10s|%-10s|%-10s|%-10s|%-10s|\n", date, day, time, levels, focus, foodTime, foodType);
+
+        for (int i = 0; i < 77; i++)
+        {
+            fprintf(fptr, "-");
+        }
+        fprintf(fptr, "\n");
+
+        printList(head, fptr); // take the linked list data and paste it into the file
+
+        fclose(fptr); // close the file when done
+    }
+
+    closedir(dir);
+
+    // read data from the text file and output it
+    // readData(); // comment out if you don't want the program to print in the terminal the contents in the text file
+}
+
+void printList(struct Node *head, FILE *fptr) // called by visualizeData() and uses file ptr to print/format data into file
+{
+
+    time_t now = time(NULL);
+
+    struct tm *cur_time = localtime(&now);
+
+    struct Node *current = head;
+
+    while (current != NULL)
+    {
+
+        // print current date
+        char date[20];
+        strftime(date, 20, "%m/%d/%y", cur_time);
+        fprintf(fptr, "%-10s|", date);
+
+        // print current day
+        char day[20];
+        strftime(day, 20, "%A", cur_time);
+        fprintf(fptr, "%-10s|", day);
+
+        // print current time
+        char time[20];
+        strftime(time, 20, "%I:%M%p", cur_time);
+        fprintf(fptr, "%-10s|", time);
+
+        // print gluclose levels
+        fprintf(fptr, "%-10d|", current->data.levels);
+
+        // print cognative rating
+        fprintf(fptr, "%-10d|", current->data.focusedLevel);
+
+        // print foodTime tag
+        enum FoodTime foodTime = current->data.foodTime;
+
+        switch (foodTime)
+        {
+        case 1:
+            // char word[15] = "Morning";
+            fprintf(fptr, "%-10s|", "Morning");
+            break;
+        case 2:
+            // char word[15] = "Afternoon";
+            fprintf(fptr, "%-10s|", "Afternoon");
+            break;
+        case 3:
+            // char word[15] = "Evening";
+            fprintf(fptr, "%-10s|", "Evening");
+            break;
+        case 4:
+            // char word[15] = "Midnight";
+            fprintf(fptr, "%-10s|", "Midnight");
+            break;
+        }
+
+        // print foodType tag
+        enum FoodType foodType = current->data.foodType;
+        switch (foodType)
+        {
+        case 1:
+            // char word[15] = "Breakfast";
+            fprintf(fptr, "%-10s|", "Breakfast");
+            break;
+        case 2:
+            // char word[15] = "Lunch";
+            fprintf(fptr, "%-10s|", "Lunch");
+            break;
+        case 3:
+            // char word[15] = "Dinner";
+            fprintf(fptr, "%-10s|", "Dinner");
+            break;
+        case 4:
+            // char word[15] = "Snack";
+            fprintf(fptr, "%-10s|", "Snack");
+            break;
+        }
+
+        fprintf(fptr, "\n");
+
+        // Go To The Next Node
+        current = current->next;
+    }
+}
+
+// -------|1.3 & 1.4| Logger Option Remove/Insert Functions------- //
+
+// ---Allocate Memory (Array of Structs) Functions--- //
+void initializeDynamicArray(struct ArrayNode **dynamicArray, int *arrayLength, int *initialSize) // allocates data for the data in csv file, and calls loadData()
+{
+    // allocate memory for the array data structure
+    *dynamicArray = (struct ArrayNode *)malloc((*initialSize) * sizeof(struct ArrayNode));
+
+    // If allocation fails condition
+    if (*dynamicArray == NULL)
+    {
+        fprintf(stderr, "Memory allocation failed\n");
+        // Handle the error as needed
+    }
+
+    loadData(dynamicArray, arrayLength, initialSize);
+}
+
+void loadData(struct ArrayNode **dynamicArray, int *arrayLength, int *size) // this will read data from the csv file and add it into an array data structure
+{
+    // look for csv file in the current directory
+    DIR *dir;
+    struct dirent *entry;
+    dir = opendir(".");
+
+    if (dir == NULL)
+    {
+        perror("Error opening up directory");
+    }
+
+    int fileCheck = 0; // 0 == file wasn't found, 1 == file was found
+
+    // iterate through the dir while it's not NULL
+    while ((entry = readdir(dir)) != NULL)
+    {
+        // if it meets the name criteria, load the data into an array
+        if (strcmp(entry->d_name, "backupData.csv") == 0)
+        {
+            fileCheck++;
+
+            FILE *fptr;
+
+            // open and read data from the file
+            fptr = fopen("backupData.csv", "r");
+
+            // we then store that newNode into a dynamically allocated array
+            char buffer[100];
+            if (fgets(buffer, sizeof(buffer), fptr) == NULL)
+            {
+                // this means that there isn't a file in place
+                fprintf(stderr, "Couldn't read the first line\n");
+                fclose(fptr);
+            }
+
+            // set current index for array
+            int currentIndex = 0;
+
+            // we iterate through the file and take all the data and plug it into the first index of the dynamicArray variable
+            while (fscanf(fptr, "%d, %d, %d, %d, %d, %d, %d, %d, %d, %15[^,], %15[^,\n]", &(*dynamicArray)[currentIndex].month, &(*dynamicArray)[currentIndex].day, &(*dynamicArray)[currentIndex].year, &(*dynamicArray)[currentIndex].dayName, &(*dynamicArray)[currentIndex].hour, &(*dynamicArray)[currentIndex].minutes, &(*dynamicArray)[currentIndex].seconds, &(*dynamicArray)[currentIndex].levels, &(*dynamicArray)[currentIndex].focusedLevel, (*dynamicArray)[currentIndex].foodTime, (*dynamicArray)[currentIndex].foodType) == 11)
+            {
+                // ^^^ need to change food type and food time into integers and use enum to convert data
+                currentIndex++;
+
+                // this checks to see if the current count of the index has exceeded the set initial value for the array
+                if (currentIndex >= *size)
+                {
+                    *size *= 2;
+
+                    // count how many times we've stored into the structure, and reallocate memory if it exceeds initial size
+                    *dynamicArray = (struct ArrayNode *)realloc(*dynamicArray, *size * sizeof(struct ArrayNode));
+
+                    // failure condition
+                    if (*dynamicArray == NULL)
+                    {
+                        fprintf(stderr, "Memory reallocation failed\n");
+                    }
+                }
+            }
+
+            // assigns arrayLength with the value of the current index to use outside scope
+            *arrayLength = currentIndex;
+
+            fclose(fptr);
+        }
+    }
+
+    // prompt that the file wasn't found
+    if (fileCheck != 1)
+    {
+        printf("No File Found\n");
+    }
+    closedir(dir);
+}
+
+void binarySearch(int monthKey, int dayKey, int yearKey, int arraySize)
+{
+
+    // this function will start in the middle of the array
+    // it will use the size of the array and half it to start
+
+    // it will check the month data member to find the right month of the key
+    // once it finds the right month, it will look for the right day, but still cutting in half
+
+    // this will keep going until it finds the day before the
+}
+
+void insertAt(){
+    printf("Not in use");
+}
+
+// ---|2| Carb Planner Functions--- //
+
+// ---|3| Calculate Insulin Dose Functions--- //
+
+// ---|4| Food-To-Carbs Functions--- //
+
+// ---|5| A1C Calculator Functions--- //
 double a1cCalculator()
 {
 
@@ -855,69 +693,151 @@ double a1cCalculator()
     return calculation;
 }
 
-void insert(struct Node *newNode, struct Node *head)
+
+// ---Misc Functions--- //
+void Header()
 {
 
-    // this function will take in the newNode and have a pointer to the head
+    printf("-----WELCOME TO GLUCLOSE LOGGER V.2-----\n");
+    printf("\n");
+}
 
-    // this function can't do divide and conquor because it's not an array which you can have a length
+void RemoveNewLine(char *stringInput) // function not is use
+{
+    stringInput[strcspn(stringInput, "\n")] = 0;
+}
 
-    // this function will have a pointer starting at the front, and a pointer starting at the end
+void clearInputBuffer()
+{
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF)
+        ;
+}
 
-    //
+// --Backup Data into CSV Functions--//
+void backupData(struct Node *head) // backs up data into a csv file
+{
+    // look for file text file in the current directory
+    DIR *dir;
+
+    struct dirent *entry;
+
+    dir = opendir(".");
+
+    if (dir == NULL)
+    {
+        perror("Error opening up directory");
+    }
+
+    int fileNotFound = 0; // 0 == file wasn't found, 1 == file was found
+
+    // search directory for file name (backupData.txt)
+    while ((entry = readdir(dir)) != NULL)
+    {
+        // check to see if it meets the name criteria, then open if it does
+        if (strcmp(entry->d_name, "backupData.csv") == 0)
+        {
+            // append new data to the file
+            fileNotFound++;
+
+            // required set up for file appending
+            FILE *fptr;
+            fptr = fopen("backupData.csv", "a");
+
+            // loop through each nodes data members and print it into file
+            // if file already has data, go to the next avaliable space
+            printData(head, fptr);
+
+            // close the file when done
+            fclose(fptr);
+        }
+    }
+
+    // if file isn't present, create the file
+    if (fileNotFound != 1)
+    {
+
+        FILE *fptr;
+
+        fptr = fopen("backupData.csv", "w");
+
+        // create a column header to specify each data section
+        char month[15] = "Month";
+        char day[15] = "Day";
+        char year[15] = "Year";
+        char dayName[15] = "Day-Name";
+        char hour[15] = "Hour";
+        char minutes[15] = "Minutes";
+        char seconds[15] = "Seconds";
+        char levels[15] = "Levels";
+        char focus[15] = "Focus-R8";
+        char foodTime[15] = "Meal-Time";
+        char foodType[15] = "Meal-Type";
+
+        fprintf(fptr, "%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s\n", month, day, year, dayName, hour, minutes, seconds, levels, focus, foodTime, foodType);
+
+        // take the linked list data and paste it into the file
+        printData(head, fptr);
+
+        // close the file when done
+        fclose(fptr);
+    }
+
+    closedir(dir);
+}
+
+void printData(struct Node *head, FILE *fptr) // takes in head ptr & file ptr from backupData() & printsData into csv file
+{
 
     struct Node *current = head;
+
+    while (current != NULL)
+    {
+
+        fprintf(fptr, "%d, %d, %d, %d, %d, %d, %d, %d, %d, ", current->data.month, current->data.day, current->data.year, current->data.dayName, current->data.hour, current->data.minutes, current->data.seconds, current->data.levels, current->data.focusedLevel);
+
+        // print foodTime tag
+        enum FoodTime foodTime = current->data.foodTime;
+
+        switch (foodTime)
+        {
+        case 1:
+            fprintf(fptr, "%s, ", "Morning");
+            break;
+        case 2:
+            fprintf(fptr, "%s, ", "Afternoon");
+            break;
+        case 3:
+            fprintf(fptr, "%s, ", "Evening");
+            break;
+        case 4:
+            fprintf(fptr, "%s, ", "Midnight");
+            break;
+        }
+
+        // print foodType tag
+        enum FoodType foodType = current->data.foodType;
+
+        switch (foodType)
+        {
+        case 1:
+            fprintf(fptr, "%s", "Breakfast");
+            break;
+        case 2:
+            fprintf(fptr, "%s", "Lunch");
+            break;
+        case 3:
+            fprintf(fptr, "%s", "Dinner");
+            break;
+        case 4:
+
+            fprintf(fptr, "%s", "Snack");
+            break;
+        }
+
+        fprintf(fptr, "\n");
+
+        // Go To The Next Node
+        current = current->next;
+    }
 }
-
-void deleteLast(struct Node *tail)
-{
-    printf("Hello world");
-}
-
-// this function is not in use
-/*void LogIn()
-{
-
-    char username[100];
-    char password[100];
-
-    printf("Enter Username: ");
-    fgets(username, 100, stdin);
-
-    printf("Enter Password: ");
-    fgets(password, 100, stdin);
-    printf("\n");
-
-    printf("---Successful Login---\n\n");
-
-    RemoveNewLine(username);
-
-    printf("Welcome %s! Please select an option: \n\n", username);
-
-    MenuOptions(head);
-} */
-
-
-// Array Of Structs Functions //
-
-/*
-void binarySearch(int monthKey, int dayKey, int yearKey, int arraySize) {
-
-
-    int mid = arraySize / 2
-
-    if (mid == monthKey)
-    // this function will start in the middle of the array
-        // it will use the size of the array and half it to start
-
-        // it will check the month data member to find the right month of the key
-            // once it finds the right month, it will look for the right day, but still cutting in half
-
-            // this will keep going until it finds the day before the 
-
-}
-
-*/
-
-void insertAt();
-

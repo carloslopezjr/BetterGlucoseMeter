@@ -1,6 +1,8 @@
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
 
+
+// ---ENUMS--- //
 enum FoodType
 {
 
@@ -22,7 +24,7 @@ enum FoodTime
 };
 
 
-// STRUCTS //
+// ---STRUCTS--- //
 
 struct LoggerData
 {
@@ -81,46 +83,44 @@ struct ArrayNode {
 
 };
 
-void RemoveNewLine(char *stringInput);
-
-void visualizeData(struct Node *head);
-
-void backupData(struct Node *head);
-
-void printData(struct Node *head, FILE *fptr);
-
-void loadData(struct ArrayNode **dynamicArray, int* arrayLength, int *size);
-
-void allocatedArray(struct ArrayNode *dynamicArray, int size);
-
-void readData();
-
-void clearInputBuffer();
-
-void Header();
-
-struct Node *createNode(struct LoggerData newData);
-
-void insertEnd(struct Node **head, struct Node *newNode);
-
-void printList(struct Node *head, FILE *fptr);
-
-struct Node *Logger(struct Node *head);
-
+// -------Menu Option Function------- //
 struct Node *MenuOptions(struct Node *head);
 
+// --|1.1| Logger Option View Logs Functions--- //
+void readData();
+
+// ---|1.1 & 1.2|Logger Option Functions--- //
+struct Node *Logger(struct Node *head);
+struct Node *createNode(struct LoggerData newData);
 struct LoggerData currentTime(struct LoggerData inputData);
+void insertEnd(struct Node **head, struct Node *newNode);
+void visualizeData(struct Node *head);
+void printList(struct Node *head, FILE *fptr);
 
-// void LogIn();
+// -------|1.3 & 1.4| Logger Option Remove/Insert Functions------- //
+void initializeDynamicArray(struct ArrayNode **dynamicArray, int *arrayLength, int *initialSize);
+void loadData(struct ArrayNode **dynamicArray, int *arrayLength, int *size);
+void binarySearch(int monthKey, int dayKey, int yearKey, int arraySize);
+void insertAt();
+void backupData(struct Node *head);
+void printData(struct Node *head, FILE *fptr);
 
-void insert(struct Node *newNode, struct Node *head);
+// ---|2| Carb Planner Functions--- //
 
-void deleteLog();
+// ---|3| Calculate Insulin Dose Functions--- //
 
-// OPTION 5 FUNCTIONS //
+// ---|4| Food-To-Carbs Functions--- //
 
+// ---|5| A1C Calculator Functions--- //
 double a1cCalculator();
 
-void binarySearch(int monthKey, int dayKey, int yearKey, int arraySize);
+// ---Misc Functions--- //
+void RemoveNewLine(char *stringInput);
+void clearInputBuffer();
+void Header();
+
+// --Backup Data into CSV Functions--//
+void backupData(struct Node *head);
+void printData(struct Node *head, FILE *fptr);
 
 #endif
