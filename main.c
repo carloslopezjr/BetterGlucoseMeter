@@ -60,4 +60,27 @@ int main()
 // ideate how to create "Calculate Insulin Dose" option for program
 
 // (IDEA)
-// My levels right now are 140, and I'm going to eat 15 carbs right now. What are the chances I will feel less focused because of it? 
+// A person's levels are 140, and their going to eat 15 carbs right now. What are the chances they will feel less focused because of it? 
+
+
+
+// ---CODE DUMP--- //
+
+/*
+for (int i = 0; i < arraySize; i++)
+    {
+        printf("%d, ", (*dynamicArray)[i].month);
+        printf("%d, ", (*dynamicArray)[i].day);
+        printf("%d, ", (*dynamicArray)[i].year);
+        printf("%d, ", (*dynamicArray)[i].dayName);
+        printf("%d, ", (*dynamicArray)[i].hour);
+        printf("%d, ", (*dynamicArray)[i].minutes);
+        printf("%d, ", (*dynamicArray)[i].seconds);
+        printf("%d, ", (*dynamicArray)[i].levels);
+        printf("%d, ", (*dynamicArray)[i].focusedLevel);
+        printf("%s, ", (*dynamicArray)[i].foodTime);
+        printf("%s\n", (*dynamicArray)[i].foodType);
+    }
+
+    printf("\n");
+*/
