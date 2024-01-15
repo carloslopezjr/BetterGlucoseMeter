@@ -1,20 +1,3 @@
 Date      |Day       |Time      |Levels    |Focus R8  |Meal Time |Meal Type |
 -----------------------------------------------------------------------------
-01/12/24  |Friday    |12:57PM   |100       |1         |Morning   |Breakfast |
-01/12/24  |Friday    |12:57PM   |200       |2         |Afternoon |Lunch     |
-01/12/24  |Friday    |12:57PM   |300       |3         |Evening   |Dinner    |
-01/12/24  |Friday    |04:37PM   |200       |1         |Morning   |Breakfast |
-01/12/24  |Friday    |04:37PM   |100       |1         |Morning   |Breakfast |
-01/12/24  |Friday    |04:38PM   |100       |6         |Morning   |Dinner    |
-01/12/24  |Friday    |04:38PM   |500       |7         |Midnight  |Breakfast |
-01/12/24  |Friday    |04:46PM   |1         |1         |Morning   |Breakfast |
-01/12/24  |Friday    |04:46PM   |300       |3         |Afternoon |Breakfast |
-01/13/24  |Saturday  |10:33PM   |100       |6         |Evening   |Lunch     |
-01/13/24  |Saturday  |10:36PM   |150       |5         |Morning   |Breakfast |
-01/13/24  |Saturday  |11:25PM   |100       |5         |Morning   |Breakfast |
-01/13/24  |Saturday  |11:25PM   |150       |6         |Afternoon |Breakfast |
-01/14/24  |Sunday    |12:33AM   |123       |7         |Morning   |Dinner    |
-01/14/24  |Sunday    |12:33AM   |198       |9         |Afternoon |Snack     |
-01/14/24  |Sunday    |11:30PM   |164       |9         |Evening   |Breakfast |
-01/15/24  |Monday    |11:39AM   |150       |4         |Afternoon |Breakfast |
-01/15/24  |Monday    |11:39AM   |100       |9         |Evening   |Breakfast |
+01/15/24  |Monday    |05:53PM   |130       |2         |Evening   |Lunch     |
