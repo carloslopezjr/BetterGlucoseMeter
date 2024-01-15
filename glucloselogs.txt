@@ -15,3 +15,4 @@ Date      |Day       |Time      |Levels    |Focus R8  |Meal Time |Meal Type |
 01/13/24  |Saturday  |11:25PM   |150       |6         |Afternoon |Breakfast |
 01/14/24  |Sunday    |12:33AM   |123       |7         |Morning   |Dinner    |
 01/14/24  |Sunday    |12:33AM   |198       |9         |Afternoon |Snack     |
+01/14/24  |Sunday    |11:30PM   |164       |9         |Evening   |Breakfast |
