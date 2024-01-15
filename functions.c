@@ -57,17 +57,40 @@ struct Node *MenuOptions(struct Node *head) // gets called in the main.c file
                 else if (selection == 3)
                 {
 
+                    int arrayLength = 0;
+                    int initialSize = 100;
+
+                    struct ArrayNode *dynamicArray; // initalized here to use in other functions
+
+                    initializeDynamicArray(&dynamicArray, &arrayLength, &initialSize); // starts the dynamic array data structure
+
                     int month, day, year, hour, minutes;
 
                     // Enter the date for this log?
-                    printf("Please enter the date for this log (MM/DD/YYYY): ");
-                    scanf("%d/%d/%d", &month, &day, &year);
+                    // printf("Please enter the date for this log (MM/DD/YYYY): ");
+                    // scanf("%d/%d/%d", &month, &day, &year);
 
                     // What time for this log?
-                    printf("Please enter the time for this log (HH/MM): ");
-                    scanf("%d:%d", &hour, &minutes);
+                    // printf("Please enter the time for this log (HH/MM): ");
+                    // scanf("%d:%d", &hour, &minutes);
 
                     // get the other data from this input:
+                    for (int i = 0; i < arrayLength; i++)
+                    {
+                        printf("%d, ", dynamicArray[i].month);
+                        printf("%d, ", dynamicArray[i].day);
+                        printf("%d, ", dynamicArray[i].year);
+                        printf("%d, ", dynamicArray[i].dayName);
+                        printf("%d, ", dynamicArray[i].hour);
+                        printf("%d, ", dynamicArray[i].minutes);
+                        printf("%d, ", dynamicArray[i].seconds);
+                        printf("%d, ", dynamicArray[i].levels);
+                        printf("%d, ", dynamicArray[i].focusedLevel);
+                        printf("%s, ", dynamicArray[i].foodTime);
+                        printf("%s\n", dynamicArray[i].foodType);
+                    }
+
+                    free(dynamicArray);
 
                     // add a insert function here to search through the array of structs to find the right point to place it
                     // binarySearch(month, day, year);
