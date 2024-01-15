@@ -21,6 +21,9 @@ enum FoodTime
 
 };
 
+
+// STRUCTS //
+
 struct LoggerData
 {
 
@@ -61,7 +64,6 @@ struct Node
     struct Node *prev;
 };
 
-
 struct ArrayNode {
 
     int month;
@@ -89,7 +91,7 @@ void printData(struct Node *head, FILE *fptr);
 
 void loadData(struct ArrayNode **dynamicArray, int* arrayLength, int *size);
 
-void allocatedArray(FILE *fptr, struct ArrayNode *dynamicArray, int size);
+void allocatedArray(struct ArrayNode *dynamicArray, int size);
 
 void readData();
 
@@ -115,7 +117,10 @@ void insert(struct Node *newNode, struct Node *head);
 
 void deleteLog();
 
+// OPTION 5 FUNCTIONS //
+
 double a1cCalculator();
 
+void binarySearch(int monthKey, int dayKey, int yearKey, int arraySize);
 
 #endif

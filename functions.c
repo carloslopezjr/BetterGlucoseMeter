@@ -93,7 +93,7 @@ void visualizeData(struct Node *head)
     // readData(); // comment out if you don't want the program to print in the terminal the contents in the text file
 }
 
-//
+// backs up data into a csv file
 void backupData(struct Node *head)
 {
     // look for file text file in the current directory
@@ -300,7 +300,7 @@ void loadData(struct ArrayNode **dynamicArray, int *arrayLength, int *size)
 }
 
 // not in use right now
-void allocatedArray(FILE *fptr, struct ArrayNode *dynamicArray, int size)
+void allocatedArray(struct ArrayNode *dynamicArray, int size)
 {
 
     // this is a node sturct that holds functions
@@ -596,16 +596,12 @@ struct Node *Logger(struct Node *head)
 // gets called in the main.c file
 struct Node *MenuOptions(struct Node *head)
 {
-
     int selection;
 
     int num = 1;
     while (num != 0)
     {
-
-        printf("|1| Logs |2| Carb Planner |3| Calculate Insulin Dose |4| Food-To-Carbs |5| A1C Goal Planner |6| Exit\n");
-
-        printf("\n");
+        printf("|1| Logs |2| Carb Planner |3| Calculate Insulin Dose |4| Food-To-Carbs |5| A1C Goal Planner |6| Exit\n\n");
 
         if (num == 1)
         {
@@ -627,7 +623,7 @@ struct Node *MenuOptions(struct Node *head)
 
             while (num == 1)
             {
-                printf("|1| View Logs |2| Log Current Levels |3| Log Past Levels \n\n");
+                printf("|1| View Logs |2| Log Current Levels |3| Log Past Levels |4| Remove Last Log \n\n");
 
                 printf("Selection: ");
                 scanf("%d", &selection);
@@ -648,18 +644,23 @@ struct Node *MenuOptions(struct Node *head)
                 }
                 else if (selection == 3)
                 {
-
-                    printf("Log Past Levels\n");
+                    
+                    int month, day, year, hour, minutes;
 
                     // Enter the date for this log?
-                    scanf("Please enter the date for this log:");
+                    printf("Please enter the date for this log (MM/DD/YYYY): ");
+                    scanf("%d/%d/%d", &month, &day, &year);
 
                     // What time for this log?
-                    scanf("What time?");
+                    printf("Please enter the time for this log (HH/MM): ");
+                    scanf("%d:%d", &hour, &minutes);
+                    
 
-                    // What is the meal time of the log?
+                    // get the other data from this input:
 
-                    // What is the meal type of the log?
+
+                    // add a insert function here to search through the array of structs to find the right point to place it
+                    // binarySearch(month, day, year);
 
                     num = 0;
                 }
@@ -895,3 +896,28 @@ void deleteLast(struct Node *tail)
 
     MenuOptions(head);
 } */
+
+
+// Array Of Structs Functions //
+
+/*
+void binarySearch(int monthKey, int dayKey, int yearKey, int arraySize) {
+
+
+    int mid = arraySize / 2
+
+    if (mid == monthKey)
+    // this function will start in the middle of the array
+        // it will use the size of the array and half it to start
+
+        // it will check the month data member to find the right month of the key
+            // once it finds the right month, it will look for the right day, but still cutting in half
+
+            // this will keep going until it finds the day before the 
+
+}
+
+*/
+
+void insertAt();
+
