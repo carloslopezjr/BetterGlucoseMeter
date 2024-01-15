@@ -223,10 +223,9 @@ void printData(struct Node *head, FILE *fptr)
 }
 
 // this will read data from the csv file and add it into an array data structure
-struct ArrayNode loadData(struct ArrayNode *dynamicArray, int *arrayLength, int size)
+void loadData(struct ArrayNode **dynamicArray, int *arrayLength, int *size)
 {
-
-    // look for csv file in current directory
+    // look for csv file in the current directory
     DIR *dir;
     struct dirent *entry;
     dir = opendir(".");
@@ -241,28 +240,17 @@ struct ArrayNode loadData(struct ArrayNode *dynamicArray, int *arrayLength, int 
     // iterate through the dir while it's not NULL
     while ((entry = readdir(dir)) != NULL)
     {
-
         // if it meets the name criteria, load the data into an array
         if (strcmp(entry->d_name, "backupData.csv") == 0)
         {
-
             fileCheck++;
 
             FILE *fptr;
 
             // open and read data from the file
             fptr = fopen("backupData.csv", "r");
-            
-            // allocate memory for the array data structure
-            dynamicArray = (struct ArrayNode *)malloc(size * sizeof(struct ArrayNode));
 
-            // If allocation fails condition
-            if (dynamicArray == NULL)
-            {
-                fprintf(stderr, "Memory allocation failed\n");
-            }
-
-            // we then store that newNode into an dynamically allocated array
+            // we then store that newNode into a dynamically allocated array
             char buffer[100];
             if (fgets(buffer, sizeof(buffer), fptr) == NULL)
             {
@@ -275,43 +263,28 @@ struct ArrayNode loadData(struct ArrayNode *dynamicArray, int *arrayLength, int 
             int currentIndex = 0;
 
             // we iterate through the file and take all the data and plug it into the first index of the dynamicArray variable
-            while (fscanf(fptr, "%d, %d, %d, %d, %d, %d, %d, %d, %d, %15[^,], %15[^,\n]", &dynamicArray[currentIndex].month, &dynamicArray[currentIndex].day, &dynamicArray[currentIndex].year, &dynamicArray[currentIndex].dayName, &dynamicArray[currentIndex].hour, &dynamicArray[currentIndex].minutes, &dynamicArray[currentIndex].seconds, &dynamicArray[currentIndex].levels, &dynamicArray[currentIndex].focusedLevel, dynamicArray[currentIndex].foodTime, dynamicArray[currentIndex].foodType) == 11)
+            while (fscanf(fptr, "%d, %d, %d, %d, %d, %d, %d, %d, %d, %15[^,], %15[^,\n]", &(*dynamicArray)[currentIndex].month, &(*dynamicArray)[currentIndex].day, &(*dynamicArray)[currentIndex].year, &(*dynamicArray)[currentIndex].dayName, &(*dynamicArray)[currentIndex].hour, &(*dynamicArray)[currentIndex].minutes, &(*dynamicArray)[currentIndex].seconds, &(*dynamicArray)[currentIndex].levels, &(*dynamicArray)[currentIndex].focusedLevel, (*dynamicArray)[currentIndex].foodTime, (*dynamicArray)[currentIndex].foodType) == 11)
             {
                 // ^^^ need to change food type and food time into integers and use enum to convert data
                 currentIndex++;
 
                 // this checks to see if the current count of the index has exceeded the set initial value for the array
-                if (currentIndex >= size)
+                if (currentIndex >= *size)
                 {
-                    size *= 10;
+                    *size *= 2;
 
-                    // count how many times we've stored into the structure, and reallocate memory if it exceeds intitial size
-                    dynamicArray = (struct ArrayNode *)realloc(dynamicArray, size * sizeof(struct ArrayNode));
+                    // count how many times we've stored into the structure, and reallocate memory if it exceeds initial size
+                    *dynamicArray = (struct ArrayNode *)realloc(*dynamicArray, *size * sizeof(struct ArrayNode));
 
                     // failure condition
-                    if (dynamicArray == NULL)
+                    if (*dynamicArray == NULL)
                     {
                         fprintf(stderr, "Memory reallocation failed\n");
                     }
                 }
             }
 
-            for (int i = 0; i < currentIndex; i++)
-            {
-                printf("%d, ", dynamicArray[i].month);
-                printf("%d, ", dynamicArray[i].day);
-                printf("%d, ", dynamicArray[i].year);
-                printf("%d, ", dynamicArray[i].dayName);
-                printf("%d, ", dynamicArray[i].hour);
-                printf("%d, ", dynamicArray[i].minutes);
-                printf("%d, ", dynamicArray[i].seconds);
-                printf("%d, ", dynamicArray[i].levels);
-                printf("%d, ", dynamicArray[i].focusedLevel);
-                printf("%s, ", dynamicArray[i].foodTime);
-                printf("%s\n", dynamicArray[i].foodType);
-            }
-
-            // assigns arrayLength with value of current index to use outside scope
+            // assigns arrayLength with the value of the current index to use outside scope
             *arrayLength = currentIndex;
 
             fclose(fptr);
@@ -324,8 +297,8 @@ struct ArrayNode loadData(struct ArrayNode *dynamicArray, int *arrayLength, int 
         printf("No File Found\n");
     }
     closedir(dir);
-
 }
+
 
 void allocatedArray(FILE *fptr, struct ArrayNode *dynamicArray, int size)
 {
