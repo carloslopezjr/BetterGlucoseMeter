@@ -299,7 +299,7 @@ void loadData(struct ArrayNode **dynamicArray, int *arrayLength, int *size)
     closedir(dir);
 }
 
-
+// not in use right now
 void allocatedArray(FILE *fptr, struct ArrayNode *dynamicArray, int size)
 {
 
