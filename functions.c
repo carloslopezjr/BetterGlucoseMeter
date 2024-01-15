@@ -52,6 +52,7 @@ struct Node *MenuOptions(struct Node *head) // gets called in the main.c file
                     // printf("Log Current Levels\n");
                     head = Logger(head);
                     visualizeData(head);
+                    backupData(head);
                     num = 0;
                 }
                 else if (selection == 3) // log past levels
@@ -62,9 +63,21 @@ struct Node *MenuOptions(struct Node *head) // gets called in the main.c file
 
                     struct ArrayNode *dynamicArray; // initalized here to use in other functions
 
-                    initializeDynamicArray(&dynamicArray, &arrayLength, &initialSize); // starts the dynamic array data structure
-                    
-                    printf("%d\n", arrayLength);
+                    int check = initializeDynamicArray(&dynamicArray, &arrayLength, &initialSize); // starts the dynamic array data structure
+
+                    printf("The check value: %d\n", check);
+                    printf("Array length: %d\n\n", arrayLength);
+
+                    if (check == 0) {
+                        printf("| --- File not found --- |\n\n");
+                        break;
+                    }
+
+                    // if (arrayLength == 1)
+                    // {
+                    // printf("No File Found\n\n");
+                    // break;
+                    // }
 
                     int month, day, year, hour, minutes; // this is the important data needed to find where to insert
 
@@ -202,7 +215,7 @@ struct Node *MenuOptions(struct Node *head) // gets called in the main.c file
 }
 
 // --|1.1| Logger Option View Logs Functions--- //
-void readData() // prints each line of the gluclose logs to the terminal
+int readData() // prints each line of the gluclose logs to the terminal
 {
 
     FILE *fptr;
@@ -211,8 +224,7 @@ void readData() // prints each line of the gluclose logs to the terminal
 
     if (fptr == NULL)
     {
-        perror("Error Opening File");
-        exit(EXIT_FAILURE);
+        printf("| --- No File On Record To View --- |\n");
     }
 
     // this is the buffer for each line
@@ -562,7 +574,7 @@ void printList(struct Node *head, FILE *fptr) // called by visualizeData() and u
 // -------|1.3 & 1.4| Logger Option Remove/Insert Functions------- //
 
 // ---Allocate Memory (Array of Structs) Functions--- //
-void initializeDynamicArray(struct ArrayNode **dynamicArray, int *arrayLength, int *initialSize) // allocates data for the data in csv file, and calls loadData()
+int initializeDynamicArray(struct ArrayNode **dynamicArray, int *arrayLength, int *initialSize) // allocates data for the data in csv file, and calls loadData()
 {
     // allocate memory for the array data structure
     *dynamicArray = (struct ArrayNode *)malloc((*initialSize) * sizeof(struct ArrayNode));
@@ -574,10 +586,12 @@ void initializeDynamicArray(struct ArrayNode **dynamicArray, int *arrayLength, i
         // Handle the error as needed
     }
 
-    loadData(dynamicArray, arrayLength, initialSize);
+    int fileCheck = loadData(dynamicArray, arrayLength, initialSize);
+
+    return fileCheck;
 }
 
-void loadData(struct ArrayNode **dynamicArray, int *arrayLength, int *size) // this will read data from the csv file and add it into an array data structure
+int loadData(struct ArrayNode **dynamicArray, int *arrayLength, int *size) // this will read data from the csv file and add it into an array data structure
 {
     // look for csv file in the current directory
     DIR *dir;
@@ -639,18 +653,21 @@ void loadData(struct ArrayNode **dynamicArray, int *arrayLength, int *size) // t
             }
 
             // assigns arrayLength with the value of the current index to use outside scope
-            *arrayLength = currentIndex - 1;
+            *arrayLength = currentIndex;
 
             fclose(fptr);
         }
     }
 
     // prompt that the file wasn't found
-    if (fileCheck != 1)
-    {
-        printf("No File Found\n");
-    }
+    // if (fileCheck != 1)
+    // {
+    // printf("No File Found\n\n");
+    //     }
+    
     closedir(dir);
+
+    return fileCheck;
 }
 
 int binarySearch(int monthKey, int dayKey, int yearKey, int start, int arraySize, struct ArrayNode** dynamicArray)
