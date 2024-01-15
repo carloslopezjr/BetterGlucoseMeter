@@ -4,6 +4,7 @@
 #include <time.h>
 #include "functions.h"
 
+
 int main()
 {
 
@@ -19,22 +20,39 @@ int main()
 
 
     int arrayLength = 0;
-    // int* arrPtr = &arrayLength;
+    int initialSize = 100;
 
-    int initialSize = 10;
     struct ArrayNode *dynamicArray;
-    
 
-    loadData(dynamicArray, &arrayLength, initialSize);
+    // allocate memory for the array data structure
+    dynamicArray = (struct ArrayNode *)malloc(initialSize * sizeof(struct ArrayNode));
 
+    // If allocation fails condition
+    if (dynamicArray == NULL)
+    {
+        fprintf(stderr, "Memory allocation failed\n");
+    }
 
-    // there is an issue with this not printing. It could be memory issues but I feel like it has to do with the memory not dynamically changing in the main function. So this code works within the allocate memory function, but not out here
-    printf("%d\n", arrayLength);
-    
+    loadData(&dynamicArray, &arrayLength, &initialSize);
+
+    for (int i = 0; i < arrayLength; i++)
+    {
+        printf("%d, ", dynamicArray[i].month);
+        printf("%d, ", dynamicArray[i].day);
+        printf("%d, ", dynamicArray[i].year);
+        printf("%d, ", dynamicArray[i].dayName);
+        printf("%d, ", dynamicArray[i].hour);
+        printf("%d, ", dynamicArray[i].minutes);
+        printf("%d, ", dynamicArray[i].seconds);
+        printf("%d, ", dynamicArray[i].levels);
+        printf("%d, ", dynamicArray[i].focusedLevel);
+        printf("%s, ", dynamicArray[i].foodTime);
+        printf("%s\n", dynamicArray[i].foodType);
+    }
 
     free(dynamicArray);
 
-    return 0; 
+    return 0;
 }
 
 /* NEXT UPDATES */ 
