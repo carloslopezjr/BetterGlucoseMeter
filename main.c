@@ -5,41 +5,22 @@
 #include "functions.h"
 
 
+
 int main()
 {
 
+
+
     struct Node *head = NULL;
+
+     // initalized here to use in other functions
 
     Header(); // this will always display the header in the beginning of the program
 
     // this will keep running until the user exits
     head = MenuOptions(head); // assignes the head variable with the return of menuOptions(head) function
 
-    backupData(head);
-
-    int arrayLength = 0;
-    int initialSize = 100;
-
-    struct ArrayNode *dynamicArray; // initalized here to use in other functions
-
-    initializeDynamicArray(&dynamicArray, &arrayLength, &initialSize);
-
-    for (int i = 0; i < arrayLength; i++)
-    {
-        printf("%d, ", dynamicArray[i].month);
-        printf("%d, ", dynamicArray[i].day);
-        printf("%d, ", dynamicArray[i].year);
-        printf("%d, ", dynamicArray[i].dayName);
-        printf("%d, ", dynamicArray[i].hour);
-        printf("%d, ", dynamicArray[i].minutes);
-        printf("%d, ", dynamicArray[i].seconds);
-        printf("%d, ", dynamicArray[i].levels);
-        printf("%d, ", dynamicArray[i].focusedLevel);
-        printf("%s, ", dynamicArray[i].foodTime);
-        printf("%s\n", dynamicArray[i].foodType);
-    }
-
-    free(dynamicArray);
+    backupData(head); // this needs to be one of the last things that gets done
 
     return 0;
 }
