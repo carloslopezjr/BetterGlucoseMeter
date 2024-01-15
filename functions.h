@@ -87,7 +87,7 @@ struct ArrayNode {
 struct Node *MenuOptions(struct Node *head);
 
 // --|1.1| Logger Option View Logs Functions--- //
-void readData();
+int readData();
 
 // ---|1.1 & 1.2|Logger Option Functions--- //
 struct Node *Logger(struct Node *head);
@@ -98,8 +98,8 @@ void visualizeData(struct Node *head);
 void printList(struct Node *head, FILE *fptr);
 
 // -------|1.3 & 1.4| Logger Option Remove/Insert Functions------- //
-void initializeDynamicArray(struct ArrayNode **dynamicArray, int *arrayLength, int *initialSize);
-void loadData(struct ArrayNode **dynamicArray, int *arrayLength, int *size);
+int initializeDynamicArray(struct ArrayNode **dynamicArray, int *arrayLength, int *initialSize);
+int loadData(struct ArrayNode **dynamicArray, int *arrayLength, int *size);
 int binarySearch(int monthKey, int dayKey, int yearKey, int start, int arraySize, struct ArrayNode** dynamicArray);
 void insertAt();
 void backupData(struct Node *head);
