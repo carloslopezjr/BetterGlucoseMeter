@@ -77,13 +77,7 @@ struct ArrayNode {
     char foodTime[20];
     char foodType[20];
 
-    
-
-
 };
-
-
-
 
 void RemoveNewLine(char *stringInput);
 
