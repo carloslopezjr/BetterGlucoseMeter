@@ -54,7 +54,7 @@ struct Node *MenuOptions(struct Node *head) // gets called in the main.c file
                     visualizeData(head);
                     num = 0;
                 }
-                else if (selection == 3)
+                else if (selection == 3) // log past levels
                 {
 
                     int arrayLength = 0;
@@ -63,39 +63,38 @@ struct Node *MenuOptions(struct Node *head) // gets called in the main.c file
                     struct ArrayNode *dynamicArray; // initalized here to use in other functions
 
                     initializeDynamicArray(&dynamicArray, &arrayLength, &initialSize); // starts the dynamic array data structure
+                    
+                    printf("%d\n", arrayLength);
 
-                    int month, day, year, hour, minutes;
+                    int month, day, year, hour, minutes; // this is the important data needed to find where to insert
 
                     // Enter the date for this log?
-                    // printf("Please enter the date for this log (MM/DD/YYYY): ");
-                    // scanf("%d/%d/%d", &month, &day, &year);
+                    printf("Please enter the date for this log (MM/DD/YYYY): ");
+                    scanf("%d/%d/%d", &month, &day, &year);
+                    printf("\n");
 
                     // What time for this log?
-                    // printf("Please enter the time for this log (HH/MM): ");
-                    // scanf("%d:%d", &hour, &minutes);
+                    printf("Please enter the time for this log (HH:MM): ");
+                    scanf("%d:%d", &hour, &minutes);
+                    printf("\n");
 
-                    // get the other data from this input:
-                    for (int i = 0; i < arrayLength; i++)
-                    {
-                        printf("%d, ", dynamicArray[i].month);
-                        printf("%d, ", dynamicArray[i].day);
-                        printf("%d, ", dynamicArray[i].year);
-                        printf("%d, ", dynamicArray[i].dayName);
-                        printf("%d, ", dynamicArray[i].hour);
-                        printf("%d, ", dynamicArray[i].minutes);
-                        printf("%d, ", dynamicArray[i].seconds);
-                        printf("%d, ", dynamicArray[i].levels);
-                        printf("%d, ", dynamicArray[i].focusedLevel);
-                        printf("%s, ", dynamicArray[i].foodTime);
-                        printf("%s\n", dynamicArray[i].foodType);
+                    // add a search function here to search through the array of structs to find the right point to place it
+                    int answer = binarySearch(month, day, year, 0, arrayLength, &dynamicArray);
+
+                    if (answer < 0) {
+                        printf("Index wasn't found\n\n");
+                    }
+                    else {
+                        printf("Index was found at: %d\n\n", answer);
                     }
 
-                    free(dynamicArray);
 
-                    // add a insert function here to search through the array of structs to find the right point to place it
-                    // binarySearch(month, day, year);
 
-                    num = 0;
+                    // get other context data about levels, focus r8, etc.
+
+                    free(dynamicArray); // make sure to free the array once it's done
+
+                    num = 0; // return this to exit this option
                 }
                 else
                 {
@@ -640,7 +639,7 @@ void loadData(struct ArrayNode **dynamicArray, int *arrayLength, int *size) // t
             }
 
             // assigns arrayLength with the value of the current index to use outside scope
-            *arrayLength = currentIndex;
+            *arrayLength = currentIndex - 1;
 
             fclose(fptr);
         }
@@ -654,13 +653,63 @@ void loadData(struct ArrayNode **dynamicArray, int *arrayLength, int *size) // t
     closedir(dir);
 }
 
-void binarySearch(int monthKey, int dayKey, int yearKey, int arraySize)
+int binarySearch(int monthKey, int dayKey, int yearKey, int start, int arraySize, struct ArrayNode** dynamicArray)
 {
 
-    // this function will start in the middle of the array
-    // it will use the size of the array and half it to start
+    
 
-    // it will check the month data member to find the right month of the key
+    // this function will start in the middle of the array
+    int mid = start + (arraySize - 1) / 2;
+
+    if (start > arraySize) {
+        return -1;
+    }
+
+    // it will check the year data member to find the right month of the key
+    if ((*dynamicArray)[mid].year == yearKey) {
+
+        // continue to look for the month key
+        if ((*dynamicArray)[mid].month == monthKey) {
+
+            // continue to look for the day
+            if ((*dynamicArray)[mid].day == dayKey) {
+                return mid;
+            }
+            else if ((*dynamicArray)[mid].day > dayKey)
+            {
+                return binarySearch(monthKey, dayKey, yearKey, start, mid - 1, dynamicArray);
+            }
+            else
+            {
+                return binarySearch(monthKey, dayKey, yearKey, mid + 1, arraySize, dynamicArray);
+            }
+        }
+        
+        else if ((*dynamicArray)[mid].month > monthKey) {
+
+            return binarySearch(monthKey, dayKey, yearKey, start, mid - 1, dynamicArray);
+
+        } else {
+
+            return binarySearch(monthKey, dayKey, yearKey, mid + 1, arraySize, dynamicArray);
+
+        }
+    }
+
+    else if ((*dynamicArray)[mid].year > yearKey) {
+
+        return binarySearch(monthKey, dayKey, yearKey, start, mid - 1, dynamicArray);
+
+    } 
+
+    else {
+
+        return binarySearch(monthKey, dayKey, yearKey, mid + 1, arraySize, dynamicArray);
+
+    }
+
+
+
     // once it finds the right month, it will look for the right day, but still cutting in half
 
     // this will keep going until it finds the day before the
