@@ -9,8 +9,6 @@
 int main()
 {
 
-
-
     struct Node *head = NULL;
 
      // initalized here to use in other functions
@@ -20,7 +18,6 @@ int main()
     // this will keep running until the user exits
     head = MenuOptions(head); // assignes the head variable with the return of menuOptions(head) function
 
-    backupData(head); // this needs to be one of the last things that gets done
 
     return 0;
 }
