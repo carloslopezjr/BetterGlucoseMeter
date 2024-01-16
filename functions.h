@@ -100,7 +100,7 @@ void printList(struct Node *head, FILE *fptr);
 // -------|1.3 & 1.4| Logger Option Remove/Insert Functions------- //
 int initializeDynamicArray(struct ArrayNode **dynamicArray, int *arrayLength, int *initialSize);
 int loadData(struct ArrayNode **dynamicArray, int *arrayLength, int *size);
-int binarySearch(int monthKey, int dayKey, int yearKey, int start, int arraySize, struct ArrayNode** dynamicArray);
+int binarySearch(int monthKey, int dayKey, int yearKey, int start, int arraySize, struct ArrayNode** dynamicArray, int *numFound);
 void insertAt();
 void backupData(struct Node *head);
 void printData(struct Node *head, FILE *fptr);

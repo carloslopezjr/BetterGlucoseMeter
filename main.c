@@ -11,13 +11,10 @@ int main()
 
     struct Node *head = NULL;
 
-     // initalized here to use in other functions
-
     Header(); // this will always display the header in the beginning of the program
 
     // this will keep running until the user exits
     head = MenuOptions(head); // assignes the head variable with the return of menuOptions(head) function
-
 
     return 0;
 }
