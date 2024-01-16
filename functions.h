@@ -87,7 +87,7 @@ struct ArrayNode {
 struct Node *MenuOptions(struct Node *head);
 
 // --|1.1| Logger Option View Logs Functions--- //
-int readData();
+void readData();
 
 // ---|1.1 & 1.2|Logger Option Functions--- //
 struct Node *Logger(struct Node *head);
