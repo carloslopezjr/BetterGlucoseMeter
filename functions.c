@@ -61,6 +61,9 @@ struct Node *MenuOptions(struct Node *head) // gets called in the main.c file
                     int arrayLength = 0;
                     int initialSize = 100;
 
+                    int numFound = 0; // this will be used for the binary search
+                    
+
                     struct ArrayNode *dynamicArray; // initalized here to use in other functions
 
                     int check = initializeDynamicArray(&dynamicArray, &arrayLength, &initialSize); // starts the dynamic array data structure
@@ -87,19 +90,22 @@ struct Node *MenuOptions(struct Node *head) // gets called in the main.c file
                     printf("\n");
 
                     // What time for this log?
-                    printf("Please enter the time for this log (HH:MM): ");
-                    scanf("%d:%d", &hour, &minutes);
-                    printf("\n");
+                    // printf("Please enter the time for this log (HH:MM): ");
+                    // scanf("%d:%d", &hour, &minutes);
+                    // printf("\n");
 
                     // add a search function here to search through the array of structs to find the right point to place it
-                    int answer = binarySearch(month, day, year, 0, arrayLength, &dynamicArray);
+                    int answer = binarySearch(month, day, year, 0, arrayLength, &dynamicArray, &numFound);
 
-                    if (answer < 0) {
-                        printf("Index wasn't found\n\n");
-                    }
-                    else {
-                        printf("Index was found at: %d\n\n", answer);
-                    }
+                    printf("%d\n", numFound);
+                    printf("%d\n\n", answer);
+
+                    // if (answer < 0) {
+                        // printf("Index wasn't found\n\n");
+                    // }
+                    // else {
+                        // printf("Index was found at: %d\n\n", answer);
+                    // }
 
 
 
@@ -670,59 +676,65 @@ int loadData(struct ArrayNode **dynamicArray, int *arrayLength, int *size) // th
     return fileCheck;
 }
 
-int binarySearch(int monthKey, int dayKey, int yearKey, int start, int arraySize, struct ArrayNode** dynamicArray)
+int binarySearch(int monthKey, int dayKey, int yearKey, int start, int arraySize, struct ArrayNode** dynamicArray, int *numFound)
 {
 
-    
+    int numFound = 0;
 
     // this function will start in the middle of the array
     int mid = start + (arraySize - 1) / 2;
 
+    if (numFound == 0) {
+        return mid;
+    } 
+    else if (numFound == 1) {
+        return 
+    }
+
     if (start > arraySize) {
-        return -1;
+        return mid;
     }
 
     // it will check the year data member to find the right month of the key
     if ((*dynamicArray)[mid].year == yearKey) {
 
+        numFound += 1;
         // continue to look for the month key
         if ((*dynamicArray)[mid].month == monthKey) {
 
+            numFound += 1;
             // continue to look for the day
             if ((*dynamicArray)[mid].day == dayKey) {
+                numFound += 1;
                 return mid;
             }
             else if ((*dynamicArray)[mid].day > dayKey)
             {
-                return binarySearch(monthKey, dayKey, yearKey, start, mid - 1, dynamicArray);
+                return binarySearch(monthKey, dayKey, yearKey, start, mid - 1, dynamicArray, numFound);
             }
             else
             {
-                return binarySearch(monthKey, dayKey, yearKey, mid + 1, arraySize, dynamicArray);
+                return binarySearch(monthKey, dayKey, yearKey, mid + 1, arraySize, dynamicArray, numFound);
             }
         }
         
         else if ((*dynamicArray)[mid].month > monthKey) {
 
-            return binarySearch(monthKey, dayKey, yearKey, start, mid - 1, dynamicArray);
-
+            return binarySearch(monthKey, dayKey, yearKey, start, mid - 1, dynamicArray, numFound);
         } else {
 
-            return binarySearch(monthKey, dayKey, yearKey, mid + 1, arraySize, dynamicArray);
-
+            return binarySearch(monthKey, dayKey, yearKey, mid + 1, arraySize, dynamicArray, numFound);
         }
     }
 
     else if ((*dynamicArray)[mid].year > yearKey) {
 
-        return binarySearch(monthKey, dayKey, yearKey, start, mid - 1, dynamicArray);
-
+        return binarySearch(monthKey, dayKey, yearKey, start, mid - 1, dynamicArray, numFound);
     } 
 
     else {
 
-        return binarySearch(monthKey, dayKey, yearKey, mid + 1, arraySize, dynamicArray);
-
+        return binarySearch(monthKey, dayKey, yearKey, mid + 1, arraySize, dynamicArray, numFound);
     }
 
 
