@@ -98,7 +98,7 @@ struct Node *MenuOptions(struct Node *head) // gets called in the main.c file
                     int answer = binarySearch(month, day, year, 0, arrayLength, &dynamicArray, &numFound);
 
                     printf("%d\n", numFound);
-                    printf("%d\n\n", answer);
+                    printf("This is the index: %d\n\n", answer);
 
                     // if (answer < 0) {
                         // printf("Index wasn't found\n\n");
@@ -221,7 +221,7 @@ struct Node *MenuOptions(struct Node *head) // gets called in the main.c file
 }
 
 // --|1.1| Logger Option View Logs Functions--- //
-int readData() // prints each line of the gluclose logs to the terminal
+void readData() // prints each line of the gluclose logs to the terminal
 {
 
     FILE *fptr;
@@ -679,17 +679,10 @@ int loadData(struct ArrayNode **dynamicArray, int *arrayLength, int *size) // th
 int binarySearch(int monthKey, int dayKey, int yearKey, int start, int arraySize, struct ArrayNode** dynamicArray, int *numFound)
 {
 
-    int numFound = 0;
+    
 
     // this function will start in the middle of the array
     int mid = start + (arraySize - 1) / 2;
-
-    if (numFound == 0) {
-        return mid;
-    } 
-    else if (numFound == 1) {
-        return 
-    }
 
     if (start > arraySize) {
         return mid;
@@ -698,14 +691,14 @@ int binarySearch(int monthKey, int dayKey, int yearKey, int start, int arraySize
     // it will check the year data member to find the right month of the key
     if ((*dynamicArray)[mid].year == yearKey) {
 
-        numFound += 1;
+        *numFound += 1;
         // continue to look for the month key
         if ((*dynamicArray)[mid].month == monthKey) {
 
-            numFound += 1;
+            *numFound += 1;
             // continue to look for the day
             if ((*dynamicArray)[mid].day == dayKey) {
-                numFound += 1;
+                *numFound += 1;
                 return mid;
             }
             else if ((*dynamicArray)[mid].day > dayKey)
