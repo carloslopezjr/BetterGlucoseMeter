@@ -8,7 +8,6 @@
 
 int main()
 {
-
     struct Node *head = NULL;
 
     Header(); // this will always display the header in the beginning of the program
@@ -78,3 +77,8 @@ for (int i = 0; i < arraySize; i++)
 
     printf("\n");
 */
+
+
+// Prompt the user on all the logs they have for that day.
+
+// and ask them which line they want to insert in
