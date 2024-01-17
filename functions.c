@@ -67,8 +67,8 @@ struct Node *MenuOptions(struct Node *head) // gets called in the main.c file
                     struct ArrayNode *dynamicArray; // initalized here to use in other functions
 
                     int check = initializeDynamicArray(&dynamicArray, &arrayLength, &initialSize); // starts the dynamic array data structure
-
-                    printf("The check value: %d\n", check);
+                                                                                                            // 1 means there's data in the CSV file, 0 means no file found
+                    printf("1 = Good / 0 = Bad: %d\n", check);
                     printf("Array length: %d\n\n", arrayLength);
 
                     if (check == 0) {
@@ -89,16 +89,33 @@ struct Node *MenuOptions(struct Node *head) // gets called in the main.c file
                     scanf("%d/%d/%d", &month, &day, &year);
                     printf("\n");
 
-                    // What time for this log?
-                    // printf("Please enter the time for this log (HH:MM): ");
-                    // scanf("%d:%d", &hour, &minutes);
-                    // printf("\n");
-
                     // add a search function here to search through the array of structs to find the right point to place it
                     int answer = binarySearch(month, day, year, 0, arrayLength, &dynamicArray, &numFound);
 
-                    printf("%d\n", numFound);
-                    printf("This is the index: %d\n\n", answer);
+                    // Returns how many keys were found (1 = year, 2 = year + month, 3 = year + month + day)
+                    printf("Total Keys Found: %d\n", numFound); // test 
+                    printf("This is the index: %d\n\n", answer); // test
+
+                    // if binarySearch only matches with the year, it returns back the number 1 (meaning it only found 1)
+                    // we then know now that the month is where we couldn't find a match (This means there's no month of on file for that log)
+                    // so now we can get the month that the user inputted, and log it in the right spot
+                        // example: if there's logs for all months except march and april, the search is trying to find march based off the user's input and returns -1 as there's no log for that. We then find the value that is before march in the logs, and grab the index for that.
+
+                    // with the new index, we will now use the insert function to place the new march log in the right order
+
+
+                    // if binarySearch only matches with the year and month, it returns back the number 2 (meaning it only found 2 of the keys)
+                    // we then know that the day is where we couldn't find a match (this means there was no log for that day of the month)
+                    // so now we can get the day that the user inputted, and log it in the right spot
+                        // example: if there's logs for all days of the specified month except the 4th - 16th, we iterate through the last known day before the gap, and grab the index.
+
+                    // with the new index, we will now use the insert function to place the new log in the right order
+
+                    // if binarySearch matches with everything, we then prompt the user with all the logs for that day
+
+                    // These are all the logs for that day
+                        // Please select which line you want us to insert after.
+
 
                     // if (answer < 0) {
                         // printf("Index wasn't found\n\n");
@@ -679,7 +696,10 @@ int loadData(struct ArrayNode **dynamicArray, int *arrayLength, int *size) // th
 int binarySearch(int monthKey, int dayKey, int yearKey, int start, int arraySize, struct ArrayNode** dynamicArray, int *numFound)
 {
 
+    // have three values for mid (the index that matches the key
     
+    // index1 = the index that the year matched
+        // if the year matched, it starts looking for the month match, after that first iteration where the first iteration doesn't equal the month match, the program will decide to move the mid to the left or right
 
     // this function will start in the middle of the array
     int mid = start + (arraySize - 1) / 2;
