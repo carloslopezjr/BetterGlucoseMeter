@@ -79,6 +79,52 @@ for (int i = 0; i < arraySize; i++)
 */
 
 
-// Prompt the user on all the logs they have for that day.
+// What's the problem? ------------------------ |
 
-// and ask them which line they want to insert in
+// The problem is that we want to make the user input as little as possible to avoid any annoyances.
+
+// When we are asking for data to insert a past log the user forgot to input, we don't want to ask for every single detail to find where it should go
+
+// we will first ask for the context data for the log
+
+// We will then ask for the date the user wants to input, and from there, the program will print out a table of all the related logs for that date in which the user can select the line number in which the log will be added
+
+// if there's no date associated in the database, we will ask for the hour ("Give a general time for this log") for the log and input it into the database
+
+
+// This is how the program will operate:
+
+// When the user selects the option to insert past log data, we will prompt the user instructions.
+
+// these instructions will be used to determine where their log should reside
+
+// we use the inputs from the user and input them into the binarySearch function
+    // the binarySearch function will take 3 inputs, month, day, year
+
+    // when the function is called, we want it to look at the year the user inputted to see if there's any relevant data associated with it
+        // if binarySearch can't find relevant data, we will have the binarySearch end and report that 0 "keys" were found
+
+    // since 0 keys were found, the program knows that there is no data logged for that year the user specified, in which now the process of inserting the data all depends on if the log should be inserted after or before a certain point.
+
+        // Here are the multiple cases the program can figure out:
+
+            // Example: Let's say in the database there's only data from 2020 & 2024.
+                // If a user enters the year 2023 as the year for their log, the program needs to successfully find the last log the database has for the year 2020. Since in the next line, it the logs will be from 2024. Or vise versa, the program needs to know the first log for the year 2024, and insert before.
+
+                // Algorithm:
+
+                    // the program will check the most recent log in the database. 
+                    // it will compare the year the user entered with the last log. If the userYear > lastLog, insert after last log
+
+                    // if the userYear < lastLog, check the first log of the database
+                    // if the userYear < firstLog, insert before first log
+
+                    // if the userYear > firstLog && userYear < lastLog, then obviously we need to input it somewhere in between that, in which I don't know the best way to do it. 
+
+                    // Here are some options: 
+
+                        // Lineaer search to find the date gap
+
+                        // Or is there a way for the binarySearch to automatically do that for us?
+
+                        // 
