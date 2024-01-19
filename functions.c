@@ -82,19 +82,25 @@ struct Node *MenuOptions(struct Node *head) // gets called in the main.c file
                     // break;
                     // }
 
+                    struct ArrayNode userData;
+
                     int month, day, year, hour, minutes; // this is the important data needed to find where to insert
 
                     // Enter the date for this log?
                     printf("Please enter the date for this log (MM/DD/YYYY): ");
-                    scanf("%d/%d/%d", &month, &day, &year);
+                    scanf("%d/%d/%d", &userData.month, &userData.day, &userData.year);
                     printf("\n");
 
+                    printf("This is the month: %d\n\n", userData.month);
+                    printf("This is the day: %d\n\n", userData.day);
+                    printf("This is the year: %d\n\n", userData.year);
+
                     // add a search function here to search through the array of structs to find the right point to place it
-                    int answer = binarySearch(month, day, year, 0, arrayLength, &dynamicArray, &numFound);
+                    int foundIndex = binarySearch(userData, 0, arrayLength - 1, &dynamicArray, &numFound);
 
                     // Returns how many keys were found (1 = year, 2 = year + month, 3 = year + month + day)
                     printf("Total Keys Found: %d\n", numFound); // test 
-                    printf("This is the index: %d\n\n", answer); // test
+                    printf("You need to insert the log at this index: %d\n\n", foundIndex); // test
 
                     // if binarySearch only matches with the year, it returns back the number 1 (meaning it only found 1)
                     // we then know now that the month is where we couldn't find a match (This means there's no month of on file for that log)
@@ -259,7 +265,6 @@ void readData() // prints each line of the gluclose logs to the terminal
 
     fclose(fptr);
 }
-
 
 // ---|1.1 & 1.2|Logger Option Functions--- //
 struct Node *Logger(struct Node *head) // this gets called by menuOptions() function
@@ -693,72 +698,27 @@ int loadData(struct ArrayNode **dynamicArray, int *arrayLength, int *size) // th
     return fileCheck;
 }
 
-int binarySearch(int monthKey, int dayKey, int yearKey, int start, int arraySize, struct ArrayNode** dynamicArray, int *numFound)
+int binarySearch(struct ArrayNode userData, int low, int high, struct ArrayNode** dynamicArray, int *numFound)
 {
 
-    // have three values for mid (the index that matches the key
-    
-    // index1 = the index that the year matched
-        // if the year matched, it starts looking for the month match, after that first iteration where the first iteration doesn't equal the month match, the program will decide to move the mid to the left or right
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
 
-    // this function will start in the middle of the array
-    int mid = start + (arraySize - 1) / 2;
-
-    if (start > arraySize) {
-        return mid;
-    }
-
-    // it will check the year data member to find the right month of the key
-    if ((*dynamicArray)[mid].year == yearKey) {
-
-        *numFound += 1;
-        // continue to look for the month key
-        if ((*dynamicArray)[mid].month == monthKey) {
-
-            *numFound += 1;
-            // continue to look for the day
-            if ((*dynamicArray)[mid].day == dayKey) {
-                *numFound += 1;
-                return mid;
-            }
-            else if ((*dynamicArray)[mid].day > dayKey)
-            {
-                return binarySearch(monthKey, dayKey, yearKey, start, mid - 1, dynamicArray, numFound);
-            }
-            else
-            {
-                return binarySearch(monthKey, dayKey, yearKey, mid + 1, arraySize, dynamicArray, numFound);
-            }
-        }
-        
-        else if ((*dynamicArray)[mid].month > monthKey) {
-
-            return binarySearch(monthKey, dayKey, yearKey, start, mid - 1, dynamicArray, numFound);
+        if ((*dynamicArray)[mid].year < userData.year || ((*dynamicArray)[mid].year == userData.year && (*dynamicArray)[mid].month < userData.month) || ((*dynamicArray)[mid].year == userData.year && (*dynamicArray)[mid].month == userData.month && (*dynamicArray)[mid].day < userData.day)) {
+            low = mid + 1;
         } else {
-
-            return binarySearch(monthKey, dayKey, yearKey, mid + 1, arraySize, dynamicArray, numFound);
+            high = mid - 1;
         }
     }
-
-    else if ((*dynamicArray)[mid].year > yearKey) {
-
-        return binarySearch(monthKey, dayKey, yearKey, start, mid - 1, dynamicArray, numFound);
-    } 
-
-    else {
-
-        return binarySearch(monthKey, dayKey, yearKey, mid + 1, arraySize, dynamicArray, numFound);
-    }
-
-
-
-    // once it finds the right month, it will look for the right day, but still cutting in half
-
-    // this will keep going until it finds the day before the
+    return low;
 }
 
-void insertAt(){
+void insertAt(){ // will be used in conjunction with binarySearch
     printf("Not in use");
+}
+
+void removeLog() {
+    
 }
 
 // ---|2| Carb Planner Functions--- //
