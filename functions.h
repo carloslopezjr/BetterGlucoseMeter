@@ -23,64 +23,59 @@ enum FoodTime
 
 };
 
-
 // ---STRUCTS--- //
 
-struct LoggerData
+struct LoggerData // we want this data to be stored in the node for easier sorting in the future
 {
 
-    // we want this data to be stored in the node for easier sorting in the future
-
     // date formatted
-    // month number
-    // day number
-    // year number
+    int month; // month number
+    int day;   // day number
+    int year;  // year number
 
-    int month;
-    int day;
-    int year;
+    int dayName; // value will represent the number day of the week (Monday, Tuesday, etc.)
 
-    // day
-    // name
-    int dayName;
+    // time formatted
+    int hour; // hour formatted
+    int minutes; // minutes number
+    int seconds; // seconds number
 
-    // hour formatted
-    // hour number
-    // minutes number
-
-    int hour;
-    int minutes;
-    int seconds;
-
-    int levels;
-    int focusedLevel;
-    int foodType;
-    int foodTime;
+    // context data
+    int levels; // blood sugar levels
+    int focusedLevel; // user's focus-level in relation to blood sugar
+    int foodTime; // time the food was ate
+    int foodType; // type of food ate
+    
 };
 
 struct Node
 {
     struct LoggerData data;
-
     struct Node *next;
     struct Node *prev;
 };
 
-struct ArrayNode {
+struct ArrayNode { // nodes that will be added to an array called "Array of Structs"
 
-    int month;
-    int day;
-    int year; 
-    int dayName;
-    int hour;
-    int minutes;
-    int seconds;
-    int levels;
-    int focusedLevel;
+    // date formatted
+    int month; // month number
+    int day;   // day number
+    int year;  // year number
 
-    char foodTime[20];
-    char foodType[20];
+    int dayName; // value will represent the number day of the week (Monday, Tuesday, etc.)
 
+    // time formatted
+    int hour;    // hour formatted
+    int minutes; // minutes number
+    int seconds; // seconds number
+
+    // context data
+    int levels;       // blood sugar levels
+    int focusedLevel; // user's focus-level in relation to blood sugar
+
+    // char array since csv file holds this info as a string and this node will be getting it's data from the csv file
+    char foodTime[20]; // time the food was ate
+    char foodType[20]; // type of food ate
 };
 
 // -------Menu Option Function------- //
@@ -100,10 +95,9 @@ void printList(struct Node *head, FILE *fptr);
 // -------|1.3 & 1.4| Logger Option Remove/Insert Functions------- //
 int initializeDynamicArray(struct ArrayNode **dynamicArray, int *arrayLength, int *initialSize);
 int loadData(struct ArrayNode **dynamicArray, int *arrayLength, int *size);
-int binarySearch(int monthKey, int dayKey, int yearKey, int start, int arraySize, struct ArrayNode** dynamicArray, int *numFound);
+int binarySearch(struct ArrayNode userInput, int low, int high, struct ArrayNode** dynamicArray, int *numFound);
 void insertAt();
-void backupData(struct Node *head);
-void printData(struct Node *head, FILE *fptr);
+void removeLog();
 
 // ---|2| Carb Planner Functions--- //
 
