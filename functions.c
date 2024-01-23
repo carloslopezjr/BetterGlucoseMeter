@@ -155,9 +155,21 @@ struct Node *MenuOptions(struct Node *head) // gets called in the main.c file
         {
             // option 3: Calculate Insulin Dose
             // Take the total carbs of the food and tell the user the total insulin needed to meidate it
-            printf("-------------------\n");
-            printf("Option 3: (UNDER CONSTRUCTION) \n");
-            printf("-------------------\n\n");
+            // printf("-------------------\n");
+            // printf("Option 3: (UNDER CONSTRUCTION) \n");
+            // printf("-------------------\n\n");
+
+            int carbs;
+            printf("How many Carbs are in your meal? ");
+            scanf("%d", &carbs);
+            printf("\n\n");
+
+
+            double dosage = foodToDosage(carbs);
+
+            printf("The amount of units you need to take are %.2lf\n\n", dosage); 
+
+
         }
         else if (selection == 4)
         {
@@ -724,6 +736,17 @@ void removeLog() {
 // ---|2| Carb Planner Functions--- //
 
 // ---|3| Calculate Insulin Dose Functions--- //
+double foodToDosage(int carbs) {
+
+
+    int units = 15;
+    double dosage;
+
+    dosage = (double) carbs / (double) units;
+    
+    return dosage;
+}
+
 
 // ---|4| Food-To-Carbs Functions--- //
 
