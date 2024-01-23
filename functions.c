@@ -713,8 +713,11 @@ int loadData(struct ArrayNode **dynamicArray, int *arrayLength, int *size) // th
 int binarySearch(struct ArrayNode userData, int low, int high, struct ArrayNode** dynamicArray, int *numFound)
 {
 
-    while (low <= high) {
-        int mid = low + (high - low) / 2;
+    int mid;
+
+        while (low <= high)
+    {
+        mid = (low + high) / 2;
 
         if ((*dynamicArray)[mid].year < userData.year || ((*dynamicArray)[mid].year == userData.year && (*dynamicArray)[mid].month < userData.month) || ((*dynamicArray)[mid].year == userData.year && (*dynamicArray)[mid].month == userData.month && (*dynamicArray)[mid].day < userData.day)) {
             low = mid + 1;
@@ -722,7 +725,7 @@ int binarySearch(struct ArrayNode userData, int low, int high, struct ArrayNode*
             high = mid - 1;
         }
     }
-    return low;
+    return high + 1;
 }
 
 void insertAt(){ // will be used in conjunction with binarySearch
