@@ -102,6 +102,7 @@ void removeLog();
 // ---|2| Carb Planner Functions--- //
 
 // ---|3| Calculate Insulin Dose Functions--- //
+double foodToDosage(int carbs);
 
 // ---|4| Food-To-Carbs Functions--- //
 
