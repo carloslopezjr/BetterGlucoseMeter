@@ -1,7 +1,6 @@
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
 
-
 // ---ENUMS--- //
 enum FoodType
 {
@@ -36,16 +35,15 @@ struct LoggerData // we want this data to be stored in the node for easier sorti
     int dayName; // value will represent the number day of the week (Monday, Tuesday, etc.)
 
     // time formatted
-    int hour; // hour formatted
+    int hour;    // hour formatted
     int minutes; // minutes number
     int seconds; // seconds number
 
     // context data
-    int levels; // blood sugar levels
+    int levels;       // blood sugar levels
     int focusedLevel; // user's focus-level in relation to blood sugar
-    int foodTime; // time the food was ate
-    int foodType; // type of food ate
-    
+    int foodTime;     // time the food was ate
+    int foodType;     // type of food ate
 };
 
 struct Node
@@ -55,7 +53,8 @@ struct Node
     struct Node *prev;
 };
 
-struct ArrayNode { // nodes that will be added to an array called "Array of Structs"
+struct ArrayNode
+{ // nodes that will be added to an array called "Array of Structs"
 
     // date formatted
     int month; // month number
@@ -95,7 +94,7 @@ void printList(struct Node *head, FILE *fptr);
 // -------|1.3 & 1.4| Logger Option Remove/Insert Functions------- //
 int initializeDynamicArray(struct ArrayNode **dynamicArray, int *arrayLength, int *initialSize);
 int loadData(struct ArrayNode **dynamicArray, int *arrayLength, int *size);
-int binarySearch(struct ArrayNode userInput, int low, int high, struct ArrayNode** dynamicArray, int *numFound);
+int binarySearch(struct ArrayNode userInput, int low, int high, struct ArrayNode **dynamicArray, int *numFound);
 void insertAt();
 void removeLog();
 
