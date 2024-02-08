@@ -4,3 +4,4 @@ Date      |Day       |Time      |Levels    |Focus R8  |Meal Time |Meal Type |
 01/17/24  |Wednesday |10:21PM   |566       |4         |Dinner    |
 01/23/24  |Tuesday   |02:41PM   |150       |6         |Evening   |Breakfast |
 01/23/24  |Tuesday   |02:41PM   |120       |9         |Evening   |Breakfast |
+02/07/24  |Wednesday |11:19PM   |140       |8         |Evening   |Dinner    |
