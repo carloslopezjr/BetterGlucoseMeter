@@ -69,6 +69,7 @@ struct Node *MenuOptions(struct Node *head) // gets called in the main.c file
                     int check = initializeDynamicArray(&dynamicArray, &arrayLength, &initialSize); // starts the dynamic array data structure
                                                                                                             // 1 means there's data in the CSV file, 0 means no file found
                     printf("1 = Good / 0 = Bad: %d\n", check);
+                    
                     printf("Array length: %d\n\n", arrayLength);
 
                     if (check == 0) {
