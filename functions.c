@@ -62,17 +62,17 @@ struct Node *MenuOptions(struct Node *head) // gets called in the main.c file
                     int initialSize = 100;
 
                     int numFound = 0; // this will be used for the binary search
-                    
 
                     struct ArrayNode *dynamicArray; // initalized here to use in other functions
 
                     int check = initializeDynamicArray(&dynamicArray, &arrayLength, &initialSize); // starts the dynamic array data structure
-                                                                                                            // 1 means there's data in the CSV file, 0 means no file found
+                                                                                                   // 1 means there's data in the CSV file, 0 means no file found
                     printf("1 = Good / 0 = Bad: %d\n", check);
-                    
+
                     printf("Array length: %d\n\n", arrayLength);
 
-                    if (check == 0) {
+                    if (check == 0)
+                    {
                         printf("| --- File not found --- |\n\n");
                         break;
                     }
@@ -85,7 +85,7 @@ struct Node *MenuOptions(struct Node *head) // gets called in the main.c file
 
                     struct ArrayNode userData;
 
-                    int month, day, year, hour, minutes; // this is the important data needed to find where to insert
+                    // int month, day, year, hour, minutes; // this is the important data needed to find where to insert
 
                     // Enter the date for this log?
                     printf("Please enter the date for this log (MM/DD/YYYY): ");
@@ -100,38 +100,34 @@ struct Node *MenuOptions(struct Node *head) // gets called in the main.c file
                     int foundIndex = binarySearch(userData, 0, arrayLength - 1, &dynamicArray, &numFound);
 
                     // Returns how many keys were found (1 = year, 2 = year + month, 3 = year + month + day)
-                    printf("Total Keys Found: %d\n", numFound); // test 
+                    printf("Total Keys Found: %d\n", numFound);                             // test
                     printf("You need to insert the log at this index: %d\n\n", foundIndex); // test
 
                     // if binarySearch only matches with the year, it returns back the number 1 (meaning it only found 1)
                     // we then know now that the month is where we couldn't find a match (This means there's no month of on file for that log)
                     // so now we can get the month that the user inputted, and log it in the right spot
-                        // example: if there's logs for all months except march and april, the search is trying to find march based off the user's input and returns -1 as there's no log for that. We then find the value that is before march in the logs, and grab the index for that.
+                    // example: if there's logs for all months except march and april, the search is trying to find march based off the user's input and returns -1 as there's no log for that. We then find the value that is before march in the logs, and grab the index for that.
 
                     // with the new index, we will now use the insert function to place the new march log in the right order
-
 
                     // if binarySearch only matches with the year and month, it returns back the number 2 (meaning it only found 2 of the keys)
                     // we then know that the day is where we couldn't find a match (this means there was no log for that day of the month)
                     // so now we can get the day that the user inputted, and log it in the right spot
-                        // example: if there's logs for all days of the specified month except the 4th - 16th, we iterate through the last known day before the gap, and grab the index.
+                    // example: if there's logs for all days of the specified month except the 4th - 16th, we iterate through the last known day before the gap, and grab the index.
 
                     // with the new index, we will now use the insert function to place the new log in the right order
 
                     // if binarySearch matches with everything, we then prompt the user with all the logs for that day
 
                     // These are all the logs for that day
-                        // Please select which line you want us to insert after.
-
+                    // Please select which line you want us to insert after.
 
                     // if (answer < 0) {
-                        // printf("Index wasn't found\n\n");
+                    // printf("Index wasn't found\n\n");
                     // }
                     // else {
-                        // printf("Index was found at: %d\n\n", answer);
+                    // printf("Index was found at: %d\n\n", answer);
                     // }
-
-
 
                     // get other context data about levels, focus r8, etc.
 
@@ -165,12 +161,9 @@ struct Node *MenuOptions(struct Node *head) // gets called in the main.c file
             scanf("%d", &carbs);
             printf("\n\n");
 
-
             double dosage = foodToDosage(carbs);
 
-            printf("The amount of units you need to take are %.2lf\n\n", dosage); 
-
-
+            printf("The amount of units you need to take are %.2lf\n\n", dosage);
         }
         else if (selection == 4)
         {
@@ -705,52 +698,55 @@ int loadData(struct ArrayNode **dynamicArray, int *arrayLength, int *size) // th
     // {
     // printf("No File Found\n\n");
     //     }
-    
+
     closedir(dir);
 
     return fileCheck;
 }
 
-int binarySearch(struct ArrayNode userData, int low, int high, struct ArrayNode** dynamicArray, int *numFound)
+int binarySearch(struct ArrayNode userData, int low, int high, struct ArrayNode **dynamicArray, int *numFound)
 {
 
     int mid;
 
-        while (low <= high)
+    while (low <= high)
     {
         mid = (low + high) / 2;
 
-        if ((*dynamicArray)[mid].year < userData.year || ((*dynamicArray)[mid].year == userData.year && (*dynamicArray)[mid].month < userData.month) || ((*dynamicArray)[mid].year == userData.year && (*dynamicArray)[mid].month == userData.month && (*dynamicArray)[mid].day < userData.day)) {
+        if ((*dynamicArray)[mid].year < userData.year || ((*dynamicArray)[mid].year == userData.year && (*dynamicArray)[mid].month < userData.month) || ((*dynamicArray)[mid].year == userData.year && (*dynamicArray)[mid].month == userData.month && (*dynamicArray)[mid].day < userData.day))
+        {
             low = mid + 1;
-        } else {
+        }
+        else
+        {
             high = mid - 1;
         }
     }
     return high + 1;
 }
 
-void insertAt(){ // will be used in conjunction with binarySearch
+void insertAt()
+{ // will be used in conjunction with binarySearch
     printf("Not in use");
 }
 
-void removeLog() {
-    
+void removeLog()
+{
 }
 
 // ---|2| Carb Planner Functions--- //
 
 // ---|3| Calculate Insulin Dose Functions--- //
-double foodToDosage(int carbs) {
-
+double foodToDosage(int carbs)
+{
 
     int units = 15;
     double dosage;
 
-    dosage = (double) carbs / (double) units;
-    
+    dosage = (double)carbs / (double)units;
+
     return dosage;
 }
-
 
 // ---|4| Food-To-Carbs Functions--- //
 
@@ -793,7 +789,6 @@ double a1cCalculator()
 
     return calculation;
 }
-
 
 // ---Misc Functions--- //
 void Header()

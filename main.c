@@ -123,7 +123,7 @@ for (int i = 0; i < arraySize; i++)
 
                     // Here are some options: 
 
-                        // Lineaer search to find the date gap
+                        // Linear search to find the date gap
 
                         // Or is there a way for the binarySearch to automatically do that for us?
 
