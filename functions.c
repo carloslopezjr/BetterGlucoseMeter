@@ -704,27 +704,13 @@ int loadData(struct ArrayNode **dynamicArray, int *arrayLength, int *size) // th
     return fileCheck;
 }
 
-int binarySearch(struct ArrayNode userData, int low, int high, struct ArrayNode **dynamicArray, int *numFound)
+/* 
+int binarySearch(struct ArrayNode userData, int low, int high, struct ArrayNode **dynamicArray)
 {
 
-    int mid;
-
-    while (low <= high)
-    {
-        mid = (low + high) / 2;
-
-        if ((*dynamicArray)[mid].year < userData.year || ((*dynamicArray)[mid].year == userData.year && (*dynamicArray)[mid].month < userData.month) || ((*dynamicArray)[mid].year == userData.year && (*dynamicArray)[mid].month == userData.month && (*dynamicArray)[mid].day < userData.day))
-        {
-            low = mid + 1;
-        }
-        else
-        {
-            high = mid - 1;
-        }
-    }
-    return high + 1;
+    
 }
-
+*/
 void insertAt()
 { // will be used in conjunction with binarySearch
     printf("Not in use");
