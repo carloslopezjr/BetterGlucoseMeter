@@ -127,6 +127,6 @@ for (int i = 0; i < arraySize; i++)
 
                         // Or is there a way for the binarySearch to automatically do that for us?
 
-                        // 
+                        // New Comment
 
 // add updates
